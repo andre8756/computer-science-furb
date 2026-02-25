@@ -4,8 +4,8 @@ public class Aula2 {
         System.out.print("Notas dia 25/02");
 
         float notaUm = 9.5f;
-        float notaDois = 3f;
-        float notaTres = 4f;
+        float notaDois = 8.4f;
+        float notaTres = 4.3f;
         float soma = (notaUm + notaDois + notaTres);
         System.out.println("Soma das notas é:" + soma);
 
