@@ -9,6 +9,13 @@ public class A2 {
         System.out.println("Digite uma String: ");
         String tentativa = scan.next();
 
+        String a = "aasdf";
+        String b = "aasdf";
+
+        if (a == b) {
+            System.out.println("a é igual a b");
+        }
+
         while (!tentativa.equals("teste")) {
             System.out.println("você errou!! Tente de novo.");
             tentativa = scan.next();

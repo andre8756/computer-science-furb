@@ -3,10 +3,13 @@ public class Aula2 {
 
         System.out.print("Notas dia 25/02");
 
-        int notaUm = 10;
-        int notaDois = 3;
-        int notaTres = 4;
-        int soma = (notaUm + notaDois + notaTres);
-        System.out.print("Soma das notas é:" + soma);
+        float notaUm = 9.5f;
+        float notaDois = 3f;
+        float notaTres = 4f;
+        float soma = (notaUm + notaDois + notaTres);
+        System.out.println("Soma das notas é:" + soma);
+
+        float media = soma / 3;
+        System.out.println("A média é " + media);
     }
 }
