@@ -4,5 +4,6 @@ public class Aula1 {
         System.out.println("Segunda linha");
         System.out.print("Terceiro item");
         System.err.print("Quarto item");
+
     }
 }
