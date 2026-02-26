@@ -1,3 +1,5 @@
+package Aula2;
+
 public class MediaPonderada {
     public static void main(String[] args) {
 
