@@ -1,5 +1,6 @@
 package Aula3;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class MediaPonderada {
@@ -65,6 +66,9 @@ public class MediaPonderada {
         System.out.println(mediaFinal);
 
         System.out.printf("Media final do Aluno é: %.2f%n", mediaFinal);
+
+        DecimalFormat df = new DecimalFormat("00");
+        System.out.print("Media final do aluno é:" + df.format(mediaFinal));
 
         if (mediaFinal < 6) {
             System.out.println("O Aluno(a) está reprovado(a)");
