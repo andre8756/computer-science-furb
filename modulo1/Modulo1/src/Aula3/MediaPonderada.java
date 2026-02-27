@@ -57,10 +57,20 @@ public class MediaPonderada {
                 + exercicioUnidade5
                 + exercicioUnidade6 + exercicioUnidade7) / 7;
 
-        float mediaFinal = (mediaDosTrabalhos * 0.1f +
-                prova1 * 0.2f +
-                prova2 * 0.2f +
-                trabalhoFinal * 0.5f) / 4;
+        float mediaFinal = ((mediaDosTrabalhos * 0.2f) +
+                (prova1 * 0.2f) +
+                (prova2 * 0.3f) +
+                (trabalhoFinal * 0.3f));
+
+        System.out.println(mediaFinal);
+
+        System.out.printf("Media final do Aluno é: %.2f%n", mediaFinal);
+
+        if (mediaFinal < 6) {
+            System.out.println("O Aluno(a) está reprovado(a)");
+        } else {
+            System.out.print("O Aluno(a) esta aprovado(a)");
+        }
 
         scan.close();
 
