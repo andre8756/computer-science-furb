@@ -16,7 +16,7 @@ public class Uni2Exe11 {
         c = scan.nextFloat();
 
         // a - area do triângulo retângulo que tem A por base e C por altura.
-        areaRetangulo = (a * b) / 2;
+        areaRetangulo = (a * c) / 2;
         // b - área do círculo de raio C. (pi = 3.14159)
         areaCirculo = Math.pow(c, 2) * Math.PI;
         // c - área do trapézio que tem A e B por bases e C por altura
