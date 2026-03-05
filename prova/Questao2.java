@@ -152,10 +152,13 @@ public class Questao2 {
         Integer id = findInMochila(mochila, valor);
         Integer[] newMochila = new Integer[10];
 
-        if (id != null) {
-
+        if (id != null && mochila[id] == valor) {
+            mochila[id] = null;
+        } else {
+            System.out.println("Item não encontrado ao excluir!");
         }
 
+        return mochila;
     }
 
 }
