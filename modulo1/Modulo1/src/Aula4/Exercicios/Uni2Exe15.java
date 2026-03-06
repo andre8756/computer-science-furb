@@ -36,6 +36,8 @@ public class Uni2Exe15 {
         valor = valor - (notas1*1);
 
         valor = valor*100;
+        moeda05 = (int) (valor/50);
+        valor = valor - (moeda05 * 50);
 
         System.out.println("------Cedulas de troco: ");
         System.out.printf("Notas de R$100,00 - %d%n", notas100);
