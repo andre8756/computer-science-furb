@@ -11,6 +11,11 @@ public class Condutor extends Pessoa {
         this.crv = crv;
     }
 
+    public String toString() {
+        return "nome: " + super.getNome() + "\ncpf: " + super.getCpf() + "\nidade: " + super.getIdade() + "\nsexo: "
+                + super.getSexo() + "\ncnh: " + cnh + "\ncrv: " + crv;
+    }
+
     public String getCnh() {
         return this.cnh;
     }

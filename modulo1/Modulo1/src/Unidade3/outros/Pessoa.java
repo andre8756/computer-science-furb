@@ -22,6 +22,10 @@ public abstract class Pessoa {
 
     }
 
+    public String toString() {
+        return "nome: " + nome + "\ncpf: " + cpf + "\nidade: " + idade + "\nsexo: " + sexo + "cnh: ";
+    }
+
     public String getNome() {
         return nome;
     }
