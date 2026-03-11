@@ -1,3 +1,5 @@
+package Aula4.Exercicios;
+
 import java.util.Scanner;
 
 public class Uni2Exe15 {
@@ -10,7 +12,7 @@ public class Uni2Exe15 {
 
         System.out.print("Digite o valor desejado para troco: ");
         valor = scan.nextDouble();
-        
+
         centavos = (int) Math.round(valor * 100);
 
         // Contagem das notas
@@ -18,9 +20,9 @@ public class Uni2Exe15 {
         centavos %= 10000;
         notas50 = centavos / 5000;
         centavos %= 5000;
-        notas20 = centavos/2000;
+        notas20 = centavos / 2000;
         centavos %= 2000;
-        notas10 = centavos/10000;
+        notas10 = centavos / 10000;
         centavos %= 1000;
         notas5 = centavos / 500;
         centavos %= 500;
@@ -30,9 +32,9 @@ public class Uni2Exe15 {
         centavos %= 100;
 
         // Contagem das moedas
-        moeda05 = centavos/50;
+        moeda05 = centavos / 50;
         centavos %= 50;
-        moeda025 = centavos/25;
+        moeda025 = centavos / 25;
         centavos %= 25;
         moeda010 = centavos / 10;
         centavos %= 10;
@@ -49,7 +51,7 @@ public class Uni2Exe15 {
         System.out.printf("Notas de R$5,00 - %d%n", notas5);
         System.out.printf("Notas de R$02,00 - %d%n", notas2);
         System.out.println("");
-        
+
         // printando moedas
         System.out.println("-----Moedas:");
         System.out.printf("Moedas de R$01,00 - %d%n", notas1);
@@ -58,8 +60,6 @@ public class Uni2Exe15 {
         System.out.printf("Moedas de R$00,10 - %d%n", moeda010);
         System.out.printf("Moedas de R$00,05 - %d%n", moeda005);
         System.out.printf("Moedas de R$00,01 - %d%n", moeda001);
-
-        
 
         scan.close();
     }

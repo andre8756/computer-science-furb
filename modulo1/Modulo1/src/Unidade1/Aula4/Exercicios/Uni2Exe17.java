@@ -1,6 +1,8 @@
+package Aula4.Exercicios;
+
 import java.util.Scanner;
 
-public class Uni2Exe17{
+public class Uni2Exe17 {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         String nome;
@@ -15,15 +17,14 @@ public class Uni2Exe17{
         System.out.print("Digite o número de dependentes do funcionário: ");
         numeroDependentes = scan.nextInt();
 
-        salarioTrabalho = 10*horasTrabalhadas;
-        salarioFamilia = 60*numeroDependentes;
-        salarioBruto = salarioTrabalho+salarioFamilia;
-        salarioLiquido = salarioBruto - (float) (salarioTrabalho*taxas);
+        salarioTrabalho = 10 * horasTrabalhadas;
+        salarioFamilia = 60 * numeroDependentes;
+        salarioBruto = salarioTrabalho + salarioFamilia;
+        salarioLiquido = salarioBruto - (float) (salarioTrabalho * taxas);
 
-        System.out.println("Dados do funcionário "+nome+": ");
+        System.out.println("Dados do funcionário " + nome + ": ");
         System.out.printf("Salário Bruto: R$%.2f%n", salarioBruto);
         System.out.printf("Salário Líquido: R$%.2f", salarioLiquido);
-        
 
         scan.close();
     }

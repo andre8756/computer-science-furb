@@ -1,8 +1,9 @@
+package Aula4.Exercicios;
 
 import java.util.Scanner;
 
-public class Uni2Exe18{
-    public static void main(String[] args){
+public class Uni2Exe18 {
+    public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         float altura, comprimento, preco;
         float precoUnitario = 12.5f;

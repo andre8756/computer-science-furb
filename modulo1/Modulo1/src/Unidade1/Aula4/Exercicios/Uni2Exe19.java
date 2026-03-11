@@ -1,7 +1,8 @@
+package Aula4.Exercicios;
 
 import java.util.Scanner;
 
-public class Uni2Exe19{
+public class Uni2Exe19 {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         double a, b, c, d;
@@ -16,7 +17,6 @@ public class Uni2Exe19{
         a = b;
 
         System.out.printf("Valor de A = %.2f", a);
-        
 
         scan.close();
     }
