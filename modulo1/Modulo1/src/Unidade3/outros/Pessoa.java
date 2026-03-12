@@ -22,6 +22,10 @@ public abstract class Pessoa {
 
     }
 
+    public void andar() {
+        System.out.println("Andando..");
+    }
+
     public String toString() {
         return "nome: " + nome + "\ncpf: " + cpf + "\nidade: " + idade + "\nsexo: " + sexo + "cnh: ";
     }

@@ -150,12 +150,27 @@ public class Questao2 {
 
     public static Integer[] removerPesoMochila(Integer[] mochila, int valor) {
         Integer id = findInMochila(mochila, valor);
-        Integer[] newMochila = new Integer[10];
 
         if (id != null && mochila[id] == valor) {
             mochila[id] = null;
         } else {
             System.out.println("Item não encontrado ao excluir!");
+        }
+
+        return mochila;
+    }
+
+    public static Integer[] ordenarMochila(Integer[] mochila){
+        int maior = 0;
+        int menor = 0;
+        Integer[] newMochila = new Integer[10];
+
+        for(int i = 0; i < 10; i++){
+            if(maior > mochila[i]){
+                menor = mochila[i];
+                mochila[i] = maior;
+                mochila[]
+            }
         }
 
         return mochila;
