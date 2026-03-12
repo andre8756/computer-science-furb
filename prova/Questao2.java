@@ -69,6 +69,9 @@ public class Questao2 {
                     System.out.println("Saindo!!");
                     break;
 
+                case 'g':
+                    listMochila(mochila);
+                    break;
                 default:
                     System.out.println("Opção inválida!");
                     break;
@@ -80,6 +83,12 @@ public class Questao2 {
 
         scan.close();
 
+    }
+
+    public static void listMochila(Integer[] mochila) {
+        for (int i = 0; i < 10; i++) {
+            System.out.printf("Item %d: %d", i, mochila[i]);
+        }
     }
 
     public static float getPesoMochila(Integer[] mochila) {
