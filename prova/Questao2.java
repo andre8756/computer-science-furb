@@ -51,6 +51,7 @@ public class Questao2 {
                     break;
 
                 case 'd':
+                    mochila = ordenarMochila(mochila);
                     break;
 
                 case 'e':
@@ -160,20 +161,21 @@ public class Questao2 {
         return mochila;
     }
 
-    public static Integer[] ordenarMochila(Integer[] mochila){
+    public static Integer[] ordenarMochila(Integer[] mochila) {
         int maior = 0;
-        int menor = 0;
         Integer[] newMochila = new Integer[10];
 
-        for(int i = 0; i < 10; i++){
-            if(maior > mochila[i]){
-                menor = mochila[i];
-                mochila[i] = maior;
-                mochila[]
+        for (int i = 0; i < 10; i++) {
+
+            for (int j = 10; j > 0; j--) {
+                if (mochila[i] > mochila[j]) {
+                    maior = mochila[i];
+                    newMochila[i] = maior;
+                }
             }
         }
 
-        return mochila;
+        return newMochila;
     }
 
 }
