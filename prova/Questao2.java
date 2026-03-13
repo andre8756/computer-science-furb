@@ -44,6 +44,9 @@ public class Questao2 {
                     break;
 
                 case 'b':
+                    System.out.println("Digite o valor para remover: ");
+                    valor = scan.nextInt();
+                    removerPesoMochila(mochila, valor);
                     break;
 
                 case 'c':
@@ -87,7 +90,7 @@ public class Questao2 {
 
     public static void listMochila(Integer[] mochila) {
         for (int i = 0; i < 10; i++) {
-            System.out.printf("Item %d: %d", i, mochila[i]);
+            System.out.printf(" Item %d: %d \n", i, mochila[i]);
         }
     }
 
@@ -175,7 +178,15 @@ public class Questao2 {
         Integer[] newMochila = new Integer[10];
 
         for (int i = 0; i < 10; i++) {
-            for (int j = 10; j > 0; j--) {
+            for (int j = 9; j > 0; j--) {
+                if (mochila[i] == null) {
+                    mochila[i] = 0;
+                }
+
+                if (mochila[j] == null) {
+                    mochila[j] = 0;
+                }
+
                 if (mochila[i] > mochila[j]) {
                     maior = mochila[i];
                     newMochila[i] = maior;
