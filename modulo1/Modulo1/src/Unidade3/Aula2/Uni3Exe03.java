@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class Uni3Exe03 {
 
-    float precoGasolina;
-    float valorPagamento;
+    private float precoGasolina;
+    private float valorPagamento;
 
     public Uni3Exe03(float precoGasolina, float valorPagamento) {
         this.precoGasolina = precoGasolina;

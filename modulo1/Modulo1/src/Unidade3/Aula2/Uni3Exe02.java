@@ -25,10 +25,8 @@ public class Uni3Exe02 {
         Scanner scan = new Scanner(System.in);
         System.out.print("Digite o preço do par de sapatos com desconto ");
         float valorTotal = scan.nextFloat();
-        System.out.print("Digite o valor do desconto: ");
-        float desconto = scan.nextFloat();
         System.out.println();
-        Uni3Exe02 calcado = new Uni3Exe02(valorTotal, desconto);
+        Uni3Exe02 calcado = new Uni3Exe02(valorTotal, 12);
         System.out.printf("Valor do desconto: R$ %.2f \n", calcado.desconto());
         System.out.printf("O preço do par de sapatos com desconto: R$ %.2f ", calcado.valorTotalAPagar());
 

@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class Uni3Exe01 {
 
-    int comprimento;
-    int largura;
+    private int comprimento;
+    private int largura;
 
     public Uni3Exe01(int comprimento, int largura) {
         this.comprimento = comprimento;
