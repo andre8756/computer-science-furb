@@ -20,10 +20,15 @@ public class Uni3Exe04 {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        System.out.print("Digite a 1º");
+        System.out.print("Digite a primeira nota: ");
+        int n1 = scan.nextInt();
+        System.out.print("Digite a segunda nota: ");
+        int n2 = scan.nextInt();
+        System.out.print("Digite a terceira nota: ");
+        int n3 = scan.nextInt();
 
-        Uni3Exe04 notas = new Uni3Exe04(4, 8, 6);
+        Uni3Exe04 notas = new Uni3Exe04(n1, n2, n3);
 
-        System.out.println(notas.mediaPonderada());
+        System.out.printf("A media poderada é: %.2f", notas.mediaPonderada());
     }
 }
