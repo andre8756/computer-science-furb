@@ -26,6 +26,8 @@ public class Uni3Exe06 {
         Uni3Exe06 restaurante = new Uni3Exe06(prato);
 
         System.out.printf("O valor do prato do cliente é R$ %.2f", restaurante.calculaPreco(prato));
+
+        scan.close();
     }
 
 }

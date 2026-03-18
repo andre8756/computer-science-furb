@@ -30,5 +30,7 @@ public class Uni3Exe04 {
         Uni3Exe04 notas = new Uni3Exe04(n1, n2, n3);
 
         System.out.printf("A media poderada é: %.2f", notas.mediaPonderada());
+
+        scan.close();
     }
 }

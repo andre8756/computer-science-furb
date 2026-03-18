@@ -28,6 +28,8 @@ public class Uni3Exe03 {
         Uni3Exe03 posto = new Uni3Exe03(precoGasolina, valorPago);
 
         System.out.printf("Você conseguiu colocar %.2f com este valor", posto.calcularCombustivel());
+
+        scan.close();
     }
 
 }

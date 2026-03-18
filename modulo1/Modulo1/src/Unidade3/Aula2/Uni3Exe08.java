@@ -35,5 +35,6 @@ public class Uni3Exe08 {
 
         System.out.printf("O atendente deve devolver %.2f para o cliente. ", cambio.calculoCambio());
 
+        scan.close();
     }
 }

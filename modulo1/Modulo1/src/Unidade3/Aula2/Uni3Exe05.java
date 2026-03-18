@@ -36,6 +36,8 @@ public class Uni3Exe05 {
         Uni3Exe05 granja = new Uni3Exe05(galinhas);
 
         System.out.printf("O gasto total para marcar %d é R$ %.2f", granja.getFrangos(), granja.calcularGasto());
+
+        scan.close();
     }
 
 }

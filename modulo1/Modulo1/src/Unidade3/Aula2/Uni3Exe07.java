@@ -46,6 +46,8 @@ public class Uni3Exe07 {
         Uni3Exe07 fabrica = new Uni3Exe07(latas, garrafas600, garrafas2L);
 
         System.out.printf("O cliente comprou um total de %.2f litros", fabrica.calcularLitros());
+
+        scan.close();
     }
 
 }

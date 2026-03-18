@@ -26,5 +26,7 @@ public class Uni3Exe01 {
         Uni3Exe01 uni3Exe01 = new Uni3Exe01(comprimento, altura);
 
         System.out.println(uni3Exe01.calcularArea());
+
+        scan.close();
     }
 }
