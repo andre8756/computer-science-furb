@@ -9,9 +9,6 @@ public class Uni3Exe14 {
 
     private float consumo = 12;
 
-    public Uni3Exe14() {
-    }
-
     public Uni3Exe14(float distancia, float tempo) {
         this.distancia = distancia;
         this.tempo = tempo;
