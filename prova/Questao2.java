@@ -30,6 +30,7 @@ public class Questao2 {
             System.out.println("d - Ordenar mochila em ordem decrescente");
             System.out.println("e - Verificar se um peso existe na mochila");
             System.out.println("f - Sair");
+            System.out.println("g - Listar Items");
             System.out.println();
             System.out.print("Digite uma opção válida: ");
             opcao2 = scan.next();
@@ -114,7 +115,7 @@ public class Questao2 {
         int add = 0;
 
         do {
-            if (mochila[i] == null) {
+            if (mochila[i] == null || mochila[i] == 0) {
                 if ((getPesoMochila(mochila) + valor) >= 10) {
                     System.out.println("Peso Excedido!!!");
                 } else {
@@ -175,26 +176,32 @@ public class Questao2 {
 
     public static Integer[] ordenarMochila(Integer[] mochila) {
         int maior = 0;
-        Integer[] newMochila = new Integer[10];
 
         for (int i = 0; i < 10; i++) {
-            for (int j = 9; j > 0; j--) {
-                if (mochila[i] == null) {
-                    mochila[i] = 0;
-                }
+            if (mochila[i] == null) {
+                mochila[i] = 0;
+            }
 
+            for (int j = 9; j >= i; j--) {
                 if (mochila[j] == null) {
                     mochila[j] = 0;
                 }
 
                 if (mochila[i] > mochila[j]) {
                     maior = mochila[i];
-                    newMochila[i] = maior;
                 }
+
+                if (mochila[i] < mochila[j] && maior < mochila[j] || mochila[i] == mochila[j]) {
+                    maior = mochila[j];
+                }
+            }
+
+            if (mochila[i] <= maior) {
+                mochila[i] = maior;
             }
         }
 
-        return newMochila;
+        return mochila;
     }
 
 }
