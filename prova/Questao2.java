@@ -176,6 +176,7 @@ public class Questao2 {
 
     public static Integer[] ordenarMochila(Integer[] mochila) {
         int maior = 0;
+        Integer newMochila[] = new Integer[10];
 
         for (int i = 0; i < 10; i++) {
             if (mochila[i] == null) {
@@ -187,21 +188,18 @@ public class Questao2 {
                     mochila[j] = 0;
                 }
 
-                if (mochila[i] > mochila[j]) {
+                if (mochila[i] >= mochila[j]) {
                     maior = mochila[i];
-                }
-
-                if (mochila[i] < mochila[j] && maior < mochila[j] || mochila[i] == mochila[j]) {
+                } else {
                     maior = mochila[j];
                 }
+
             }
 
-            if (mochila[i] <= maior) {
-                mochila[i] = maior;
-            }
+            newMochila[i] = maior;
         }
 
-        return mochila;
+        return newMochila;
     }
 
 }
