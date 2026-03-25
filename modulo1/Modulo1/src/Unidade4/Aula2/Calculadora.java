@@ -15,7 +15,7 @@ public class Calculadora {
     }
 
     private void exibirResultado() {
-        System.out.printf("O resultado é %f", resultado);
+        System.out.printf("O resultado é %.2f", resultado);
     }
 
     private void executarOperacao() {
@@ -52,7 +52,7 @@ public class Calculadora {
     }
 
     public static void main(String[] args) {
-
+        Calculadora calculadora = new Calculadora();
     }
 
     public float somar(float n1, float n2) {
