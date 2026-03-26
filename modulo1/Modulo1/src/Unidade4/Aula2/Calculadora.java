@@ -52,7 +52,7 @@ public class Calculadora {
     }
 
     public static void main(String[] args) {
-        Calculadora calculadora = new Calculadora();
+        new Calculadora();
     }
 
     public float somar(float n1, float n2) {
