@@ -11,9 +11,9 @@ public class Uni4Exe09 {
     }
 
     public void iniciar() {
-        System.out.println("Digite o primeiro valor: ");
+        System.out.print("Digite o primeiro valor: ");
         n1 = scan.nextInt();
-        System.out.println("Digite o segundo valor: ");
+        System.out.print("Digite o segundo valor: ");
         n2 = scan.nextInt();
 
         if (isMultiplo()) {
