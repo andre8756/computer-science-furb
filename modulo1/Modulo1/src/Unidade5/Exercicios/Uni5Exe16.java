@@ -8,16 +8,22 @@ public class Uni5Exe16 {
         float altura = 1;
         char genero;
 
-        try{
+        try {
             while (altura != 0) {
-            
-            System.out.println("Atura: ");
-            altura = scan.nextFloat();
-            System.out.println("Gênero: ");
-            genero = scan.next().charAt(0);
 
+                System.out.println("Atura: ");
+                altura = scan.nextFloat();
+                System.out.println("Gênero: ");
+                genero = scan.next().toUpperCase().charAt(0);
+
+                if (genero == 'M') {
+
+                }
+
+            }
+        } catch (Exception ex) {
+            System.out.println("Algo deu errado :/");
         }
-        }catch
 
     }
 }
