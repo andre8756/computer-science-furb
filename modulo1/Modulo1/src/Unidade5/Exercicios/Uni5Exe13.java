@@ -13,12 +13,12 @@ public class Uni5Exe13 {
         reabastecimentos = scan.nextInt();
 
         for (int i = 0; i < reabastecimentos; i++) {
-            System.out.println("Parada " + reabastecimentos + ": ");
+            System.out.println("Parada " + (i + 1) + ": ");
             System.out.print("  Quilometragem: ");
             quilometragem = scan.nextFloat();
             System.out.print("  Combustível: ");
             combustivel = scan.nextFloat();
-            System.out.println("Parada " + reabastecimentos + ": " + (quilometragem / combustivel));
+            System.out.println("  Parada " + (i + 1) + ": " + (quilometragem / combustivel));
             quilometragemMedia += (quilometragem / combustivel);
         }
 
