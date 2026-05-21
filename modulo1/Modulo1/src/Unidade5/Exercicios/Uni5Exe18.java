@@ -26,5 +26,7 @@ public class Uni5Exe18 {
 
             totalAssistindo += pessoasAssistindo;
         }
+
+        media = (totalAssistindo * 100);
     }
 }
