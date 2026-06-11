@@ -16,7 +16,7 @@ public class Uni5Exe18 {
 
             if (canal == 0) {
                 break;
-            } else if (canal != 4 || canal != 5 || canal != 9 || canal != 12) {
+            } else if (canal != 4 && canal != 5 && canal != 9 && canal != 12) {
                 System.out.println("Número inválido! Tente novamente");
                 continue;
             }
@@ -27,6 +27,5 @@ public class Uni5Exe18 {
             totalAssistindo += pessoasAssistindo;
         }
 
-        media = (totalAssistindo * 100);
     }
 }

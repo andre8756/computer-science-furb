@@ -1,5 +1,3 @@
-package Unidade6.Atividade;
-
 import java.util.Scanner;
 
 public class Uni6Exe02 {
@@ -16,7 +14,7 @@ public class Uni6Exe02 {
 
     public void ler() {
         for (int i = 0; i < (tamanho); i++) {
-            System.out.println("Digite o " + (i + 1) + " número: ");
+            System.out.print("Digite o " + (i + 1) + "º número: ");
             array[i] = scan.nextFloat();
         }
     }
@@ -32,7 +30,7 @@ public class Uni6Exe02 {
     public void escrever() {
         for (int i = 0; i < (tamanho); i++) {
             if (array[i] > media) {
-                System.out.printf("%.2f é maior que a média", array[i]);
+                System.out.printf("%.2f é maior que a média \n", array[i]);
             }
         }
     }
