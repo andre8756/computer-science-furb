@@ -18,11 +18,13 @@ public class Produto{
         return preco;
     }
 
-    public void setPreco(int preco){
-        if(preco > 0) this.preco = preco;
+    public void setPreco(double preco){
+        if(preco > 0) {
+            this.preco = preco;
+        }
     }
 
-    public double getNome(){
+    public String getNome(){
         return nome;
     }
 
