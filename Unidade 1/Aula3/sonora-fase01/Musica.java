@@ -1,5 +1,5 @@
 public class Musica {
-    private int id;
+    private final int id;
     private String titulo;
     private String artista;
     private int duracaoSegundos;
