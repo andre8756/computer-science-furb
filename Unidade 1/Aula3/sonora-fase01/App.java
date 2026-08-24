@@ -38,6 +38,6 @@ public class App {
     }
 
     public static void cadastrarMusicaManualmente(){
-        System.out.println();  //testee reewrwer
+        System.out.println();  
     }
 }
