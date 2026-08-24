@@ -28,12 +28,16 @@ public class App {
             opcao = scan.nextInt();
 
             switch(opcao){
-                case
+                case 1: cadastrarMusicaManualmente();
             }
 
         }while(opcao != 0);
 
         scan.close();
 
+    }
+
+    public static void cadastrarMusicaManualmente(){
+        System.out.println();  //testee reewrwer
     }
 }
