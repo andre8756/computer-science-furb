@@ -41,8 +41,13 @@ public class App {
             opcao = scan.nextInt();
 
             switch(opcao){
-                case 1: plataforma.cadastrarMusicaManualmente();
-                case 2: plataforma.cadastrarUsuarioManualmente();
+                case 0: System.out.println("Saindo do sonora... "); break;
+                case 1: plataforma.cadastrarMusicaManualmente(); break;
+                case 2: plataforma.cadastrarUsuarioManualmente(); break;
+                case 3: plataforma.criarPlaylistEAdicionarMusicas(); break;
+                
+                default:System.out.println("Dígito inválido, tente novamente!");
+
             }
 
         }while(opcao != 0);
