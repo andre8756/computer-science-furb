@@ -2,8 +2,21 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String args[]){
+        Plataforma plataforma = new Plataforma();
+
+        //  ----- Apenas testando
+        
+        Musica musica1 = new Musica("titulo1", "artista1", 65);
+        Musica musica2 = new Musica("titulo2", "artista2", 70);
+        Musica musica3 = new Musica("titulo3", "artista3", 75);
+
+        plataforma.cadastrarMusica(musica1);
+        plataforma.cadastrarMusica(musica2);
+        plataforma.cadastrarMusica(musica3);
+
+        //  ----- Tela inicial
+
         Scanner scan = new Scanner(System.in);
-        boolean hasInt;
         int opcao = 0;
 
         do{
@@ -18,26 +31,23 @@ public class App {
             System.out.println("0 - Sair");
             System.out.println();
             System.out.print(">> ");
-            hasInt = scan.hasNextInt();
 
             while(!scan.hasNextInt()) { 
                 System.out.println("Dígito inválido, tente novamente!");
+                System.out.print(">> ");
                 scan.nextInt();
             }
 
             opcao = scan.nextInt();
 
             switch(opcao){
-                case 1: cadastrarMusicaManualmente();
+                case 1: plataforma.cadastrarMusicaManualmente();
+                case 2: plataforma.cadastrarUsuarioManualmente();
             }
 
         }while(opcao != 0);
 
         scan.close();
 
-    }
-
-    public static void cadastrarMusicaManualmente(){
-        System.out.println();  // teste branch234324234
     }
 }

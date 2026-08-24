@@ -1,4 +1,7 @@
+import java.util.Scanner;
+
 public class Plataforma {
+    Scanner scan = new Scanner(System.in);
 
     private final int MAX = 500;
     private Musica musicas[] = new Musica[MAX];
@@ -70,5 +73,45 @@ public class Plataforma {
 
         return contador;
     }
+
+
+    // -------------- Métodos Auxiliares:
+
+    public void cadastrarMusicaManualmente(){
+        Musica musica;
+        String titulo;
+        String artista;
+        int duracaoSegundos;
+
+        System.out.print("Digite o titulo da música: ");
+        titulo = scan.next();
+        System.out.print("Digite o artista da música: ");
+        artista = scan.next();
+        System.out.print("Digite a duração total em segundos da música: ");
+        
+        while(!scan.hasNextInt()){
+            System.out.print("Duração da música inválida! Tente novamente...");
+            System.out.print("Digite a duração total em segundos da música: ");
+
+            scan.nextInt();
+        }
+        duracaoSegundos = scan.nextInt();
+
+        musica = new Musica(titulo, artista, duracaoSegundos);
+        cadastrarMusica(musica);
+    }
+
+    public void cadastrarUsuarioManualmente(){
+        Usuario usuario;
+        String nome;
+        String email;
+
+        System.out.print("Digite o titulo da música: ");
+        titulo = scan.next();
+        System.out.print("Digite o artista da música: ");
+        artista = scan.next();
+
+    }
+
         
 }
