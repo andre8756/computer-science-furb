@@ -1,8 +1,8 @@
 public class Plataforma {
 
-    int MAX = 500;
-    Musica musicas[] = new Musica[MAX];
-    Usuario usuarios[] = new Usuario[MAX];
+    private final int MAX = 500;
+    private Musica musicas[] = new Musica[MAX];
+    private Usuario usuarios[] = new Usuario[MAX];
 
     public boolean cadastrarMusica(Musica musica){
         
@@ -27,15 +27,48 @@ public class Plataforma {
         return false;
     }
 
-    public boolean verificarEspacoMusicas(){
-        for(int i = 0; i < MAX-1; i++){
-            if(musicas[i] == null){
-                return true;
+    public Musica buscarMusicaPorId(int id){
+        for(int i = 0; i < (MAX-1); i++){
+            if(musicas[i].getId() == id){
+                return musicas[i];
             }
         }
 
-        return false;
+        return null;
     }
 
+    public Musica buscarMusica(String titulo){
+        for(int i = 0; i < (MAX-1); i++){
+            if(musicas[i].getTitulo().equals(titulo)){
+                return musicas[i];
+            }
+        }
+    
+        return null;
+    }
+    
+    public int getTotalMusicas(){
+        int contador = 0;
+
+        for(int i = 0; i < (MAX - 1); i++){
+            if(musicas[i] != null){
+                contador++;
+            }
+        }
+
+        return contador;
+    }
+
+    public int getTotalUsuarios(){
+        int contador = 0;
+
+        for (int i = 0; i < (MAX - 1); i++){
+            if(usuarios[i] != null){
+                contador++;
+            }
+        }
+
+        return contador;
+    }
         
 }
