@@ -1,8 +1,6 @@
 public class Playlist {
     private String nome;
     private Usuario dono;
-    private int quantidade;
-    private int duracaoTotalSegundos;
     private int quantidadeMax = 100;
     private Musica musicas[] = new Musica[quantidadeMax];
 
@@ -34,7 +32,7 @@ public class Playlist {
     public boolean adicionar(Musica musica){
         
         for(int i = 0; i < 99; i++){
-            if(musicas[i] == null){
+            if(musicas[i] == null && musica != null){
                 musicas[i] = musica;
                 return true;
             }
@@ -52,8 +50,8 @@ public class Playlist {
         return null;
     }
 
-    public boolean remremoverNaPosicao(int indice){
-        if(indice >= 0 && indice <= 100 && musicas[indice] != null){
+    public boolean removerNaPosicao(int indice){
+        if(indice >= 0 && indice <= 99){
             musicas[indice] = null;
             organizarPlaylist();
             return true;
@@ -74,8 +72,7 @@ public class Playlist {
         return duracaoTotalSeg;
     }
 
-    public int reproduzirTudo(){
-        int duracaoTotalSeg = 0;
+    public void reproduzirTudo(){
 
         for(int i = 0; i < quantidadeMax-1; i++){
             
@@ -83,26 +80,25 @@ public class Playlist {
                 musicas[i].reproduzir();
             }
         }
-
-        return duracaoTotalSeg;
     }
 
 
     // --------- Metodos Auxiliares
 
-    public void organizarPlaylist() {
+    public void organizarPlaylist(){
         boolean troca = true;
         Musica musicaTemp;
 
-        while (troca) {
+        while(troca){
             troca = false;
-            for (int i = (quantidadeMax - 2); i < 0; i++) {
-                if (musicas[i] == null && musicas[i + 1] != null) {
+
+            for(int i = 0; i < (quantidadeMax - 2); i++){
+                if(musicas[i] == null && musicas[i+1] != null){
                     troca = true;
 
                     musicaTemp = musicas[i];
-                    musicas[i] = musicas[i + 1];
-                    musicas[i + 1] = musicaTemp;
+                    musicas[i] = musicas[i+1];
+                    musicas[i+1] = musicaTemp;
                 }
             }
         }

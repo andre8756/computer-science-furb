@@ -37,7 +37,5 @@ public class Plataforma {
         return false;
     }
 
-    public Musica buscarMusicaPorId(int id){
         
-    }
 }
