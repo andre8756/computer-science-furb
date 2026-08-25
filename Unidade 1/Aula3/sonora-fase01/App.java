@@ -20,6 +20,7 @@ public class App {
         int opcao = 0;
 
         do{
+            System.out.println();
             System.out.println("=== Sonora ===");
             System.out.println("1 - Cadastrar música manualmente");
             System.out.println("2 - Cadastrar usuário");
@@ -45,6 +46,8 @@ public class App {
                 case 1: plataforma.cadastrarMusicaManualmente(); break;
                 case 2: plataforma.cadastrarUsuarioManualmente(); break;
                 case 3: plataforma.criarPlaylistEAdicionarMusicas(); break;
+                case 4: plataforma.buscarMusicaPorId();
+                case 5: plataforma.buscarMusicaPorTitulo();
                 
                 default:System.out.println("Dígito inválido, tente novamente!");
 
