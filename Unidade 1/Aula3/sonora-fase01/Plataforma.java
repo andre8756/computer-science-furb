@@ -8,10 +8,12 @@ public class Plataforma {
     private Usuario usuarios[] = new Usuario[MAX];
     private Playlist playlists[] = new Playlist[15];
 
+    // -------  Cadastros 
+
     public boolean cadastrarMusica(Musica musica){
         
         for(int i = 0; i < MAX; i++){
-            if(musicas[i] == null){
+            if(musicas[i] == null && musicaNova(musica)){
                 musicas[i] = musica;
                 return true;
             }
@@ -21,7 +23,7 @@ public class Plataforma {
     }
 
     public boolean cadastrarUsuario(Usuario usuario){
-        for(int i = 0; i < MAX; i++){
+        for(int i = 0; i < (MAX - 1); i++){
             if(usuarios[i] == null && usuarioNovo(usuario)){
                 usuarios[i] = usuario;
                 return true;
@@ -30,6 +32,19 @@ public class Plataforma {
 
         return false;
     }
+
+    public boolean cadastrarPlaylist(Playlist playlist){
+        for(int i = 0; i < (MAX - 1); i++){
+            if(playlists[i] == null && playlistNova(playlist)){
+                playlists[i] = playlist;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // -------- Métodos de busca
 
     public Musica buscarMusicaPorId(int id){
         for(int i = 0; i < (MAX-1); i++){
@@ -48,6 +63,7 @@ public class Plataforma {
             }
         }
     
+        System.out.println("Música não encontrada!");
         return null;
     }
     
@@ -65,7 +81,7 @@ public class Plataforma {
 
     public Usuario buscarUsuario(String nome){
         for(int i = 0; i < (MAX - 1); i++){
-            if(nome == usuarios[i].getNome()){
+            if(nome.equals(usuarios[i].getNome())){
                 return usuarios[i];
             }
         }
@@ -86,17 +102,49 @@ public class Plataforma {
         return contador;
     }
 
+    public Playlist buscarPlaylist(String nome){
+        for(int i = 0; i < 14; i++){
+            if(playlists[i].getNome().equals(nome)){
+                return playlists[i];
+            }
+        }
+
+        return null;
+    }
+
     // --------------- Métodos Auxiliares:
 
-    public boolean usuarioNovo(Usuario usuario){
+    private boolean musicaNova(Musica musica){
+        for(int i = 0; i < (MAX - 1); i++){
+            if(musica.getTitulo().equals(musicas[i].getTitulo())){
+                System.out.println("Já existe uma música com este título!!");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean usuarioNovo(Usuario usuario){
         for(int i = 0; i < (MAX-1); i++){
-            if(usuario.getNome() == usuarios[i].getNome()){
+            if(usuario.getNome().equals(usuarios[i].getNome())){
                 System.out.println("Nome de usuário já utilizado");
                 return false;
             }
 
-            if(usuario.getEmail() == usuarios[i].getEmail()){
+            if(usuario.getEmail().equals(usuarios[i].getEmail())){
                 System.out.println("E-mail de usuário já utilizado");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean playlistNova(Playlist playlist){
+        for(int i = 0; i < (14); i++){
+            if(playlist.getNome().equals(playlists[i].getNome())){
+                System.out.println("Já existe uma playlist com este nome!!");
                 return false;
             }
         }
@@ -146,15 +194,43 @@ public class Plataforma {
         cadastrarUsuario(usuario);
     }
 
+    // Falta esse bendito método!!!!!
     public void criarPlaylistEAdicionarMusicas(){
         Playlist playlist;
         String nome;
         Usuario dono;
+        char continuar;
 
         System.out.print("Digite o nome da playlist: ");
         nome = scan.next();
         System.out.print("Digite o nome do usuário: ");
         dono = buscarUsuario(scan.next());
+        playlist = new Playlist(nome, dono);
+
+        System.out.println("");
+        System.out.println("Playlist criada com sucesso, vocẽ deseja adicionar uma música existente à playlist? (s/n) ");
+        System.out.print(">> ");
+        continuar = scan.next().toUpperCase().charAt(0);
+        
+        while(continuar == 'S'){
+            Musica musica;
+
+            System.out.println("Digite o título da música: ");
+            musica = buscarMusica(scan.next());
+
+            if(musica != null){
+                playlist.adicionar(musica);
+            }
+
+            System.out.println();
+            System.out.println("Deseja adicionar outra música? (s/n) ");
+            System.out.print(">> ");
+            continuar = scan.next().toUpperCase().CharAt(0);
+
+        }
+
+        System.out.println("Saindo da playlist!! ");
+        System.out.println();
     }
 
         
