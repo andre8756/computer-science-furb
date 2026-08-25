@@ -1,0 +1,13 @@
+Melhorias no Sonora:
+
+- Melhorar métodos de busca e verificação de cadastro:
+
+Os métodos estão fazendo muitos processos, e deixando o sistema lento.
+
+- Exceptions
+
+Tem muitos erros de execução
+
+- Mais métodos
+
+- Playlist ser vinculada direto no usuário.

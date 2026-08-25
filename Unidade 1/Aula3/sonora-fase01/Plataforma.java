@@ -263,9 +263,10 @@ public class Plataforma {
         indice = scan.nextInt();
         musicaTemp = buscarMusicaPorId(indice);
 
-        System.out.println("Titulo da Música: "+musicaTemp.getTitulo());
-        System.out.println("Artista da Música: "+musicaTemp.getArtista());
-        System.out.println("Duração: "+musicaTemp.getDuracaoFormatada());
+        System.out.println("Titulo da Música: " + musicaTemp.getTitulo());
+        System.out.println("Artista da Música: " + musicaTemp.getArtista());
+        System.out.println("Duração: " + musicaTemp.getDuracaoFormatada());
+        System.out.println("Reproduções: " + musicaTemp.getReproducoes());
 
     }
 
@@ -277,12 +278,13 @@ public class Plataforma {
         titulo = scan.next();
         musicaTemp = buscarMusica(titulo);
 
-        System.out.println("Titulo da Música: "+musicaTemp.getTitulo());
-        System.out.println("Artista da Música: "+musicaTemp.getArtista());
-        System.out.println("Duração: "+musicaTemp.getDuracaoFormatada());
+        System.out.println("Titulo da Música: " + musicaTemp.getTitulo());
+        System.out.println("Artista da Música: " + musicaTemp.getArtista());
+        System.out.println("Duração: " + musicaTemp.getDuracaoFormatada());
+        System.out.println("Reproduções: " + musicaTemp.getReproducoes());
     }
 
-    public void reproduzirUmaMusica(){
+    public void reproduzirUmaMusica() {
         String titulo;
         Musica musicaTemp;
         System.out.println("Digite o título da música que você deseja reproduzir: ");
@@ -290,8 +292,20 @@ public class Plataforma {
         titulo = scan.next();
 
         musicaTemp = buscarMusica(titulo);
-        if(musicaTemp != null){
+        if (musicaTemp != null) {
             musicaTemp.reproduzir();
+        }
+    }
+
+    public void listarAcervo(){
+        System.out.println("    Id   Nome    Artista     Duração   Reproduções");
+        for(int i = 0; i < (MAX-1); i++){
+            if(musicas[i] != null){
+                System.out.printf("   %d   %s    %s    %s     %d\n", 
+                musicas[i].getId(), musicas[i].getTitulo(),
+            musicas[i].getArtista(), musicas[i].getDuracaoFormatada(),
+            musicas[i].getReproducoes());
+            }
         }
     }
 

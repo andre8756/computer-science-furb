@@ -40,14 +40,18 @@ public class App {
             }
 
             opcao = scan.nextInt();
+            
+            System.out.println();
 
             switch(opcao){
                 case 0: System.out.println("Saindo do sonora... "); break;
                 case 1: plataforma.cadastrarMusicaManualmente(); break;
                 case 2: plataforma.cadastrarUsuarioManualmente(); break;
                 case 3: plataforma.criarPlaylistEAdicionarMusicas(); break;
-                case 4: plataforma.buscarMusicaPorId();
-                case 5: plataforma.buscarMusicaPorTitulo();
+                case 4: plataforma.buscarMusicaPorId(); break;
+                case 5: plataforma.buscarMusicaPorTitulo(); break;
+                case 6: plataforma.reproduzirUmaMusica(); break;
+                case 7: plataforma.listarAcervo(); break;
                 
                 default:System.out.println("Dígito inválido, tente novamente!");
 
