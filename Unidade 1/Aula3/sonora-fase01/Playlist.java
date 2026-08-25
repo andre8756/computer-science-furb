@@ -62,7 +62,7 @@ public class Playlist {
     public int getDuracaoTotalSegundos(){
         int duracaoTotalSeg = 0;
 
-        for(int i = 0; i < quantidadeMax-1; i++){
+        for(int i = 0; i < quantidadeMax; i++){
             
             if(musicas[i] != null){
                 duracaoTotalSeg += musicas[i].getDuracaoSegundos();
@@ -74,7 +74,7 @@ public class Playlist {
 
     public void reproduzirTudo(){
 
-        for(int i = 0; i < quantidadeMax-1; i++){
+        for(int i = 0; i < quantidadeMax; i++){
             
             if(musicas[i] != null){
                 musicas[i].reproduzir();
@@ -92,7 +92,7 @@ public class Playlist {
         while(troca){
             troca = false;
 
-            for(int i = 0; i < (quantidadeMax - 2); i++){
+            for(int i = 0; i < (quantidadeMax - 1); i++){
                 if(musicas[i] == null && musicas[i+1] != null){
                     troca = true;
 

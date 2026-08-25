@@ -40,11 +40,16 @@ public class Musica {
     }
 
     public String getDuracaoFormatada(){
-        int duracaoMinutos;
-        duracaoMinutos = duracaoSegundos / 60;
-        duracaoSegundos = duracaoSegundos % 60;
+        int minutos = duracaoSegundos / 60;
+        int segundos = duracaoSegundos % 60;
 
-        return String.format("%02d:%02d", duracaoMinutos, duracaoSegundos);
+        return String.format("%02d:%02d", minutos, segundos);
+    }
+
+    @Override
+    public String toString(){
+        return String.format("%d - %s (%s) | Duração: %s | Reproduções: %d", 
+        id, titulo, artista, getDuracaoFormatada(), reproducoes);
     }
 
 }
