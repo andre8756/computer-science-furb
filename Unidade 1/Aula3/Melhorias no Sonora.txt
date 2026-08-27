@@ -11,3 +11,11 @@ Tem muitos erros de execução
 - Mais métodos
 
 - Playlist ser vinculada direto no usuário.
+
+
+
+
+
+
+sudo systemctl stop mariadb
+sudo systemctl start mariadb

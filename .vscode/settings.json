@@ -1,11 +1,12 @@
 {
     "java.debug.settings.onBuildFailureProceed": true,
     "java.project.sourcePaths": [
+        "Unidade 1/Aula3/sonora-fase01",
         "Unidade 1/Aula 2/Questao_3",
         "Unidade 1/Aula 2/Questao_2",
         "Unidade 1/Aula 2/Questao_1",
         "Unidade 1/Aula 1",
-        "Unidade 1/Aula3/sonora-fase01"
+        "Unidade 1/Aula5/sonora-fase02"
     ],
     "editor.suggest.selectionMode": "never"
 }
