@@ -11,8 +11,7 @@ public class Musica {
         this.id = contadorId;
         setTitulo(titulo);
         setArtista(artista);
-
-        this.duracaoSegundos = duracaoSegundos;
+        setDuracaoSegundos(duracaoSegundos);
         reproducoes = 0;
     }
 

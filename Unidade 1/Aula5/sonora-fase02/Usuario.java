@@ -4,30 +4,41 @@ public class Usuario {
     private String email;
     private static int contadorId = 0;
 
-    public Usuario(String nome, String email){
+    public Usuario(String nome, String email) {
         contadorId++;
         id = contadorId;
-        this.nome = nome;
-        this.email = email;
+        setNome(nome);
+        setEmail(email);
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
-    public String getNome(){
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome){
+    private void setNome(String nome) {
+
+        if (nome.isBlank() || nome.isEmpty()) {
+            throw new IllegalArgumentException("O nome do usuário deve estar preenchido!");
+        }
+
         this.nome = nome;
     }
 
-    public String getEmail(){
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email){
+    private void setEmail(String email) {
+
+        if (email.isBlank() || email.isEmpty()) {
+            throw new IllegalArgumentException("O emiail do usuário deve estar preenchido!");
+        }
+
         this.email = email;
+
     }
 }
