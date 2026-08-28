@@ -19,7 +19,7 @@ public class Usuario {
         return nome;
     }
 
-    public void setNome(String nome){
+    private void setNome(String nome){
         this.nome = nome;
     }
 

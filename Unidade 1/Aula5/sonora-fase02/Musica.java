@@ -6,40 +6,62 @@ public class Musica {
     private int reproducoes;
     private static int contadorId = 0;
 
-    public Musica(String titulo, String artista, int duracaoSegundos){
+    public Musica(String titulo, String artista, int duracaoSegundos) {
         contadorId++;
         this.id = contadorId;
-        this.titulo = titulo;
-        this.artista = artista;
+        setTitulo(titulo);
+        setArtista(artista);
+
         this.duracaoSegundos = duracaoSegundos;
         reproducoes = 0;
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
-    public String getTitulo(){
+    public String getTitulo() {
         return titulo;
     }
 
-    public String getArtista(){
+    private void setTitulo(String titulo) {
+        if (titulo.isBlank() || titulo.isEmpty()) {
+            throw new IllegalArgumentException("O título não pode estar em branco!");
+        }
+        this.titulo = titulo;
+    }
+
+    public String getArtista() {
         return artista;
     }
 
-    public int getDuracaoSegundos(){
+    private void setArtista(String artista){
+        if(artista.isBlank() || artista.isEmpty()){
+            throw new IllegalArgumentException("O artista não pode estar vazio!");
+        }
+        
+        this.artista = artista;
+    }
+
+    public int getDuracaoSegundos() {
         return duracaoSegundos;
     }
 
-    public int getReproducoes(){
+    private void setDuracaoSegundos(int duracaoSegundos){
+        if(duracaoSegundos <= 0){
+            throw new IllegalArgumentException("A música não pode ter menos de 1 segundo!");
+        }
+    }
+
+    public int getReproducoes() {
         return reproducoes;
     }
 
-    public void reproduzir(){
+    public void reproduzir() {
         reproducoes++;
     }
 
-    public String getDuracaoFormatada(){
+    public String getDuracaoFormatada() {
         int minutos = duracaoSegundos / 60;
         int segundos = duracaoSegundos % 60;
 
@@ -47,9 +69,9 @@ public class Musica {
     }
 
     @Override
-    public String toString(){
-        return String.format("%d - %s (%s) | Duração: %s | Reproduções: %d", 
-        id, titulo, artista, getDuracaoFormatada(), reproducoes);
+    public String toString() {
+        return String.format("%d - %s (%s) | Duração: %s | Reproduções: %d",
+                id, titulo, artista, getDuracaoFormatada(), reproducoes);
     }
 
 }
