@@ -5,7 +5,7 @@ public class Playlist {
     private Musica musicas[] = new Musica[quantidadeMax];
 
     public Playlist(String nome, Usuario dono){
-        this.nome = nome;
+        setNome(nome);
         this.dono = dono;
     }
 
@@ -13,8 +13,26 @@ public class Playlist {
         return nome;
     }
 
+    private void setNome(String nome){
+        if (nome.isBlank() || nome.isEmpty()) {
+            throw new IllegalArgumentException("O nome da playlist precisa estar preenchido!");
+        }   
+
+        this.nome = nome;
+    }
+
     public Usuario getDono(){
         return dono;
+    }
+
+    private void setDono(Usuario dono){
+
+        if (dono == null) {
+            throw new IllegalArgumentException("Erro ao vincular dono à playlist.");
+        }
+
+        this.dono = dono;
+
     }
 
     public int getQuantidade(){
@@ -42,12 +60,13 @@ public class Playlist {
     }
 
     public Musica getNaPosicao(int indice){
-        
-        if(indice >= 0 && indice <= 100){
-            return musicas[indice];
+        indice--;
+
+        if(indice < 0 || indice > musicas.length){
+            throw new IndexOutOfBoundsException("Erro na getNaPosicao() da Playlist! O índice ("+indice+") é inválido.");
         }
         
-        return null;
+        return musicas[indice];
     }
 
     public boolean removerNaPosicao(int indice){
