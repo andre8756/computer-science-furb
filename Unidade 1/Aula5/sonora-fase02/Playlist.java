@@ -70,12 +70,15 @@ public class Playlist {
     }
 
     public boolean removerNaPosicao(int indice) {
-        if (indice >= 0 && indice <= 99) {
-            musicas[indice] = null;
-            organizarPlaylist();
-            return true;
+        indice--;
+
+        if (indice < 0 || indice >= quantidadeMax) {
+            throw new IndexOutOfBoundsException(
+                    "Erro na removerNaPosicao() da Playlist! O ídice (" + (indice + 1) + ") é inválido.");
         }
-        return false;
+        musicas[indice] = null;
+        organizarPlaylist();
+        return true;
     }
 
     public int getDuracaoTotalSegundos() {

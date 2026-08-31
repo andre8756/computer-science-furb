@@ -17,9 +17,11 @@ public class App {
         //  ----- Tela inicial
 
         Scanner scan = new Scanner(System.in);
-        int opcao = 0;
+        int opcao;
 
         do{
+            scan.nextLine(); // Limpando buffer
+
             System.out.println();
             System.out.println("=== Sonora ===");
             System.out.println("1 - Cadastrar música manualmente");
@@ -31,16 +33,17 @@ public class App {
             System.out.println("7 - Listar acervo");
             System.out.println("0 - Sair");
             System.out.println();
-            System.out.print(">> ");
 
-            while(!scan.hasNextInt()) { 
-                System.out.println("Dígito inválido, tente novamente!");
-                System.out.print(">> ");
-                scan.nextInt();
+            while(true) { 
+                try{
+                    System.out.print(">> ");
+                    opcao = Integer.parseInt(scan.nextLine());
+                    break;
+                } catch(NumberFormatException exception){
+                    System.out.println("Valor inválido! Digite um número:");
+                }
             }
-
-            opcao = scan.nextInt();
-            
+                        
             System.out.println();
 
             switch(opcao){
