@@ -11,6 +11,10 @@ public class Plataforma {
     // ------- Cadastros
 
     public boolean cadastrarMusica(Musica musica) {
+        
+        if(musica == null){
+            throw new IllegalArgumentException("Erro em cadastrarMusica() da Plataforma! Não foi possível cadastrar a música.");
+        }
 
         if(!musicaNova(musica)){
                 return false;

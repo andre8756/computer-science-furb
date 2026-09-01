@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
 public class App {
-    public static void main(String args[]){
+    public static void main(String args[]) {
         Plataforma plataforma = new Plataforma();
 
-        //  ----- Apenas testando
-        
+        // ----- Apenas testando
+
         Musica musica1 = new Musica("titulo1", "artista1", 65);
         Musica musica2 = new Musica("titulo2", "artista2", 70);
         Musica musica3 = new Musica("titulo3", "artista3", 75);
@@ -14,12 +14,12 @@ public class App {
         plataforma.cadastrarMusica(musica2);
         plataforma.cadastrarMusica(musica3);
 
-        //  ----- Tela inicial
+        // ----- Tela inicial
 
         Scanner scan = new Scanner(System.in);
         int opcao;
 
-        do{
+        do {
             scan.nextLine(); // Limpando buffer
 
             System.out.println();
@@ -34,33 +34,50 @@ public class App {
             System.out.println("0 - Sair");
             System.out.println();
 
-            while(true) { 
-                try{
+            while (true) {
+                try {
                     System.out.print(">> ");
                     opcao = Integer.parseInt(scan.nextLine());
                     break;
-                } catch(NumberFormatException exception){
+                } catch (NumberFormatException exception) {
                     System.out.println("Valor inválido! Digite um número:");
                 }
             }
-                        
+
             System.out.println();
 
-            switch(opcao){
-                case 0: System.out.println("Saindo do sonora... "); break;
-                case 1: cadastrarMusicaManualmente(scan, plataforma); break;
-                case 2: cadastrarUsuarioManualmente(scan, plataforma); break;
-                case 3: criarPlaylistEAdicionarMusicas(scan, plataforma); break;
-                case 4: buscarMusicaPorId(scan, plataforma); break;
-                case 5: buscarMusicaPorTitulo(scan, plataforma); break;
-                case 6: reproduzirUmaMusica(scan, plataforma); break;
-                case 7: listarAcervo(plataforma); break;
-                
-                default:System.out.println("Dígito inválido, tente novamente!");
+            switch (opcao) {
+                case 0:
+                    System.out.println("Saindo do sonora... ");
+                    break;
+                case 1:
+                    cadastrarMusicaManualmente(scan, plataforma);
+                    break;
+                case 2:
+                    cadastrarUsuarioManualmente(scan, plataforma);
+                    break;
+                case 3:
+                    criarPlaylistEAdicionarMusicas(scan, plataforma);
+                    break;
+                case 4:
+                    buscarMusicaPorId(scan, plataforma);
+                    break;
+                case 5:
+                    buscarMusicaPorTitulo(scan, plataforma);
+                    break;
+                case 6:
+                    reproduzirUmaMusica(scan, plataforma);
+                    break;
+                case 7:
+                    listarAcervo(plataforma);
+                    break;
+
+                default:
+                    System.out.println("Dígito inválido, tente novamente!");
 
             }
 
-        }while(opcao != 0);
+        } while (opcao != 0);
 
         scan.close();
 
@@ -80,19 +97,24 @@ public class App {
         titulo = scan.nextLine();
         System.out.print("Digite o artista da música: ");
         artista = scan.nextLine();
-        System.out.print("Digite a duração total em segundos da música: ");
 
-        while (!scan.hasNextInt()) {
-            System.out.print("Duração da música inválida! Tente novamente...");
-            System.out.print("Digite a duração total em segundos da música: ");
-
-            scan.nextInt();
+        while(true){
+            try{
+                System.out.print("Digite a duração total em segundos da música: ");
+                duracaoSegundos = Integer.parseInt(scan.nextLine());
+                break;
+            }catch(Exception exception){
+                System.out.print("Valor invalido. Digite um número válido.");
+            }
         }
-        duracaoSegundos = scan.nextInt();
 
-        musica = new Musica(titulo, artista, duracaoSegundos);
-        plataforma.cadastrarMusica(musica);
-        System.out.println("Música cadastrada com sucessso!");
+        try{
+            musica = new Musica(titulo, artista, duracaoSegundos);
+            plataforma.cadastrarMusica(musica);
+            System.out.println("Música cadastrada com sucessso!");
+        } catch(Exception exception){
+            System.out.println("Houve um erro ao cadastrar a música. Por favor, tente novamente mais tarde.");
+        }
     }
 
     public static void cadastrarUsuarioManualmente(Scanner scan, Plataforma plataforma) {
@@ -211,13 +233,13 @@ public class App {
         }
     }
 
-    public static void listarAcervo(Plataforma plataforma){
+    public static void listarAcervo(Plataforma plataforma) {
         System.out.println("\n--- Acervo Sonora ---");
-        
+
         Musica[] acervo = plataforma.getMusicas();
-        for(int i = 0; i < acervo.length; i++){
-            if(acervo[i] != null){
-                System.out.printf(acervo[i].toString()+"\n");
+        for (int i = 0; i < acervo.length; i++) {
+            if (acervo[i] != null) {
+                System.out.printf(acervo[i].toString() + "\n");
             }
         }
     }

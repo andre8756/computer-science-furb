@@ -50,6 +50,8 @@ public class Musica {
         if(duracaoSegundos <= 0){
             throw new IllegalArgumentException("A música não pode ter menos de 1 segundo!");
         }
+
+        this.duracaoSegundos = duracaoSegundos;
     }
 
     public int getReproducoes() {
