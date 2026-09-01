@@ -71,12 +71,20 @@ public class Plataforma {
     // -------- Métodos de busca
 
     public Musica buscarMusicaPorId(int id) {
-        for (int i = 0; i < MAX; i++) {
-            if (musicas[i].getId() == id) {
-                return musicas[i];
-            }
+        if (id < 0 || id >= MAX) {
+            throw new IndexOutOfBoundsException("Posição não exeiste");
         }
 
+        for (int i = 0; i < MAX; i++) {
+            if (musicas[i] != null) {
+                if (musicas[i].getId() == id) {
+                    return musicas[i];
+                }
+            }
+
+        }
+
+        System.out.println("Música não encontrada!");
         return null;
     }
 

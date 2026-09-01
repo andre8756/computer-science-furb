@@ -38,6 +38,12 @@ public class Usuario {
             throw new IllegalArgumentException("O emiail do usuário deve estar preenchido!");
         }
 
+        int posicaoArroba = email.indexOf('@');
+
+        if(posicaoArroba <= 0 || posicaoArroba >= email.length() - 1){
+            throw new IllegalArgumentException("O email do usuário deve ser válido!");
+        }
+
         this.email = email;
 
     }

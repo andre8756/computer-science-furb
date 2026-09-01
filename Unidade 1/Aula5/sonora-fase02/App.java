@@ -30,8 +30,7 @@ public class App {
             System.out.println("4 - Buscar música por id");
             System.out.println("5 - Buscar música por título");
             System.out.println("6 - Reproduzir uma música");
-            System.out.println("7 - Remover música");
-            System.out.println("8 - Listar acervo");
+            System.out.println("7 - Listar acervo");
             System.out.println("0 - Sair");
             System.out.println();
 
@@ -70,12 +69,8 @@ public class App {
                     reproduzirUmaMusica(scan, plataforma);
                     break;
                 case 7:
-                    removerMusica(scan, plataforma);
-                    break;
-                case 8:
                     listarAcervo(plataforma);
                     break;
-
                 default:
                     System.out.println("Dígito inválido, tente novamente!");
 
@@ -144,7 +139,7 @@ public class App {
 
     }
 
-    public static void criarPlaylistEAdicionarMusicas(Scanner scan, Plataforma plataforma) {
+    public static int criarPlaylistEAdicionarMusicas(Scanner scan, Plataforma plataforma) {
         Playlist playlist;
         String nome;
         Usuario dono;
@@ -155,10 +150,12 @@ public class App {
         System.out.print("Digite o nome da playlist: ");
         nome = scan.nextLine();
 
-        do {
-            System.out.print("Digite o nome do usuário: ");
-            dono = plataforma.buscarUsuario(scan.nextLine());
-        } while (dono == null);
+        System.out.print("Digite o nome do usuário: ");
+        dono = plataforma.buscarUsuario(scan.nextLine());
+
+        if(dono == null){
+            return 1;
+        }
 
         try {
             playlist = new Playlist(nome, dono);
@@ -189,39 +186,40 @@ public class App {
 
             System.out.println("Saindo da playlist!! ");
             System.out.println();
+
+            return 0;
         } catch (IllegalArgumentException exception) {
             System.out.println("Não foi possível criar a Playlist: " + exception.getMessage());
+            return 1;
         }
-
+        
+        
     }
 
     public static void buscarMusicaPorId(Scanner scan, Plataforma plataforma) {
         int indice;
         Musica musicaTemp;
-        System.out.println("Digite o id da música: ");
-        System.out.print(">> ");
-
         scan.nextLine(); // Limpando buffer
+        System.out.println("Digite o id da música: ");
 
-        while (true) {
-            try {
-                System.out.print(">> ");
-                indice = Integer.parseInt(scan.nextLine());
-                break;
+        try {
+            System.out.print(">> ");
+            indice = Integer.parseInt(scan.nextLine());
 
-            } catch (NumberFormatException exception) {
-                System.out.println("Valor inválido. Digite um número: ");
+            musicaTemp = plataforma.buscarMusicaPorId(indice);
+
+            if (musicaTemp != null) {
+                System.out.println("Titulo da Música: " + musicaTemp.getTitulo());
+                System.out.println("Artista da Música: " + musicaTemp.getArtista());
+                System.out.println("Duração: " + musicaTemp.getDuracaoFormatada());
+                System.out.println("Reproduções: " + musicaTemp.getReproducoes());
             }
-        }
-
-        musicaTemp = plataforma.buscarMusicaPorId(indice);
-
-        if (musicaTemp != null) {
-            System.out.println("Titulo da Música: " + musicaTemp.getTitulo());
-            System.out.println("Artista da Música: " + musicaTemp.getArtista());
-            System.out.println("Duração: " + musicaTemp.getDuracaoFormatada());
-            System.out.println("Reproduções: " + musicaTemp.getReproducoes());
-
+        } catch (IndexOutOfBoundsException exception) {
+            System.out.println("A posição precisa ser um número.");
+        } catch (NumberFormatException exception) {
+            System.out.println("Esta posição não existe na Plataforma");
+        } finally {
+            System.out.println("--- Fim da busca ---");
         }
     }
 
@@ -236,10 +234,12 @@ public class App {
         titulo = scan.nextLine();
         musicaTemp = plataforma.buscarMusica(titulo);
 
-        System.out.println("Titulo da Música: " + musicaTemp.getTitulo());
-        System.out.println("Artista da Música: " + musicaTemp.getArtista());
-        System.out.println("Duração: " + musicaTemp.getDuracaoFormatada());
-        System.out.println("Reproduções: " + musicaTemp.getReproducoes());
+        if (musicaTemp != null) {
+            System.out.println("Titulo da Música: " + musicaTemp.getTitulo());
+            System.out.println("Artista da Música: " + musicaTemp.getArtista());
+            System.out.println("Duração: " + musicaTemp.getDuracaoFormatada());
+            System.out.println("Reproduções: " + musicaTemp.getReproducoes());
+        }
     }
 
     public static void reproduzirUmaMusica(Scanner scan, Plataforma plataforma) {
@@ -258,10 +258,9 @@ public class App {
         }
     }
 
-    public static void removerMusica(Scanner scan, Plataforma plataforma){
-        System.out.println(){
-
-        }
+    // Precisa acabar esse método
+    public static void removerMusica(Scanner scan, Plataforma plataforma) {
+        System.out.println();
     }
 
     public static void listarAcervo(Plataforma plataforma) {
