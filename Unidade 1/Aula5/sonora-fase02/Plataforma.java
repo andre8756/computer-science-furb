@@ -11,16 +11,17 @@ public class Plataforma {
     // ------- Cadastros
 
     public boolean cadastrarMusica(Musica musica) {
-        
-        if(musica == null){
-            throw new IllegalArgumentException("Erro em cadastrarMusica() da Plataforma! Não foi possível cadastrar a música.");
+
+        if (musica == null) {
+            throw new IllegalArgumentException(
+                    "Erro em cadastrarMusica() da Plataforma! Não foi possível cadastrar a música.");
         }
 
-        if(!musicaNova(musica)){
-                return false;
-            }
+        if (!musicaNova(musica)) {
+            return false;
+        }
 
-        for (int i = 0; i < MAX ; i++) {
+        for (int i = 0; i < MAX; i++) {
             if (musicas[i] == null) {
                 musicas[i] = musica;
                 return true;
@@ -31,11 +32,16 @@ public class Plataforma {
     }
 
     public boolean cadastrarUsuario(Usuario usuario) {
-        
-        if(!usuarioNovo(usuario)){
+
+        if (usuario == null) {
+            throw new IllegalArgumentException(
+                    "Erro em cadastrarUsuario() da Plataforma! Não foi possível cadastrar o usuaŕio.");
+        }
+
+        if (!usuarioNovo(usuario)) {
             return false;
         }
-        
+
         for (int i = 0; i < MAX; i++) {
             if (usuarios[i] == null) {
                 usuarios[i] = usuario;
@@ -48,7 +54,7 @@ public class Plataforma {
 
     public boolean cadastrarPlaylist(Playlist playlist) {
 
-        if(!playlistNova(playlist)){
+        if (!playlistNova(playlist)) {
             return false;
         }
 
@@ -182,9 +188,29 @@ public class Plataforma {
         return true;
     }
 
-    public Musica[] getMusicas(){
+    public Musica[] getMusicas() {
         return musicas;
     }
 
-    
+    // --------- Metodos Auxiliares
+
+    public void organizarMusicas() {
+        boolean troca = true;
+        Musica musicaTemp;
+
+        while (troca) {
+            troca = false;
+
+            for (int i = 0; i < (MAX - 1); i++) {
+                if (musicas[i] == null && musicas[i + 1] != null) {
+                    troca = true;
+
+                    musicaTemp = musicas[i];
+                    musicas[i] = musicas[i + 1];
+                    musicas[i + 1] = musicaTemp;
+                }
+            }
+        }
+    }
+
 }

@@ -30,7 +30,8 @@ public class App {
             System.out.println("4 - Buscar música por id");
             System.out.println("5 - Buscar música por título");
             System.out.println("6 - Reproduzir uma música");
-            System.out.println("7 - Listar acervo");
+            System.out.println("7 - Remover música");
+            System.out.println("8 - Listar acervo");
             System.out.println("0 - Sair");
             System.out.println();
 
@@ -69,6 +70,9 @@ public class App {
                     reproduzirUmaMusica(scan, plataforma);
                     break;
                 case 7:
+                    removerMusica(scan, plataforma);
+                    break;
+                case 8:
                     listarAcervo(plataforma);
                     break;
 
@@ -98,22 +102,22 @@ public class App {
         System.out.print("Digite o artista da música: ");
         artista = scan.nextLine();
 
-        while(true){
-            try{
+        while (true) {
+            try {
                 System.out.print("Digite a duração total em segundos da música: ");
                 duracaoSegundos = Integer.parseInt(scan.nextLine());
                 break;
-            }catch(Exception exception){
+            } catch (NumberFormatException exception) {
                 System.out.print("Valor invalido. Digite um número válido.");
             }
         }
 
-        try{
+        try {
             musica = new Musica(titulo, artista, duracaoSegundos);
             plataforma.cadastrarMusica(musica);
             System.out.println("Música cadastrada com sucessso!");
-        } catch(Exception exception){
-            System.out.println("Houve um erro ao cadastrar a música. Por favor, tente novamente mais tarde.");
+        } catch (IllegalArgumentException exception) {
+            System.out.println("Houve um erro: " + exception.getMessage());
         }
     }
 
@@ -129,8 +133,15 @@ public class App {
         System.out.print("Digite o email do usuario: ");
         email = scan.nextLine();
 
-        usuario = new Usuario(nome, email);
-        plataforma.cadastrarUsuario(usuario);
+        try {
+
+            usuario = new Usuario(nome, email);
+            plataforma.cadastrarUsuario(usuario);
+            System.out.println("Usuário cadastrado com sucesso!");
+        } catch (IllegalArgumentException exception) {
+            System.out.println("Houve um erro ao cadastrar o usuário: " + exception.getMessage());
+        }
+
     }
 
     public static void criarPlaylistEAdicionarMusicas(Scanner scan, Plataforma plataforma) {
@@ -149,33 +160,39 @@ public class App {
             dono = plataforma.buscarUsuario(scan.nextLine());
         } while (dono == null);
 
-        playlist = new Playlist(nome, dono);
+        try {
+            playlist = new Playlist(nome, dono);
 
-        System.out.println("");
-        System.out
-                .println("Playlist criada com sucesso, vocẽ deseja adicionar uma música existente à playlist? (s/n) ");
-        System.out.print(">> ");
-        continuar = scan.next().toUpperCase().charAt(0);
-
-        while (continuar == 'S') {
-            Musica musica;
-
-            System.out.println("Digite o título da música: ");
-            musica = plataforma.buscarMusica(scan.nextLine());
-
-            if (musica != null) {
-                playlist.adicionar(musica);
-            }
-
-            System.out.println();
-            System.out.println("Deseja adicionar outra música? (s/n) ");
+            System.out.println("");
+            System.out
+                    .println(
+                            "Playlist criada com sucesso, vocẽ deseja adicionar uma música existente à playlist? (s/n) ");
             System.out.print(">> ");
             continuar = scan.next().toUpperCase().charAt(0);
 
+            while (continuar == 'S') {
+                Musica musica;
+
+                System.out.println("Digite o título da música: ");
+                musica = plataforma.buscarMusica(scan.nextLine());
+
+                if (musica != null) {
+                    playlist.adicionar(musica);
+                }
+
+                System.out.println();
+                System.out.println("Deseja adicionar outra música? (s/n) ");
+                System.out.print(">> ");
+                continuar = scan.next().toUpperCase().charAt(0);
+
+            }
+
+            System.out.println("Saindo da playlist!! ");
+            System.out.println();
+        } catch (IllegalArgumentException exception) {
+            System.out.println("Não foi possível criar a Playlist: " + exception.getMessage());
         }
 
-        System.out.println("Saindo da playlist!! ");
-        System.out.println();
     }
 
     public static void buscarMusicaPorId(Scanner scan, Plataforma plataforma) {
@@ -184,20 +201,28 @@ public class App {
         System.out.println("Digite o id da música: ");
         System.out.print(">> ");
 
-        while (!scan.hasNextInt()) {
-            System.out.println("Dígito inválido, tente novamente!");
-            System.out.print(">> ");
-            scan.nextInt();
+        scan.nextLine(); // Limpando buffer
+
+        while (true) {
+            try {
+                System.out.print(">> ");
+                indice = Integer.parseInt(scan.nextLine());
+                break;
+
+            } catch (NumberFormatException exception) {
+                System.out.println("Valor inválido. Digite um número: ");
+            }
         }
 
-        indice = scan.nextInt();
         musicaTemp = plataforma.buscarMusicaPorId(indice);
 
-        System.out.println("Titulo da Música: " + musicaTemp.getTitulo());
-        System.out.println("Artista da Música: " + musicaTemp.getArtista());
-        System.out.println("Duração: " + musicaTemp.getDuracaoFormatada());
-        System.out.println("Reproduções: " + musicaTemp.getReproducoes());
+        if (musicaTemp != null) {
+            System.out.println("Titulo da Música: " + musicaTemp.getTitulo());
+            System.out.println("Artista da Música: " + musicaTemp.getArtista());
+            System.out.println("Duração: " + musicaTemp.getDuracaoFormatada());
+            System.out.println("Reproduções: " + musicaTemp.getReproducoes());
 
+        }
     }
 
     public static void buscarMusicaPorTitulo(Scanner scan, Plataforma plataforma) {
@@ -230,6 +255,12 @@ public class App {
         musicaTemp = plataforma.buscarMusica(titulo);
         if (musicaTemp != null) {
             musicaTemp.reproduzir();
+        }
+    }
+
+    public static void removerMusica(Scanner scan, Plataforma plataforma){
+        System.out.println(){
+
         }
     }
 
