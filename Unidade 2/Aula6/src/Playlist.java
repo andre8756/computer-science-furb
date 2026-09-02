@@ -37,7 +37,7 @@ public class Playlist {
     public int getQuantidade() {
         int contador = 0;
 
-        for (int i = 0; i < 99; i++) {
+        for (int i = 0; i < quantidadeMax; i++) {
             if (musicas[i] != null) {
                 contador++;
             }
@@ -48,7 +48,7 @@ public class Playlist {
 
     public boolean adicionar(Musica musica) {
 
-        for (int i = 0; i < 99; i++) {
+        for (int i = 0; i < quantidadeMax; i++) {
             if (musicas[i] == null && musica != null) {
                 musicas[i] = musica;
                 return true;
