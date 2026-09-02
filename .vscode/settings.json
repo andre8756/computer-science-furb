@@ -1,12 +1,16 @@
 {
     "java.debug.settings.onBuildFailureProceed": true,
     "java.project.sourcePaths": [
-        "Unidade 1/Aula3/sonora-fase01",
-        "Unidade 1/Aula 2/Questao_3",
-        "Unidade 1/Aula 2/Questao_2",
-        "Unidade 1/Aula 2/Questao_1",
         "Unidade 1/Aula 1",
-        "Unidade 1/Aula5/sonora-fase02"
+        "Unidade 1/Aula 2/Questao_1",
+        "Unidade 1/Aula 2/Questao_2",
+        "Unidade 1/Aula 2/Questao_3",
+        "Unidade 1/Aula3/sonora-fase01",
+        "Unidade 1/Aula5/sonora-fase02",
+        "Unidade 2/Aula6/Teste"
     ],
-    "editor.suggest.selectionMode": "never"
+    "editor.suggest.selectionMode": "never",
+    "java.project.referencedLibraries": [
+        "/home/andreheribertoschmitt/Documentos/programs/vs_code/furb/fase_2/computer-science-furb/Unidade 2/Aula6/lib/junit-platform-console-standalone-6.0.0.jar"
+    ]
 }
