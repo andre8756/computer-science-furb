@@ -131,7 +131,34 @@ public class MusicaTeste {
     }
 
     // ------------------------------------------------------------
-    // PL02 - Validar construtor de Música com dados invalidos
+    // PL07 - Musica.reproduzir()
     // ------------------------------------------------------------
 
+    @Test
+    @DisplayName("Reproduzir uma vez uma música pela primeira vez")
+    public void testReproduzirPrimeiraVez(){
+        musica.reproduzir();
+        assertEquals(1, musica.getReproducoes());
+    }
+
+    @Test
+    @DisplayName("Reproduzir duas vezes uma música pela primeira vez")
+    public void testReproduzirPrimeiraVezDuasReproducoes(){
+        Musica musica = new Musica("Titulo", "Artista", 120);
+        
+        musica.reproduzir();
+        musica.reproduzir();
+        assertEquals(2, musica.getReproducoes());
+    }
+
+    @Test
+    @DisplayName("Reproduzir tres vezes uma música pela primeira vez")
+    public void testReproduzirPrimeiraVezTresReproducoes(){
+        Musica musica = new Musica("Titulo", "Artista", 120);
+        
+        musica.reproduzir();
+        musica.reproduzir();
+        musica.reproduzir();
+        assertEquals(3, musica.getReproducoes());
+    }
 }
