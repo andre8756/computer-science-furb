@@ -1,10 +1,15 @@
+package Teste;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
+
+import src.Musica;
 
 public class MusicaTeste {
 
@@ -48,6 +53,7 @@ public class MusicaTeste {
     // PL01 - Musica.getDuracaoFormatada()
 
     @Test
+    @DisplayName("AAAAA")
     public void testDuracaoFormatada125Seg() {
         Musica musica = new Musica("Titulo", "Artista", 125);
         assertEquals("02:05", musica.getDuracaoFormatada());
@@ -76,6 +82,54 @@ public class MusicaTeste {
         Musica musica = new Musica("Titulo", "Artista", 599);
         assertEquals("09:59", musica.getDuracaoFormatada());
     }
+
+    // ------------------------------------------------------------
+    // PL02 - Validar construtor de Música com dados invalidos
+
+    @Test
+    public void testConstrutorTituloVazio(){
+        assertThrows(IllegalArgumentException.class, () -> {
+            Musica musica = new Musica("", "Queen", 355);
+        });
+    }
+
+    @Test
+    public void testConstrutorTituloNull(){
+        assertThrows(IllegalArgumentException.class, () -> {
+            Musica musica = new Musica(null, "Queen", 355);
+        });
+    }
+
+    @Test
+    public void testConstrutorArtistaVazio(){
+        assertThrows(IllegalArgumentException.class, () -> {
+            Musica musica = new Musica("Bohemian", "", 355);
+        });
+    }
+
+    @Test
+    public void testDuaracaoZero(){
+        assertThrows(IllegalArgumentException.class, () -> {
+            Musica musica = new Musica("Bohemin", "Queen", 0);
+        });
+    }
+
+    @Test
+    public void testDuaracaoNegativa(){
+        assertThrows(IllegalArgumentException.class, () -> {
+            Musica musica = new Musica("Bohemin", "Queen", -10);
+        });
+    }
+
+    @Test
+    public void testDuaracaoValida(){
+        Musica musica = new Musica("Bohemin", "Queen", 355);
+        
+        assertNotNull(musica);
+        assertTrue(musica.getId() > 0, "O ID da música deve ser maior que zero");
+    }
+
+
 
 
 }

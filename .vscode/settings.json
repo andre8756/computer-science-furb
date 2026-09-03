@@ -7,10 +7,11 @@
         "Unidade 1/Aula 2/Questao_3",
         "Unidade 1/Aula3/sonora-fase01",
         "Unidade 1/Aula5/sonora-fase02",
-        "Unidade 2/Aula6/Teste"
+        "Unidade 2/Aula6/sonora03"
     ],
     "editor.suggest.selectionMode": "never",
     "java.project.referencedLibraries": [
+        "Unidade 2/Aula6/sonora03/lib/junit-platform-console-standalone-6.0.0.jar",
         "/home/andreheribertoschmitt/Documentos/programs/vs_code/furb/fase_2/computer-science-furb/Unidade 2/Aula6/lib/junit-platform-console-standalone-6.0.0.jar"
     ]
 }

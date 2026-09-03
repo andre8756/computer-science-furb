@@ -1,3 +1,5 @@
+package src;
+
 public class Playlist {
     private String nome;
     private Usuario dono;
@@ -102,6 +104,10 @@ public class Playlist {
                 musicas[i].reproduzir();
             }
         }
+    }
+
+    public int getQuantidadeMax(){
+        return quantidadeMax;
     }
 
     // --------- Metodos Auxiliares

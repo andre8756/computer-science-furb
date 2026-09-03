@@ -24,7 +24,7 @@ public class Musica {
     }
 
     private void setTitulo(String titulo) {
-        if (titulo.isBlank() || titulo.isEmpty()) {
+        if (titulo == null || titulo.isBlank()) {
             throw new IllegalArgumentException("O título não pode estar em branco!");
         }
         this.titulo = titulo;

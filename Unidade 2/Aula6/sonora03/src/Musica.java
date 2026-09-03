@@ -1,3 +1,6 @@
+package src;
+
+
 public class Musica {
     private final int id;
     private String titulo;
@@ -24,7 +27,7 @@ public class Musica {
     }
 
     private void setTitulo(String titulo) {
-        if (titulo.isBlank() || titulo.isEmpty()) {
+        if (titulo == null || titulo.isEmpty()) {
             throw new IllegalArgumentException("O título não pode estar em branco!");
         }
         this.titulo = titulo;
@@ -35,7 +38,7 @@ public class Musica {
     }
 
     private void setArtista(String artista){
-        if(artista.isBlank() || artista.isEmpty()){
+        if(artista == null || artista.isBlank()){
             throw new IllegalArgumentException("O artista não pode estar vazio!");
         }
         
