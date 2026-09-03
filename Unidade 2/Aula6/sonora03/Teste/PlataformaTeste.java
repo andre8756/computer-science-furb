@@ -39,6 +39,8 @@ public class PlataformaTeste {
 
     // PL06 - Plataforma: buscarMusica(título) e buscarMusicaPorId(id)
 
+    //ATENÇÃO: RODAR OS MÉTODOS UM DE CADA VEZ
+
     @Test
     @DisplayName("Buscar uma música válida por título")
     public void testBuscarMusicaValida(){
