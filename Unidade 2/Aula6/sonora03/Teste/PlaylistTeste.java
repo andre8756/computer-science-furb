@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
@@ -16,22 +16,25 @@ import src.Usuario;
 
 public class PlaylistTeste {
 
-    public static Playlist playlist;
-    public static Usuario dono;
-    public static Musica m1;
-    public static Musica m2;
+    public Playlist playlist;
+    public Usuario dono;
+    public Musica m1;
+    public Musica m2;
+    public Musica m3;
 
-    @BeforeAll
-    public static void inicializarPlaylist() {
-        Usuario usuario = new Usuario("Andre", "andre@teste.com");
+    @BeforeEach
+    public void inicializarPlaylist() {
+        dono = new Usuario("Andre", "andre@teste.com");
 
-        playlist = new Playlist("Playlist1", usuario);
+        playlist = new Playlist("Playlist1", dono);
 
         m1 = new Musica("Titulo", "Artista", 150);
         m2 = new Musica("Bohemin", "Queen", 355);
+        m3 = new Musica("My Way", "Frank Sinatra", 256);
 
         playlist.adicionar(m1);
         playlist.adicionar(m2);
+        playlist.adicionar(m3);
     }
 
     // -------------------------------------------
@@ -101,31 +104,21 @@ public class PlaylistTeste {
     @Test
     @DisplayName("getNaPosicao no meio da playlist")
     public void testGetPosicaoMeio() {
-        Usuario usuario = new Usuario("Andre", "andre@teste.com");
-
-        playlist = new Playlist("Playlist1", usuario);
-
-        Musica m = new Musica("Wave", "Tom Jobim", 355);
-        for (int i = 0; i < (playlist.getQuantidadeMax()); i++) {
-            playlist.adicionar(m);
+        for (int i = 0; i < (playlist.getQuantidadeMax() - 3); i++) {
+            playlist.adicionar(m1);
         }
 
-        assertEquals(m, playlist.getNaPosicao(50));
+        assertEquals(m1, playlist.getNaPosicao(50));
     }
 
     @Test
     @DisplayName("getNaPosicao no final da playlist")
     public void testGetPosicaoFinal() {
-        Usuario usuario = new Usuario("Andre", "andre@teste.com");
-
-        playlist = new Playlist("Playlist1", usuario);
-
-        Musica m = new Musica("Wave", "Tom Jobim", 355);
-        for (int i = 0; i < (playlist.getQuantidadeMax()); i++) {
-            playlist.adicionar(m);
+        for (int i = 0; i < (playlist.getQuantidadeMax() - 3); i++) {
+            playlist.adicionar(m1);
         }
 
-        assertEquals(m, playlist.getNaPosicao(100));
+        assertEquals(m1, playlist.getNaPosicao(100));
     }
 
     @Test
@@ -155,4 +148,59 @@ public class PlaylistTeste {
     // ---------------------------------------
     // PL05 - Playlist.removerNaPosicao(indice)
     // ---------------------------------------
+
+    
+    @Test
+    @DisplayName("Remover música existente no começo")
+    public void testRemoverNaPosicaoRemoverNoComeco(){
+        Playlist playlistCorreta = new Playlist("Playlist1", dono);
+
+        playlistCorreta.adicionar(m2);
+        playlistCorreta.adicionar(m3);
+
+        assertTrue(playlist.removerNaPosicao(1));
+
+        for(int i = 1; i <= 2; i++){
+            assertEquals(playlistCorreta.getNaPosicao(i).getTitulo(), playlist.getNaPosicao(i).getTitulo());
+            assertEquals(playlistCorreta.getNaPosicao(i).getArtista(), playlist.getNaPosicao(i).getArtista());
+            assertEquals(playlistCorreta.getNaPosicao(i).getDuracaoSegundos(), playlist.getNaPosicao(i).getDuracaoSegundos());
+        }
+    }
+    
+    @Test
+    @DisplayName("Remover música existente no meio")
+    public void testRemoverNaPosicaoRemoverNoMeio(){
+        Playlist playlistCorreta = new Playlist("Playlist1", dono);
+
+        playlistCorreta.adicionar(m1);
+        playlistCorreta.adicionar(m3);
+
+        assertTrue(playlist.removerNaPosicao(2));
+
+        for(int i = 1; i <= 2; i++){
+            assertEquals(playlistCorreta.getNaPosicao(i).getTitulo(), playlist.getNaPosicao(i).getTitulo());
+            assertEquals(playlistCorreta.getNaPosicao(i).getArtista(), playlist.getNaPosicao(i).getArtista());
+            assertEquals(playlistCorreta.getNaPosicao(i).getDuracaoSegundos(), playlist.getNaPosicao(i).getDuracaoSegundos());
+        }
+    }
+
+    @Test
+    @DisplayName("Remover música com índice negativo")
+    public void testRemoveNaPosicaoRemoverComIndiceNegativo(){
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            playlist.removerNaPosicao(-1);
+        });
+    }
+
+    @Test
+    @DisplayName("Remover música com índice além da quantidade de espaço")
+    public void testRemoveNaPosicaoRemoverComIndiceMaiorEspaco(){
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            playlist.removerNaPosicao(-1);
+        });
+    }
+
+
+
+
 }
