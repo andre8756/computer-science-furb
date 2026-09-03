@@ -1,7 +1,6 @@
 package Teste;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -196,7 +195,7 @@ public class PlaylistTeste {
     @DisplayName("Remover música com índice além da quantidade de espaço")
     public void testRemoveNaPosicaoRemoverComIndiceMaiorEspaco(){
         assertThrows(IndexOutOfBoundsException.class, () -> {
-            playlist.removerNaPosicao(-1);
+            playlist.removerNaPosicao(101);
         });
     }
 
