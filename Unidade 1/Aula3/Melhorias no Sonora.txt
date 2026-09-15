@@ -18,4 +18,4 @@ Tem muitos erros de execução
 
 
 sudo systemctl stop mariadb
-sudo systemctl start mariadb
+sudo systemctl start dmariadb
