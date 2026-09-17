@@ -8,6 +8,7 @@ public class Usuario {
     private String email;
     private static int contadorId = 0;
     private ArrayList<Playlist> playLists = new ArrayList<>();
+    private ArrayList<Usuario> seguindo = new ArrayList<>();
 
     public Usuario(String nome, String email) {
         contadorId++;

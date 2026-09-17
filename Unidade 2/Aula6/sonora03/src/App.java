@@ -1,6 +1,7 @@
 package src;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class App {
     public static void main(String args[]) {
@@ -267,11 +268,9 @@ public class App {
     public static void listarAcervo(Plataforma plataforma) {
         System.out.println("\n--- Acervo Sonora ---");
 
-        Musica[] acervo = plataforma.getMusicas();
-        for (int i = 0; i < acervo.length; i++) {
-            if (acervo[i] != null) {
-                System.out.printf(acervo[i].toString() + "\n");
-            }
+        ArrayList<Musica> acervo = plataforma.getMusicas();
+        for(Musica musica: acervo){
+            System.out.printf(musica.toString() + "\n");
         }
     }
 

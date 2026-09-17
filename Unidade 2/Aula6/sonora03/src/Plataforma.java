@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Plataforma {
     private final int MAX = 500;
     private ArrayList<Musica> musicas = new ArrayList<>();
-    private Usuario usuarios[] = new Usuario[MAX];
+    private ArrayList<Usuario> usuarios = new ArrayList<>();
 
     // ------- Cadastros
 
@@ -32,21 +32,19 @@ public class Plataforma {
 
         if (usuario == null) {
             throw new IllegalArgumentException(
-                    "Erro em cadastrarUsuario() da Plataforma! Não foi possível cadastrar o usuaŕio.");
+                    "Erro em cadastrarUsuario() da Plataforma! Não foi possível cadastrar o usuário.");
+        }
+
+        if (usuarios.size() >= MAX) {
+            return false;
         }
 
         if (!usuarioNovo(usuario)) {
             return false;
         }
 
-        for (int i = 0; i < MAX; i++) {
-            if (usuarios[i] == null) {
-                usuarios[i] = usuario;
-                return true;
-            }
-        }
-
-        return false;
+        usuarios.add(usuario);
+        return true;
     }
 
     public boolean cadastrarPlaylist(Playlist playlist) {
@@ -94,14 +92,12 @@ public class Plataforma {
     }
 
     public Usuario buscarUsuario(String nome) {
-        for (int i = 0; i < MAX; i++) {
 
-            if (usuarios[i] != null) {
-                if (nome.equalsIgnoreCase(usuarios[i].getNome())) {
-                    return usuarios[i];
-                }
+        for (Usuario usuario : usuarios) {
+
+            if (usuario.getNome().equalsIgnoreCase(nome)) {
+                return usuario;
             }
-
         }
 
         System.out.println("Usuário não encontrado!");
@@ -109,15 +105,7 @@ public class Plataforma {
     }
 
     public int getTotalUsuarios() {
-        int contador = 0;
-
-        for (int i = 0; i < MAX; i++) {
-            if (usuarios[i] != null) {
-                contador++;
-            }
-        }
-
-        return contador;
+        return usuarios.size();
     }
 
     // --------------- Métodos Auxiliares:
@@ -133,18 +121,17 @@ public class Plataforma {
     }
 
     private boolean usuarioNovo(Usuario usuario) {
-        for (int i = 0; i < MAX; i++) {
 
-            if (usuarios[i] != null) {
-                if (usuario.getNome().equalsIgnoreCase(usuarios[i].getNome())) {
-                    System.out.println("Nome de usuário já utilizado");
-                    return false;
-                }
+        for (Usuario outroUsuario : usuarios) {
 
-                if (usuario.getEmail().equalsIgnoreCase(usuarios[i].getEmail())) {
-                    System.out.println("E-mail de usuário já utilizado");
-                    return false;
-                }
+            if (usuario.getNome().equalsIgnoreCase(outroUsuario.getNome())) {
+                System.out.println("Nome de usuário já utilizado");
+                return false;
+            }
+
+            if (usuario.getEmail().equalsIgnoreCase(outroUsuario.getEmail())) {
+                System.out.println("E-mail de usuário já utilizado");
+                return false;
             }
         }
 
@@ -164,6 +151,10 @@ public class Plataforma {
 
     public ArrayList<Musica> getMusicas() {
         return musicas;
+    }
+
+    public ArrayList<Usuario> getUsuarios() {
+        return usuarios;
     }
 
 }
