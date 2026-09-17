@@ -1,10 +1,13 @@
 package src;
 
+import java.util.ArrayList;
+
 public class Usuario {
     private final int id;
     private String nome;
     private String email;
     private static int contadorId = 0;
+    private ArrayList<Playlist> playLists = new ArrayList<>();
 
     public Usuario(String nome, String email) {
         contadorId++;
@@ -49,4 +52,27 @@ public class Usuario {
         this.email = email;
 
     }
+
+    public boolean adicionarPlaylist(Playlist playlist){
+        if(playlist != null){
+            playLists.add(playlist);
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean removerPlaylist(Playlist playlist){
+        if(playlist != null){
+            playLists.remove(playlist);
+            return true;
+        }
+
+        return false;
+    }
+
+    public ArrayList<Playlist> getPlaylists(){
+        return playLists;
+    }
+
 }

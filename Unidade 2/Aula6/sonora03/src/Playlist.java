@@ -40,7 +40,7 @@ public class Playlist {
     public int getQuantidade() {
         int contador = 0;
 
-        for(Musica musica:musicas){
+        for (Musica musica : musicas) {
             if (musica != null) {
                 contador++;
             }
@@ -50,11 +50,9 @@ public class Playlist {
     }
 
     public boolean adicionar(Musica musica) {
-        for(Musica musicaAtual: musicas){
-            if (musicaAtual == null && musica != null) {
-                musicaAtual = musica;
-                return true;
-            }
+        if (musica != null) {
+            musicas.add(musica);
+            return true;
         }
 
         return false;
@@ -80,14 +78,13 @@ public class Playlist {
         }
         Musica musicaRemover = musicas.get(indice);
         musicas.remove(musicaRemover);
-        organizarPlaylist();
         return true;
     }
 
     public int getDuracaoTotalSegundos() {
         int duracaoTotalSeg = 0;
 
-        for(Musica musica: musicas){
+        for (Musica musica : musicas) {
             if (musica != null) {
                 duracaoTotalSeg += musica.getDuracaoSegundos();
             }
@@ -97,17 +94,11 @@ public class Playlist {
     }
 
     public void reproduzirTudo() {
-        for(Musica musica: musicas){
+        for (Musica musica : musicas) {
             if (musica != null) {
                 musica.reproduzir();
             }
         }
-    }
-
-    // --------- Metodos Auxiliares
-
-    public void organizarPlaylist() {
-        musicas.removeIf(musica -> musica == null);
     }
 
 }

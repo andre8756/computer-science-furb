@@ -1,14 +1,11 @@
 package src;
 
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Plataforma {
-    Scanner scan = new Scanner(System.in);
-
     private final int MAX = 500;
-    private Musica musicas[] = new Musica[MAX];
+    private ArrayList<Musica> musicas = new ArrayList<>();
     private Usuario usuarios[] = new Usuario[MAX];
-    private Playlist playlists[] = new Playlist[15];
 
     // ------- Cadastros
 
@@ -19,18 +16,16 @@ public class Plataforma {
                     "Erro em cadastrarMusica() da Plataforma! Não foi possível cadastrar a música.");
         }
 
+        if (musicas.size() >= MAX) {
+            return false;
+        }
+
         if (!musicaNova(musica)) {
             return false;
         }
 
-        for (int i = 0; i < MAX; i++) {
-            if (musicas[i] == null) {
-                musicas[i] = musica;
-                return true;
-            }
-        }
-
-        return false;
+        musicas.add(musica);
+        return true;
     }
 
     public boolean cadastrarUsuario(Usuario usuario) {
@@ -56,34 +51,27 @@ public class Plataforma {
 
     public boolean cadastrarPlaylist(Playlist playlist) {
 
+        if (playlist == null) {
+            throw new IllegalArgumentException(
+                    "Erro em cadastrarPlaylist() da Plataforma! Playlist inválida.");
+        }
+
         if (!playlistNova(playlist)) {
             return false;
         }
 
-        for (int i = 0; i < MAX; i++) {
-            if (playlists[i] == null) {
-                playlists[i] = playlist;
-                return true;
-            }
-        }
+        Usuario usuario = playlist.getDono();
 
-        return false;
+        return usuario.adicionarPlaylist(playlist);
     }
 
     // -------- Métodos de busca
 
     public Musica buscarMusicaPorId(int id) {
-        if (id < 0 || id >= MAX) {
-            throw new IndexOutOfBoundsException("Posição não exeiste");
-        }
-
-        for (int i = 0; i < MAX; i++) {
-            if (musicas[i] != null) {
-                if (musicas[i].getId() == id) {
-                    return musicas[i];
-                }
+        for (Musica musica : musicas) {
+            if (musica.getId() == id) {
+                return musica;
             }
-
         }
 
         System.out.println("Música não encontrada!");
@@ -91,12 +79,9 @@ public class Plataforma {
     }
 
     public Musica buscarMusica(String titulo) {
-        for (int i = 0; i < MAX; i++) {
-
-            if (musicas[i] != null) {
-                if (musicas[i].getTitulo().equalsIgnoreCase(titulo)) {
-                    return musicas[i];
-                }
+        for (Musica musica : musicas) {
+            if (musica.getTitulo().equalsIgnoreCase(titulo)) {
+                return musica;
             }
         }
 
@@ -105,15 +90,7 @@ public class Plataforma {
     }
 
     public int getTotalMusicas() {
-        int contador = 0;
-
-        for (int i = 0; i < MAX; i++) {
-            if (musicas[i] != null) {
-                contador++;
-            }
-        }
-
-        return contador;
+        return musicas.size();
     }
 
     public Usuario buscarUsuario(String nome) {
@@ -143,25 +120,12 @@ public class Plataforma {
         return contador;
     }
 
-    public Playlist buscarPlaylist(String nome) {
-        for (int i = 0; i < 14; i++) {
-            if (playlists[i].getNome().equalsIgnoreCase(nome)) {
-                return playlists[i];
-            }
-        }
-
-        return null;
-    }
-
     // --------------- Métodos Auxiliares:
 
     private boolean musicaNova(Musica musica) {
-        for (int i = 0; i < MAX; i++) {
-            if (musicas[i] != null) {
-                if (musica.getTitulo().equalsIgnoreCase(musicas[i].getTitulo())) {
-                    System.out.println("Já existe uma música com este título!!");
-                    return false;
-                }
+        for (Musica outraMusica : musicas) {
+            if (outraMusica.getTitulo().equalsIgnoreCase(musica.getTitulo())) {
+                return false;
             }
         }
 
@@ -188,8 +152,8 @@ public class Plataforma {
     }
 
     private boolean playlistNova(Playlist playlist) {
-        for (int i = 0; i < (14); i++) {
-            if (playlist.getNome().equalsIgnoreCase(playlists[i].getNome())) {
+        for (Playlist outraPlaylist : playlist.getDono().getPlaylists()) {
+            if (outraPlaylist.getNome().equalsIgnoreCase(playlist.getNome())) {
                 System.out.println("Já existe uma playlist com este nome!!");
                 return false;
             }
@@ -198,29 +162,8 @@ public class Plataforma {
         return true;
     }
 
-    public Musica[] getMusicas() {
+    public ArrayList<Musica> getMusicas() {
         return musicas;
-    }
-
-    // --------- Metodos Auxiliares
-
-    public void organizarMusicas() {
-        boolean troca = true;
-        Musica musicaTemp;
-
-        while (troca) {
-            troca = false;
-
-            for (int i = 0; i < (MAX - 1); i++) {
-                if (musicas[i] == null && musicas[i + 1] != null) {
-                    troca = true;
-
-                    musicaTemp = musicas[i];
-                    musicas[i] = musicas[i + 1];
-                    musicas[i + 1] = musicaTemp;
-                }
-            }
-        }
     }
 
 }
