@@ -1,12 +1,10 @@
 package src;
 
-import java.util.ArrayList;
-
 public class Playlist {
     private String nome;
     private Usuario dono;
     private int quantidadeMax = 100;
-    private ArrayList<Musica> musicas = new ArrayList<>();
+    private Musica musicas[] = new Musica[quantidadeMax];
 
     public Playlist(String nome, Usuario dono) {
         setNome(nome);
@@ -41,8 +39,8 @@ public class Playlist {
     public int getQuantidade() {
         int contador = 0;
 
-        for(Musica musica:musicas){
-            if (musica != null) {
+        for (int i = 0; i < quantidadeMax; i++) {
+            if (musicas[i] != null) {
                 contador++;
             }
         }
@@ -51,9 +49,10 @@ public class Playlist {
     }
 
     public boolean adicionar(Musica musica) {
-        for(Musica musicaAtual: musicas){
-            if (musicaAtual == null && musica != null) {
-                musicaAtual = musica;
+
+        for (int i = 0; i < quantidadeMax; i++) {
+            if (musicas[i] == null && musica != null) {
+                musicas[i] = musica;
                 return true;
             }
         }
@@ -64,12 +63,12 @@ public class Playlist {
     public Musica getNaPosicao(int indice) {
         indice--;
 
-        if (indice < 0 || indice >= musicas.size()) {
+        if (indice < 0 || indice >= musicas.length) {
             throw new IndexOutOfBoundsException(
                     "Erro na getNaPosicao() da Playlist! O índice (" + (indice + 1) + ") é inválido.");
         }
 
-        return musicas.get(indice);
+        return musicas[indice];
     }
 
     public boolean removerNaPosicao(int indice) {
@@ -79,8 +78,7 @@ public class Playlist {
             throw new IndexOutOfBoundsException(
                     "Erro na removerNaPosicao() da Playlist! O ídice (" + (indice + 1) + ") é inválido.");
         }
-        Musica musicaRemover = musicas.get(indice);
-        musicas.remove(musicaRemover);
+        musicas[indice] = null;
         organizarPlaylist();
         return true;
     }
@@ -88,9 +86,10 @@ public class Playlist {
     public int getDuracaoTotalSegundos() {
         int duracaoTotalSeg = 0;
 
-        for(Musica musica: musicas){
-            if (musica != null) {
-                duracaoTotalSeg += musica.getDuracaoSegundos();
+        for (int i = 0; i < quantidadeMax; i++) {
+
+            if (musicas[i] != null) {
+                duracaoTotalSeg += musicas[i].getDuracaoSegundos();
             }
         }
 
@@ -98,9 +97,11 @@ public class Playlist {
     }
 
     public void reproduzirTudo() {
-        for(Musica musica: musicas){
-            if (musica != null) {
-                musica.reproduzir();
+
+        for (int i = 0; i < quantidadeMax; i++) {
+
+            if (musicas[i] != null) {
+                musicas[i].reproduzir();
             }
         }
     }
@@ -112,7 +113,22 @@ public class Playlist {
     // --------- Metodos Auxiliares
 
     public void organizarPlaylist() {
-        musicas.removeIf(musica -> musica == null);
+        boolean troca = true;
+        Musica musicaTemp;
+
+        while (troca) {
+            troca = false;
+
+            for (int i = 0; i < (quantidadeMax - 1); i++) {
+                if (musicas[i] == null && musicas[i + 1] != null) {
+                    troca = true;
+
+                    musicaTemp = musicas[i];
+                    musicas[i] = musicas[i + 1];
+                    musicas[i + 1] = musicaTemp;
+                }
+            }
+        }
     }
 
 }
