@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Playlist {
     private String nome;
     private Usuario dono;
-    private int quantidadeMax = 100;
     private ArrayList<Musica> musicas = new ArrayList<>();
 
     public Playlist(String nome, Usuario dono) {
@@ -75,7 +74,7 @@ public class Playlist {
     public boolean removerNaPosicao(int indice) {
         indice--;
 
-        if (indice < 0 || indice >= quantidadeMax) {
+        if (indice < 0 || indice >= musicas.size()) {
             throw new IndexOutOfBoundsException(
                     "Erro na removerNaPosicao() da Playlist! O ídice (" + (indice + 1) + ") é inválido.");
         }
@@ -103,10 +102,6 @@ public class Playlist {
                 musica.reproduzir();
             }
         }
-    }
-
-    public int getQuantidadeMax(){
-        return quantidadeMax;
     }
 
     // --------- Metodos Auxiliares
