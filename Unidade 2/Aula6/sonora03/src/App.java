@@ -23,8 +23,6 @@ public class App {
         int opcao;
 
         do {
-            scan.nextLine(); // Limpando buffer
-
             System.out.println();
             System.out.println("=== Sonora ===");
             System.out.println("1 - Cadastrar música manualmente");
@@ -34,6 +32,9 @@ public class App {
             System.out.println("5 - Buscar música por título");
             System.out.println("6 - Reproduzir uma música");
             System.out.println("7 - Listar acervo");
+            System.out.println("8 - Seguir usuário");
+            System.out.println("9 - Deixar de seguir usuário");
+            System.out.println("10 - Ver quantidade de usuários seguindo");
             System.out.println("0 - Sair");
             System.out.println();
 
@@ -74,6 +75,17 @@ public class App {
                 case 7:
                     listarAcervo(plataforma);
                     break;
+                case 8:
+                    seguirUsuario(scan, plataforma);
+                    break;
+
+                case 9:
+                    deixarDeSeguirUsuario(scan, plataforma);
+                    break;
+
+                case 10:
+                    consultarQuantidadeSeguindo(scan, plataforma);
+                    break;
                 default:
                     System.out.println("Dígito inválido, tente novamente!");
 
@@ -113,7 +125,11 @@ public class App {
         try {
             musica = new Musica(titulo, artista, duracaoSegundos);
             plataforma.cadastrarMusica(musica);
-            System.out.println("Música cadastrada com sucessso!");
+            if (plataforma.cadastrarMusica(musica)) {
+                System.out.println("Música cadastrada com sucesso!");
+            } else {
+                System.out.println("Não foi possível cadastrar a música.");
+            }
         } catch (IllegalArgumentException exception) {
             System.out.println("Houve um erro: " + exception.getMessage());
         }
@@ -135,7 +151,11 @@ public class App {
 
             usuario = new Usuario(nome, email);
             plataforma.cadastrarUsuario(usuario);
-            System.out.println("Usuário cadastrado com sucesso!");
+            if (plataforma.cadastrarUsuario(usuario)) {
+                System.out.println("Usuário cadastrado com sucesso!");
+            } else {
+                System.out.println("Não foi possível cadastrar o usuário.");
+            }
         } catch (IllegalArgumentException exception) {
             System.out.println("Houve um erro ao cadastrar o usuário: " + exception.getMessage());
         }
@@ -156,12 +176,17 @@ public class App {
         System.out.print("Digite o nome do usuário: ");
         dono = plataforma.buscarUsuario(scan.nextLine());
 
-        if(dono == null){
+        if (dono == null) {
             return 1;
         }
 
         try {
             playlist = new Playlist(nome, dono);
+
+            if (!plataforma.cadastrarPlaylist(playlist)) {
+                System.out.println("Não foi possível cadastrar a playlist.");
+                return 1;
+            }
 
             System.out.println("");
             System.out
@@ -184,6 +209,7 @@ public class App {
                 System.out.println("Deseja adicionar outra música? (s/n) ");
                 System.out.print(">> ");
                 continuar = scan.next().toUpperCase().charAt(0);
+                scan.nextLine(); // limpando buffer
 
             }
 
@@ -195,8 +221,7 @@ public class App {
             System.out.println("Não foi possível criar a Playlist: " + exception.getMessage());
             return 1;
         }
-        
-        
+
     }
 
     public static void buscarMusicaPorId(Scanner scan, Plataforma plataforma) {
@@ -269,8 +294,69 @@ public class App {
         System.out.println("\n--- Acervo Sonora ---");
 
         ArrayList<Musica> acervo = plataforma.getMusicas();
-        for(Musica musica: acervo){
+        for (Musica musica : acervo) {
             System.out.printf(musica.toString() + "\n");
+        }
+    }
+
+    public static void seguirUsuario(Scanner scan, Plataforma plataforma) {
+
+        scan.nextLine();
+
+        System.out.print("Digite o nome do usuário que irá seguir: ");
+        String nomeSeguidor = scan.nextLine();
+
+        System.out.print("Digite o nome do usuário que deseja seguir: ");
+        String nomeSeguido = scan.nextLine();
+
+        try {
+            if (plataforma.seguir(nomeSeguidor, nomeSeguido)) {
+                System.out.println(
+                        nomeSeguidor + " agora está seguindo " + nomeSeguido + "!");
+            }
+        } catch (IllegalArgumentException exception) {
+            System.out.println("Não foi possível seguir o usuário: "
+                    + exception.getMessage());
+        }
+    }
+
+    public static void deixarDeSeguirUsuario(Scanner scan, Plataforma plataforma) {
+
+        scan.nextLine();
+
+        System.out.print("Digite o nome do usuário: ");
+        String nomeSeguidor = scan.nextLine();
+
+        System.out.print("Digite o nome do usuário que deseja deixar de seguir: ");
+        String nomeSeguido = scan.nextLine();
+
+        try {
+            if (plataforma.deixarDeSeguir(nomeSeguidor, nomeSeguido)) {
+                System.out.println(
+                        nomeSeguidor + " deixou de seguir " + nomeSeguido + "!");
+            }
+        } catch (IllegalArgumentException exception) {
+            System.out.println("Não foi possível deixar de seguir: "
+                    + exception.getMessage());
+        }
+    }
+
+    public static void consultarQuantidadeSeguindo(
+            Scanner scan, Plataforma plataforma) {
+
+        scan.nextLine();
+
+        System.out.print("Digite o nome do usuário: ");
+        String nome = scan.nextLine();
+
+        Usuario usuario = plataforma.buscarUsuario(nome);
+
+        if (usuario != null) {
+            System.out.println(
+                    usuario.getNome()
+                            + " está seguindo "
+                            + usuario.getQuantidadeSeguindo()
+                            + " usuário(s).");
         }
     }
 

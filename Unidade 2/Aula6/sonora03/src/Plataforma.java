@@ -108,6 +108,32 @@ public class Plataforma {
         return usuarios.size();
     }
 
+    // -------- Métodos de seguir
+
+    public boolean seguir(String nomeSeguidor, String nomeSeguido) {
+
+        Usuario seguidor = buscarUsuario(nomeSeguidor);
+        Usuario seguido = buscarUsuario(nomeSeguido);
+
+        if (seguidor == null || seguido == null) {
+            return false;
+        }
+
+        return seguidor.seguir(seguido);
+    }
+
+    public boolean deixarDeSeguir(String nomeSeguidor, String nomeSeguido) {
+
+        Usuario seguidor = buscarUsuario(nomeSeguidor);
+        Usuario seguido = buscarUsuario(nomeSeguido);
+
+        if (seguidor == null || seguido == null) {
+            return false;
+        }
+
+        return seguidor.deixarDeSeguir(seguido);
+    }
+
     // --------------- Métodos Auxiliares:
 
     private boolean musicaNova(Musica musica) {
