@@ -20,7 +20,7 @@ public class Podcast extends Conteudo {
         this.apresentador = host;
     }
 
-    public String getnumeroEpisodio(){
+    public String getNumeroEpisodio(){
         return numeroEpisodio;
     }
 
@@ -29,7 +29,7 @@ public class Podcast extends Conteudo {
             throw new IllegalArgumentException("O campo album não pode estar vazio!");
         }
 
-        this.tema = tema;
+        this.numeroEpisodio = numeroEpisodio;
     }
 
     public String getDuracaoFormatada() {
@@ -43,8 +43,7 @@ public class Podcast extends Conteudo {
 
     @Override
     public String toString() {
-        return "Podcast == [" + getId() + "] " + super.getTitulo()
-                + " (" + super.getDuracaoSegundos() + "s)";
+        return "Podcast == [" + getId() + "] " + super.toString() + ", apresentador: "+getApresentador()+", Album: "+getNumeroEpisod();
     }
 
 }
