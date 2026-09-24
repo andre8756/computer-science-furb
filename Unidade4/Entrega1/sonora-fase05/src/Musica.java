@@ -1,34 +1,11 @@
 
-public class Musica {
-    private final int id;
-    private String titulo;
+public class Musica extends Conteudo{
     private String artista;
-    private int duracaoSegundos;
-    private int reproducoes;
-    private static int contadorId = 0;
-
-    public Musica(String titulo, String artista, int duracaoSegundos) {
-        contadorId++;
-        this.id = contadorId;
-        setTitulo(titulo);
+    private String album;
+    
+    public Musica(String titulo, String artista, String album, int duracaoSegundos) {
+        super(titulo, duracaoSegundos);
         setArtista(artista);
-        setDuracaoSegundos(duracaoSegundos);
-        reproducoes = 0;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    private void setTitulo(String titulo) {
-        if (titulo == null || titulo.isEmpty()) {
-            throw new IllegalArgumentException("O título não pode estar em branco!");
-        }
-        this.titulo = titulo;
     }
 
     public String getArtista() {
@@ -43,37 +20,23 @@ public class Musica {
         this.artista = artista;
     }
 
-    public int getDuracaoSegundos() {
-        return duracaoSegundos;
+    public String getAlbum(){
+        return album;
     }
 
-    private void setDuracaoSegundos(int duracaoSegundos){
-        if(duracaoSegundos <= 0){
-            throw new IllegalArgumentException("A música não pode ter menos de 1 segundo!");
+    public void setAlbum(String album){
+        if(album.isBlank() || album == null){
+            throw new IllegalArgumentException("O album não pode estar vazio!!");
         }
 
-        this.duracaoSegundos = duracaoSegundos;
-    }
-
-    public int getReproducoes() {
-        return reproducoes;
-    }
-
-    public void reproduzir() {
-        reproducoes++;
+        this.album = album;
     }
 
     public String getDuracaoFormatada() {
-        int minutos = duracaoSegundos / 60;
-        int segundos = duracaoSegundos % 60;
+        int minutos = super.getDuracaoSegundos() / 60;
+        int segundos = super.getDuracaoSegundos() % 60;
 
         return String.format("%02d:%02d", minutos, segundos);
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%d - %s (%s) | Duração: %s | Reproduções: %d",
-                id, titulo, artista, getDuracaoFormatada(), reproducoes);
     }
 
 }

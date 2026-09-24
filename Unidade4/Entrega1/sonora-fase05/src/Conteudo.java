@@ -3,12 +3,14 @@ public class Conteudo {
     private final int id;
     private String titulo;
     private int duracaoSegundos;
+    private int reproducoes;
 
     public Conteudo(String titulo, int duracaoSegundos) {
         contadorId++;
         this.id = contadorId;
         setTitulo(titulo);
         setDuracaoSegundos(duracaoSegundos);
+        reproducoes = 0;
     }
 
     public int getId() {
@@ -38,8 +40,13 @@ public class Conteudo {
         this.duracaoSegundos = duracaoSegundos;
     }
 
+    public int getReproducoes(){
+        return reproducoes;
+    }
+
     public void reproduzir() {
         System.out.println("Reproduzindo: " + toString());
+        reproducoes++;
     }
 
     @Override
