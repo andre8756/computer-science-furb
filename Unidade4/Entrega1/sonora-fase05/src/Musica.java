@@ -39,4 +39,10 @@ public class Musica extends Conteudo{
         return String.format("%02d:%02d", minutos, segundos);
     }
 
+    @Override
+    public String toString() {
+        return "Musica == [" + getId() + "] " + super.getTitulo()
+                + " (" + super.getDuracaoSegundos() + "s)";
+    }
+
 }

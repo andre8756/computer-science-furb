@@ -8,9 +8,9 @@ public class App {
 
         // ----- Apenas testando
 
-        Musica musica1 = new Musica("titulo1", "artista1", 65);
-        Musica musica2 = new Musica("titulo2", "artista2", 70);
-        Musica musica3 = new Musica("titulo3", "artista3", 75);
+        Musica musica1 = new Musica("titulo1", "artista1", "djavan", 65);
+        Musica musica2 = new Musica("titulo2", "artista2", "album2", 70);
+        Musica musica3 = new Musica("titulo3", "artista3", "album3", 75);
 
         plataforma.cadastrarMusica(musica1);
         plataforma.cadastrarMusica(musica2);
