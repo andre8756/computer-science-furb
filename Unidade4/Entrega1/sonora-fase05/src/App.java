@@ -12,7 +12,9 @@ public class App {
         Musica musica2 = new Musica("titulo2", "artista2", "album2", 70);
         Musica musica3 = new Musica("titulo3", "artista3", "album3", 75);
 
-        Podcast podcast1 = new Podcast("", 2, "","");
+        Podcast podcast1 = new Podcast("podcast1", 5400, "apresentador1", 1);
+        Podcast podcast2 = new Podcast("podcast2", 5450, "apresentador2", 2);
+        Podcast podcast3 = new Podcast("podcast3", 5600, "apresentador3", 3);
 
         plataforma.cadastrarMusica(musica1);
         plataforma.cadastrarMusica(musica2);

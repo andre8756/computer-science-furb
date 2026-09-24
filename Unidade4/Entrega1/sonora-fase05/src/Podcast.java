@@ -1,8 +1,8 @@
 public class Podcast extends Conteudo {
     private String apresentador;
-    private String numeroEpisodio;
+    private int numeroEpisodio;
 
-    public Podcast(String titulo, int duracaoSegundos, String apresentador, String numeroEpisodio) {
+    public Podcast(String titulo, int duracaoSegundos, String apresentador, int numeroEpisodio) {
         super(titulo, duracaoSegundos);
         setApresentador(apresentador);
         setNumeroEpisodio(numeroEpisodio);
@@ -20,13 +20,13 @@ public class Podcast extends Conteudo {
         this.apresentador = host;
     }
 
-    public String getNumeroEpisodio(){
+    public int getNumeroEpisodio(){
         return numeroEpisodio;
     }
 
-    public void setNumeroEpisodio(String numeroEpisodio){
-        if(numeroEpisodio == null || numeroEpisodio.isBlank()){
-            throw new IllegalArgumentException("O campo album não pode estar vazio!");
+    public void setNumeroEpisodio(int numeroEpisodio){
+        if(numeroEpisodio <= 0){
+            throw new IllegalArgumentException("O número do episódio deve ser maior que zero!");
         }
 
         this.numeroEpisodio = numeroEpisodio;
@@ -43,7 +43,7 @@ public class Podcast extends Conteudo {
 
     @Override
     public String toString() {
-        return "Podcast == [" + getId() + "] " + super.toString() + ", apresentador: "+getApresentador()+", Album: "+getNumeroEpisod();
+        return "Podcast == [" + getId() + "] " + super.toString() + ", apresentador: "+getApresentador()+", Album: "+getNumeroEpisodio();
     }
 
 }
