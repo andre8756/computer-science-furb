@@ -12,6 +12,8 @@ public class App {
         Musica musica2 = new Musica("titulo2", "artista2", "album2", 70);
         Musica musica3 = new Musica("titulo3", "artista3", "album3", 75);
 
+        Podcast podcast1 = new Podcast("", 2, "","");
+
         plataforma.cadastrarMusica(musica1);
         plataforma.cadastrarMusica(musica2);
         plataforma.cadastrarMusica(musica3);
@@ -102,6 +104,7 @@ public class App {
         Musica musica;
         String titulo;
         String artista;
+        String album;
         int duracaoSegundos;
 
         scan.nextLine(); // Limpando buffer
@@ -110,6 +113,8 @@ public class App {
         titulo = scan.nextLine();
         System.out.print("Digite o artista da música: ");
         artista = scan.nextLine();
+        System.out.print("Digite o album da música: ");
+        album = scan.nextLine();
 
         while (true) {
             try {
@@ -122,7 +127,7 @@ public class App {
         }
 
         try {
-            musica = new Musica(titulo, artista, duracaoSegundos);
+            musica = new Musica(titulo, artista, album, duracaoSegundos);
             plataforma.cadastrarMusica(musica);
             if (plataforma.cadastrarMusica(musica)) {
                 System.out.println("Música cadastrada com sucesso!");
