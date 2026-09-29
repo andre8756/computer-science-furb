@@ -14,7 +14,28 @@ public class App {
 
         Podcast podcast1 = new Podcast("podcast1", 5400, "apresentador1", 1);
         Podcast podcast2 = new Podcast("podcast2", 5450, "apresentador2", 2);
-        Podcast podcast3 = new Podcast("podcast3", 5600, "apresentador3", 3);
+
+        musica1.reproduzir();
+        musica2.reproduzir();
+        musica3.reproduzir();
+
+        System.out.println();
+
+        podcast1.reproduzir();         
+        podcast1.reproduzir();   
+
+        System.out.println(musica1.toString());        ;
+        System.out.println(musica2.toString());
+        System.out.println(musica3.toString());
+
+        System.out.println();
+
+        System.out.println(podcast1.toString());
+        System.out.println(podcast2.toString());
+
+
+
+
 
         plataforma.cadastrarMusica(musica1);
         plataforma.cadastrarMusica(musica2);

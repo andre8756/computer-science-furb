@@ -10,7 +10,7 @@ public class Conteudo {
         this.id = contadorId;
         setTitulo(titulo);
         setDuracaoSegundos(duracaoSegundos);
-        reproducoes = 0;
+        this.reproducoes = 0;
     }
 
     public int getId() {
@@ -51,7 +51,7 @@ public class Conteudo {
 
     @Override
     public String toString() {
-        return "[" + getId() + "] " + titulo
+        return "[" + getId() + "] - Reproduções: " + getReproducoes() + " " + titulo
                 + " (" + duracaoSegundos + "s)";
     }
 

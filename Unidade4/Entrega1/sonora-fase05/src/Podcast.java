@@ -38,12 +38,12 @@ public class Podcast extends Conteudo {
         int minutos = resto / 60;
         int segundos = resto % 60;
 
-        return String.format("%02d:%02d%02d",horas, minutos, segundos);
+        return String.format("%02d:%02d:%02d",horas, minutos, segundos);
     }
 
     @Override
     public String toString() {
-        return "Podcast == [" + getId() + "] " + super.toString() + ", apresentador: "+getApresentador()+", Album: "+getNumeroEpisodio();
+        return "Podcast == " + super.toString() + " Tempo Formatado: " + getDuracaoFormatada() + ", apresentador: "+getApresentador()+", Numero Episódio: "+getNumeroEpisodio();
     }
 
 }

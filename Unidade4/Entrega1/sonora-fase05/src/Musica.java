@@ -6,6 +6,7 @@ public class Musica extends Conteudo {
     public Musica(String titulo, String artista, String album, int duracaoSegundos) {
         super(titulo, duracaoSegundos);
         setArtista(artista);
+        setAlbum(album);
     }
 
     public String getArtista() {
@@ -41,8 +42,8 @@ public class Musica extends Conteudo {
 
     @Override
     public String toString() {
-        return super.toString() + " - " + artista
-                + " (" + album + ")";
+        return super.toString() +" Tempo Formatado: " + getDuracaoFormatada() + " - " + getArtista()
+                + " (" + getAlbum() + ")";
     }
 
 }
