@@ -1,3 +1,5 @@
+package teste;
+
 public class NotificacaoWhatsApp extends NotificacaoTelefone {
     private String usuario;
 

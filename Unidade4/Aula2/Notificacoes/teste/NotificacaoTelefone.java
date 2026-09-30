@@ -1,3 +1,5 @@
+package teste;
+
 public abstract class NotificacaoTelefone extends Notificacao{
     private String numeroTelefone;
 

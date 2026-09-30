@@ -1,5 +1,8 @@
 package teste;
 
+import teste.NotificacaoEmail;
+import teste.NotificacaoApp;
+
 public class App {
     public static void main(String[] args){
 
