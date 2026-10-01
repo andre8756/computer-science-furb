@@ -1,30 +1,17 @@
-public class PlanoGratuito {
-    private String nome;
-    private int maxDispositivos;
+public class PlanoGratuito extends Plano {
 
     public PlanoGratuito() {
-        this.nome = "Gratuito";
-        this.maxDispositivos = 1;
+        super();
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public int getMaxDispositivos() {
-        return maxDispositivos;
-    }
-
-    public boolean temAnuncios() {
-        return true;
-    }
-
+    @Override
     public double calcularMensalidade() {
         return 0.0;
     }
 
+    @Override
     public String resumo() {
-        return nome + ": R$ " + calcularMensalidade()
-                + " por mes, " + maxDispositivos + " dispositivo(s)";
+        return super.getNome() + ": R$ " + calcularMensalidade()
+                + " por mes, " + super.getMaxDispositivos() + " dispositivo(s)";
     }
 }
