@@ -1,4 +1,4 @@
-public class PlanoGratuito extends Plano {
+public final class PlanoGratuito extends Plano {
 
     public PlanoGratuito() {
         super("Gratuito", 1);

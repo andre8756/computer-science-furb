@@ -8,12 +8,14 @@ public class Usuario {
     private static int contadorId = 0;
     private ArrayList<Playlist> playLists = new ArrayList<>();
     private ArrayList<Usuario> seguindo = new ArrayList<>();
+    private Plano planoUsuario;
 
     public Usuario(String nome, String email) {
         contadorId++;
         id = contadorId;
         setNome(nome);
         setEmail(email);
+        planoUsuario = new PlanoGratuito();
     }
 
     public int getId() {
@@ -117,6 +119,18 @@ public class Usuario {
 
     public int getQuantidadeSeguindo(){
         return seguindo.size();
+    }
+
+    public void assinar(Plano novoPlano){
+        if(novoPlano == null){
+            throw new IllegalArgumentException();
+        }
+
+        this.planoUsuario = novoPlano;
+    }
+
+    public Plano getPlanoUsuario() {
+        return planoUsuario;
     }
 
 }

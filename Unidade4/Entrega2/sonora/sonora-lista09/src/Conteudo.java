@@ -46,9 +46,9 @@ public abstract class Conteudo {
         return reproducoes;
     }
 
-    public void reproduzir() {
-        System.out.println("Reproduzindo -- " + getCreditos());
+    public final void reproduzir() {
         reproducoes++;
+        System.out.println("Reproduzindo -- " + getCreditos());
     }
 
     @Override

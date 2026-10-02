@@ -19,7 +19,7 @@ public abstract class Plano {
 
     public abstract double calcularMensalidade();
 
-    public String resumo() {
+    public final String resumo() {
         return nome + ": R$ " + calcularMensalidade()
                 + " por mes, " + maxDispositivos + " dispositivo(s)";
     }
