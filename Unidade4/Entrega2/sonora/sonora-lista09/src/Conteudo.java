@@ -1,4 +1,4 @@
-public class Conteudo {
+public abstract class Conteudo {
     private static int contadorId = 0;
     private final int id;
     private String titulo;
@@ -12,6 +12,8 @@ public class Conteudo {
         setDuracaoSegundos(duracaoSegundos);
         this.reproducoes = 0;
     }
+
+    public abstract String getCreditos();
 
     public int getId() {
         return id;
@@ -45,7 +47,7 @@ public class Conteudo {
     }
 
     public void reproduzir() {
-        System.out.println("Reproduzindo: " + toString());
+        System.out.println("Reproduzindo -- " + getCreditos());
         reproducoes++;
     }
 

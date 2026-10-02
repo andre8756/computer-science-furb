@@ -1,6 +1,12 @@
 public abstract class PlanoPago extends Plano {
     private double precoMensal;
 
+    public PlanoPago(String nome, int maxDispositivos, double precoMensal) {
+        super(nome, maxDispositivos);
+        setPrecoMensal(precoMensal);
+    }
+
+    @Override
     public boolean temAnuncios() {
         return false;
     }
@@ -16,4 +22,5 @@ public abstract class PlanoPago extends Plano {
         this.precoMensal = precoMensal;
     }
 
+    
 }

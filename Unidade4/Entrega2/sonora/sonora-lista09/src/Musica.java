@@ -9,6 +9,11 @@ public class Musica extends Conteudo {
         setAlbum(album);
     }
 
+    @Override
+    public String getCreditos(){
+        return "Crèditos: \n -- Artista: "+artista+"\n -- Álbum: "+album;
+    }
+
     public String getArtista() {
         return artista;
     }

@@ -8,6 +8,11 @@ public class Podcast extends Conteudo {
         setNumeroEpisodio(numeroEpisodio);
     }
 
+    @Override
+    public String getCreditos(){
+        return "Crèditos: \n -- Apresentador: "+apresentador+"\n -- Número do Episódio: "+numeroEpisodio;
+    }
+
     public String getApresentador(){
         return apresentador;
     }

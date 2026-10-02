@@ -1,17 +1,16 @@
 public class PlanoGratuito extends Plano {
 
     public PlanoGratuito() {
-        super();
+        super("Gratuito", 1);
+    }
+
+    @Override
+    public boolean temAnuncios(){
+        return true;
     }
 
     @Override
     public double calcularMensalidade() {
         return 0.0;
-    }
-
-    @Override
-    public String resumo() {
-        return super.getNome() + ": R$ " + calcularMensalidade()
-                + " por mes, " + super.getMaxDispositivos() + " dispositivo(s)";
     }
 }

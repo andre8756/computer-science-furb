@@ -2,9 +2,9 @@ public abstract class Plano {
     private String nome;
     private int maxDispositivos;
 
-    public Plano() {
-        this.nome = "Gratuito";
-        this.maxDispositivos = 1;
+    public Plano(String nome, int maxDispositivos) {
+        this.nome = nome;
+        this.maxDispositivos = maxDispositivos;
     }
 
     public String getNome() {
@@ -15,12 +15,12 @@ public abstract class Plano {
         return maxDispositivos;
     }
 
-    public boolean temAnuncios() {
-        return true;
-    }
+    public abstract boolean temAnuncios();
 
     public abstract double calcularMensalidade();
 
-    public abstract String resumo();
-
+    public String resumo() {
+        return nome + ": R$ " + calcularMensalidade()
+                + " por mes, " + maxDispositivos + " dispositivo(s)";
+    }
 }
