@@ -1,6 +1,7 @@
 {
     "java.debug.settings.onBuildFailureProceed": true,
     "java.project.sourcePaths": [
+        "Unidade4/Entrega2/sonora/sonora-lista09/src",
         "Unidade4/Entrega1/sonora-fase05/src",
         "Unidade4/Aula2/Notificacoes",
         "Unidade4/Aula1/Ex2",
@@ -10,7 +11,7 @@
         "Unidade 1/Aula 2/Questao_2",
         "Unidade 1/Aula 2/Questao_1",
         "Unidade 1/Aula 1",
-        "Unidade4/Entrega2/sonora/sonora-lista09/src"
+        "Unidade5/Interfaces/Inter"
     ],
     "editor.suggest.selectionMode": "never",
     "java.project.referencedLibraries": [
