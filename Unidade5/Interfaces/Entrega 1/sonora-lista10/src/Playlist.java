@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Playlist {
     private String nome;
     private Usuario dono;
-    private ArrayList<Musica> musicas = new ArrayList<>();
+    private ArrayList<Conteudo> conteudos = new ArrayList<>();
 
     public Playlist(String nome, Usuario dono) {
         setNome(nome);
@@ -38,8 +38,8 @@ public class Playlist {
     public int getQuantidade() {
         int contador = 0;
 
-        for (Musica musica : musicas) {
-            if (musica != null) {
+        for (Conteudo conteudo : conteudos) {
+            if (conteudo != null) {
                 contador++;
             }
         }
@@ -47,44 +47,44 @@ public class Playlist {
         return contador;
     }
 
-    public boolean adicionar(Musica musica) {
-        if (musica != null) {
-            musicas.add(musica);
+    public boolean adicionar(Conteudo conteudo) {
+        if (conteudo != null) {
+            conteudos.add(conteudo);
             return true;
         }
 
         return false;
     }
 
-    public Musica getNaPosicao(int indice) {
+    public Conteudo getNaPosicao(int indice) {
         indice--;
 
-        if (indice < 0 || indice >= musicas.size()) {
+        if (indice < 0 || indice >= conteudos.size()) {
             throw new IndexOutOfBoundsException(
                     "Erro na getNaPosicao() da Playlist! O índice (" + (indice + 1) + ") é inválido.");
         }
 
-        return musicas.get(indice);
+        return conteudos.get(indice);
     }
 
     public boolean removerNaPosicao(int indice) {
         indice--;
 
-        if (indice < 0 || indice >= musicas.size()) {
+        if (indice < 0 || indice >= conteudos.size()) {
             throw new IndexOutOfBoundsException(
                     "Erro na removerNaPosicao() da Playlist! O ídice (" + (indice + 1) + ") é inválido.");
         }
-        Musica musicaRemover = musicas.get(indice);
-        musicas.remove(musicaRemover);
+        Conteudo conteudoRemover = conteudos.get(indice);
+        conteudos.remove(conteudoRemover);
         return true;
     }
 
     public int getDuracaoTotalSegundos() {
         int duracaoTotalSeg = 0;
 
-        for (Musica musica : musicas) {
-            if (musica != null) {
-                duracaoTotalSeg += musica.getDuracaoSegundos();
+        for (Conteudo conteudo : conteudos) {
+            if (conteudo != null) {
+                duracaoTotalSeg += conteudo.getDuracaoSegundos();
             }
         }
 
@@ -92,9 +92,9 @@ public class Playlist {
     }
 
     public void reproduzirTudo() {
-        for (Musica musica : musicas) {
-            if (musica != null) {
-                musica.reproduzir();
+        for (Conteudo conteudo : conteudos) {
+            if (conteudo != null) {
+                conteudo.reproduzir();
             }
         }
     }
