@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Plataforma {
     private final int MAX = 500;
-    private ArrayList<Musica> musicas = new ArrayList<>();
+    private ArrayList<Conteudo> conteudos = new ArrayList<>();
     private ArrayList<Usuario> usuarios = new ArrayList<>();
 
     // ------- Cadastros
@@ -15,16 +15,36 @@ public class Plataforma {
                     "Erro em cadastrarMusica() da Plataforma! Não foi possível cadastrar a música.");
         }
 
-        if (musicas.size() >= MAX) {
+        if (conteudos.size() >= MAX) {
             return false;
         }
 
-        if (!musicaNova(musica)) {
+        if (!conteudoNovo(musica)) {
             return false;
         }
 
-        musicas.add(musica);
+        conteudos.add(musica);
         return true;
+    }
+
+    public boolean cadastrarPodcast(Podcast podcast) {
+
+        if (podcast == null) {
+            throw new IllegalArgumentException(
+                    "Erro em cadastrarPodcast() da Plataforma! Não foi possível cadastrar o Podcast.");
+        }
+
+        if (conteudos.size() >= MAX) {
+            return false;
+        }
+
+        if (!conteudoNovo(podcast)) {
+            return false;
+        }
+
+        conteudos.add(podcast);
+        return true;
+
     }
 
     public boolean cadastrarUsuario(Usuario usuario) {
@@ -46,48 +66,32 @@ public class Plataforma {
         return true;
     }
 
-    public boolean cadastrarPlaylist(Playlist playlist) {
-
-        if (playlist == null) {
-            throw new IllegalArgumentException(
-                    "Erro em cadastrarPlaylist() da Plataforma! Playlist inválida.");
-        }
-
-        if (!playlistNova(playlist)) {
-            return false;
-        }
-
-        Usuario usuario = playlist.getDono();
-
-        return usuario.adicionarPlaylist(playlist);
-    }
-
     // -------- Métodos de busca
 
-    public Musica buscarMusicaPorId(int id) {
-        for (Musica musica : musicas) {
-            if (musica.getId() == id) {
-                return musica;
+    public Conteudo buscarConteudoPorId(int id) {
+        for (Conteudo conteudo : conteudos) {
+            if (conteudo.getId() == id) {
+                return conteudo;
             }
         }
 
-        System.out.println("Música não encontrada!");
+        System.out.println("conteúdo não encontrada!");
         return null;
     }
 
-    public Musica buscarMusica(String titulo) {
-        for (Musica musica : musicas) {
-            if (musica.getTitulo().equalsIgnoreCase(titulo)) {
-                return musica;
+    public Conteudo buscarConteudo(String titulo) {
+        for (Conteudo conteudo : conteudos) {
+            if (conteudo.getTitulo().equalsIgnoreCase(titulo)) {
+                return conteudo;
             }
         }
 
-        System.out.println("Música não encontrada!");
+        System.out.println("Conteúdo não encontrada!");
         return null;
     }
 
-    public int getTotalMusicas() {
-        return musicas.size();
+    public int getTotalConteudos() {
+        return conteudos.size();
     }
 
     public Usuario buscarUsuario(String nome) {
@@ -135,9 +139,9 @@ public class Plataforma {
 
     // --------------- Métodos Auxiliares:
 
-    private boolean musicaNova(Musica musica) {
-        for (Musica outraMusica : musicas) {
-            if (outraMusica.getTitulo().equalsIgnoreCase(musica.getTitulo())) {
+    private boolean conteudoNovo(Conteudo musica) {
+        for (Conteudo outroConteudo : conteudos) {
+            if (outroConteudo.getTitulo().equalsIgnoreCase(musica.getTitulo())) {
                 return false;
             }
         }
@@ -163,19 +167,8 @@ public class Plataforma {
         return true;
     }
 
-    private boolean playlistNova(Playlist playlist) {
-        for (Playlist outraPlaylist : playlist.getDono().getPlaylists()) {
-            if (outraPlaylist.getNome().equalsIgnoreCase(playlist.getNome())) {
-                System.out.println("Já existe uma playlist com este nome!!");
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    public ArrayList<Musica> getMusicas() {
-        return musicas;
+    public ArrayList<Conteudo> getMusicas() {
+        return conteudos;
     }
 
     public ArrayList<Usuario> getUsuarios() {
