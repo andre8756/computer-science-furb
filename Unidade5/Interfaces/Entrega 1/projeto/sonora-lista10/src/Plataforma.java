@@ -117,8 +117,16 @@ public class Plataforma {
         for(Usuario usuario: usuarios){
             soma += usuario.getPlanoUsuario().calcularMensalidade();
         }
-        
+
         return soma;
+    }
+
+    public void listarEpisodiosDe(String apresentador){
+        for(Conteudo conteudo: conteudos){
+            if(conteudo instanceof Podcast && ((Podcast) conteudo).getApresentador().equalsIgnoreCase(apresentador)){
+                System.out.println(conteudo);
+            }
+        }
     }
 
     // -------- Métodos de seguir
