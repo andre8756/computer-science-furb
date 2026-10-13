@@ -1,3 +1,4 @@
+package Planos;
 public abstract class Plano {
     private String nome;
     private int maxDispositivos;

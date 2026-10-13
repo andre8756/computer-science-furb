@@ -1,3 +1,4 @@
+package Planos;
 public final class PlanoGratuito extends Plano {
 
     public PlanoGratuito() {

@@ -1,3 +1,4 @@
+package Planos;
 public class PlanoFamilia extends PlanoPago {
 
     private int quantidadeMembros;

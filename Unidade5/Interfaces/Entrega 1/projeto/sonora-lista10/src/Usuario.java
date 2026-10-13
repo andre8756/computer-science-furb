@@ -1,6 +1,9 @@
 
 import java.util.ArrayList;
 
+import Planos.Plano;
+import Planos.PlanoGratuito;
+
 public class Usuario {
     private final int id;
     private String nome;

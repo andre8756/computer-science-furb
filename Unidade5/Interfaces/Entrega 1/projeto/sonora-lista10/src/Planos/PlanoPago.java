@@ -1,3 +1,5 @@
+package Planos;
+
 public abstract class PlanoPago extends Plano {
     private double precoMensal;
 

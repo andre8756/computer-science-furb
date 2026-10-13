@@ -111,6 +111,16 @@ public class Plataforma {
         return usuarios.size();
     }
 
+    public double calcularReceitaMensal(){
+        double soma = 0;
+
+        for(Usuario usuario: usuarios){
+            soma += usuario.getPlanoUsuario().calcularMensalidade();
+        }
+        
+        return soma;
+    }
+
     // -------- Métodos de seguir
 
     public boolean seguir(String nomeSeguidor, String nomeSeguido) {

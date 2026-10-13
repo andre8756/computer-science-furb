@@ -1,6 +1,11 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import Planos.Plano;
+import Planos.PlanoFamilia;
+import Planos.PlanoGratuito;
+import Planos.PlanoIndividual;
+
 public class App2 // extends PlanoGratuito
 // erro: The type App2 cannot subclass the final class PlanoGratuito
 // O erro ocorre por a classe PlanoGratuito por ser final

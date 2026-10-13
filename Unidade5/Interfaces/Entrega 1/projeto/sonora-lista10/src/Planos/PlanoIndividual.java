@@ -1,3 +1,4 @@
+package Planos;
 public class PlanoIndividual extends PlanoPago{
     // Se o método calcularMensalidade() fosse movido para PlanoPago, 
     // Então o PalnoIndividual poderia deixar de existir, e o PlanoPago
