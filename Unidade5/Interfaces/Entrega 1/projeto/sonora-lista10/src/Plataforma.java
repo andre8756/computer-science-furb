@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import Interfaces.Faturavel;
 import Interfaces.Reproduzivel;
-import Planos.PlanoGratuito;
 
 public class Plataforma {
     private final int MAX = 500;
@@ -153,39 +152,57 @@ public class Plataforma {
     }
 
     public void listarEpisodiosDe(String apresentador) {
+        if (apresentador == null || apresentador.isBlank()) {
+            throw new IllegalArgumentException("O nome do apresentador deve ser preenchido.");
+        }
+
+        boolean encontrou = false;
         for (Conteudo conteudo : conteudos) {
-            if (conteudo instanceof Podcast && ((Podcast) conteudo).getApresentador().equalsIgnoreCase(apresentador)) {
+            if (conteudo instanceof Podcast
+                    && ((Podcast) conteudo).getApresentador().equalsIgnoreCase(apresentador)) {
                 System.out.println(conteudo);
+                encontrou = true;
             }
+        }
+
+        if (!encontrou) {
+            System.out.println("Nenhum episódio encontrado para o apresentador " + apresentador + ".");
         }
     }
 
     public void tocarPlaylist(Usuario ouvinte, Playlist playlist) {
-    ArrayList<Reproduzivel> reproduziveis = new ArrayList<>();
+        if (ouvinte == null) {
+            throw new IllegalArgumentException("O usuário ouvinte não pode ser nulo.");
+        }
+        if (playlist == null) {
+            throw new IllegalArgumentException("A playlist não pode ser nula.");
+        }
+        if (playlist.getConteudos().isEmpty()) {
+            throw new IllegalArgumentException("A playlist não possui conteúdos para reproduzir.");
+        }
 
-    boolean inserirAnuncios =
-            ouvinte.getPlanoUsuario().temAnuncios()
-            && !anuncios.isEmpty();
+        ArrayList<Reproduzivel> reproduziveis = new ArrayList<>();
 
-    int indiceAnuncio = 0;
+        boolean inserirAnuncios = ouvinte.getPlanoUsuario().temAnuncios()
+                && !anuncios.isEmpty();
 
-    for (int i = 0; i < playlist.getConteudos().size(); i++) {
-        Conteudo conteudo = playlist.getConteudos().get(i);
+        int indiceAnuncio = 0;
 
-        reproduziveis.add(conteudo);
+        for (int i = 0; i < playlist.getConteudos().size(); i++) {
+            Conteudo conteudo = playlist.getConteudos().get(i);
+            reproduziveis.add(conteudo);
 
-        if (inserirAnuncios && (i + 1) % 2 == 0) {
-            reproduziveis.add(anuncios.get(indiceAnuncio));
+            if (inserirAnuncios && (i + 1) % 2 == 0) {
+                reproduziveis.add(anuncios.get(indiceAnuncio));
+                indiceAnuncio = (indiceAnuncio + 1) % anuncios.size();
+            }
+        }
 
-            indiceAnuncio = (indiceAnuncio + 1) % anuncios.size();
+        for (Reproduzivel reproduzivel : reproduziveis) {
+            System.out.println(reproduzivel.getDuracaoFormatada());
+            reproduzivel.reproduzir();
         }
     }
-
-    for (Reproduzivel reproduzivel : reproduziveis) {
-        System.out.println(reproduzivel.getDuracaoFormatada());
-        reproduzivel.reproduzir();
-    }
-}
 
     // -------- Métodos de seguir
 
@@ -254,12 +271,6 @@ public class Plataforma {
         }
 
         return true;
-    }
-
-    private boolean temAnuncio(Usuario usuario){
-        if(usuario.getPlanoUsuario() instanceof PlanoGratuito) return true;
-
-        return false;
     }
 
     public ArrayList<Conteudo> getMusicas() {
