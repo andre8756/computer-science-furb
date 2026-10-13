@@ -5,6 +5,7 @@ public class Plataforma {
     private final int MAX = 500;
     private ArrayList<Conteudo> conteudos = new ArrayList<>();
     private ArrayList<Usuario> usuarios = new ArrayList<>();
+    private ArrayList<Anuncio> anuncios = new ArrayList<>();
 
     // ------- Cadastros
 
@@ -66,6 +67,25 @@ public class Plataforma {
         return true;
     }
 
+    public boolean cadastrarAnuncio(Anuncio anuncio) {
+
+        if (anuncio == null) {
+            throw new IllegalArgumentException(
+                    "Erro em cadastrarAnuncio() da Plataforma! Não foi possível cadastrar o anúncio.");
+        }
+
+        if (anuncios.size() >= MAX) {
+            return false;
+        }
+
+        if (!anuncioNovo(anuncio)) {
+            return false;
+        }
+
+        anuncios.add(anuncio);
+        return true;
+    }
+
     // -------- Métodos de busca
 
     public Conteudo buscarConteudoPorId(int id) {
@@ -111,19 +131,19 @@ public class Plataforma {
         return usuarios.size();
     }
 
-    public double calcularReceitaMensal(){
+    public double calcularReceitaMensal() {
         double soma = 0;
 
-        for(Usuario usuario: usuarios){
+        for (Usuario usuario : usuarios) {
             soma += usuario.getPlanoUsuario().calcularMensalidade();
         }
 
         return soma;
     }
 
-    public void listarEpisodiosDe(String apresentador){
-        for(Conteudo conteudo: conteudos){
-            if(conteudo instanceof Podcast && ((Podcast) conteudo).getApresentador().equalsIgnoreCase(apresentador)){
+    public void listarEpisodiosDe(String apresentador) {
+        for (Conteudo conteudo : conteudos) {
+            if (conteudo instanceof Podcast && ((Podcast) conteudo).getApresentador().equalsIgnoreCase(apresentador)) {
                 System.out.println(conteudo);
             }
         }
@@ -178,6 +198,19 @@ public class Plataforma {
 
             if (usuario.getEmail().equalsIgnoreCase(outroUsuario.getEmail())) {
                 System.out.println("E-mail de usuário já utilizado");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean anuncioNovo(Anuncio anuncio) {
+
+        for (Anuncio outroAnuncio : anuncios) {
+
+            if (anuncio.getTitulo().equalsIgnoreCase(outroAnuncio.getTitulo())) {
+                System.out.println("Nome de usuário já utilizado");
                 return false;
             }
         }
