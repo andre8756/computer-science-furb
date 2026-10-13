@@ -1,4 +1,7 @@
-public class Anuncio {
+import Interfaces.Faturavel;
+import Interfaces.Reproduzivel;
+
+public class Anuncio implements Faturavel, Reproduzivel{
     private String anunciante;
     private String titulo;
     private int duracaoSegundos;
@@ -13,13 +16,15 @@ public class Anuncio {
         this.impressoes = 0;
     }
 
+    @Override
     public final void reproduzir() {
         impressoes++;
         System.out.println("[ANUNCIO] - "+getTitulo()+" - oferecimento de - "+getAnunciante());
     }
 
-    public double calcularValorVeiculacao(){
-        return impressoes / (1000 * getValorPorMilImpressoes());
+    @Override
+    public double calcularMensalidade(){
+        return (impressoes / 1000.0) * getValorPorMilImpressoes();
     }
 
     public String getAnunciante(){
@@ -42,9 +47,11 @@ public class Anuncio {
         if(titulo.isBlank() || titulo.isEmpty()){
             throw new IllegalArgumentException("O título deve ser preenchido corretamente!");
         }
+        this.titulo = titulo;
     }
 
-    public int getDuracoSegundos(){
+    @Override
+    public int getDuracaoSegundos(){
         return duracaoSegundos;
     }
 

@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 
 public class Plataforma {
@@ -224,6 +223,14 @@ public class Plataforma {
 
     public ArrayList<Usuario> getUsuarios() {
         return usuarios;
+    }
+
+    public ArrayList<Conteudo> getConteudos(){
+        return conteudos;
+    }
+
+    public ArrayList<Anuncio> getAnuncios(){
+        return anuncios;
     }
 
 }

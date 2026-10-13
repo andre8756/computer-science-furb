@@ -1,390 +1,595 @@
-
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import Planos.Plano;
+import Planos.PlanoFamilia;
+import Planos.PlanoGratuito;
+import Planos.PlanoIndividual;
 
 public class App {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Plataforma plataforma = new Plataforma();
-
-        // ----- Apenas testando
-
-        Musica musica1 = new Musica("titulo1", "artista1", "djavan", 65);
-        Musica musica2 = new Musica("titulo2", "artista2", "album2", 70);
-        Musica musica3 = new Musica("titulo3", "artista3", "album3", 75);
-
-        Podcast podcast1 = new Podcast("podcast1", 5400, "apresentador1", 1);
-        Podcast podcast2 = new Podcast("podcast2", 5450, "apresentador2", 2);
-
-        musica1.reproduzir();
-        musica2.reproduzir();
-        musica3.reproduzir();
-
-        System.out.println();
-
-        podcast1.reproduzir();         
-        podcast1.reproduzir();   
-
-        System.out.println(musica1.toString());        ;
-        System.out.println(musica2.toString());
-        System.out.println(musica3.toString());
-
-        System.out.println();
-
-        System.out.println(podcast1.toString());
-        System.out.println(podcast2.toString());
-
-
-
-
-
-        plataforma.cadastrarMusica(musica1);
-        plataforma.cadastrarMusica(musica2);
-        plataforma.cadastrarMusica(musica3);
-
-        // ----- Tela inicial
-
         Scanner scan = new Scanner(System.in);
         int opcao;
 
         do {
-            System.out.println();
-            System.out.println("=== Sonora ===");
-            System.out.println("1 - Cadastrar música manualmente");
-            System.out.println("2 - Cadastrar usuário");
-            System.out.println("3 - Criar playlist e adicionar músicas");
-            System.out.println("4 - Buscar música por id");
-            System.out.println("5 - Buscar música por título");
-            System.out.println("6 - Reproduzir uma música");
-            System.out.println("7 - Listar acervo");
-            System.out.println("8 - Seguir usuário");
-            System.out.println("9 - Deixar de seguir usuário");
-            System.out.println("10 - Ver quantidade de usuários seguindo");
-            System.out.println("0 - Sair");
+            exibirMenu();
+            opcao = lerInteiro(scan, ">> ");
             System.out.println();
 
-            while (true) {
-                try {
-                    System.out.print(">> ");
-                    opcao = Integer.parseInt(scan.nextLine());
-                    break;
-                } catch (NumberFormatException exception) {
-                    System.out.println("Valor inválido! Digite um número:");
+            try {
+                switch (opcao) {
+                    case 0:
+                        System.out.println("Encerrando o Sonora...");
+                        break;
+                    case 1:
+                        cadastrarMusica(scan, plataforma);
+                        break;
+                    case 2:
+                        cadastrarPodcast(scan, plataforma);
+                        break;
+                    case 3:
+                        cadastrarUsuario(scan, plataforma);
+                        break;
+                    case 4:
+                        criarPlaylist(scan, plataforma);
+                        break;
+                    case 5:
+                        adicionarConteudoNaPlaylist(scan, plataforma);
+                        break;
+                    case 6:
+                        listarPlaylistsDeUsuario(scan, plataforma);
+                        break;
+                    case 7:
+                        reproduzirPlaylist(scan, plataforma);
+                        break;
+                    case 8:
+                        removerConteudoDaPlaylist(scan, plataforma);
+                        break;
+                    case 9:
+                        buscarConteudoPorId(scan, plataforma);
+                        break;
+                    case 10:
+                        buscarConteudoPorTitulo(scan, plataforma);
+                        break;
+                    case 11:
+                        reproduzirConteudo(scan, plataforma);
+                        break;
+                    case 12:
+                        listarAcervo(plataforma);
+                        break;
+                    case 13:
+                        seguirUsuario(scan, plataforma);
+                        break;
+                    case 14:
+                        deixarDeSeguirUsuario(scan, plataforma);
+                        break;
+                    case 15:
+                        consultarQuantidadeSeguindo(scan, plataforma);
+                        break;
+                    case 16:
+                        cadastrarAnuncio(scan, plataforma);
+                        break;
+                    case 17:
+                        listarOuReproduzirAnuncio(scan, plataforma);
+                        break;
+                    case 18:
+                        alterarPlanoUsuario(scan, plataforma);
+                        break;
+                    case 19:
+                        consultarPlanoUsuario(scan, plataforma);
+                        break;
+                    case 20:
+                        System.out.printf("Receita mensal estimada: R$ %.2f%n",
+                                plataforma.calcularReceitaMensal());
+                        break;
+                    case 21:
+                        listarPodcastsPorApresentador(scan, plataforma);
+                        break;
+                    default:
+                        System.out.println("Opção inválida. Escolha uma opção exibida no menu.");
                 }
+            } catch (IllegalArgumentException exception) {
+                System.out.println("Não foi possível concluir a operação: " + exception.getMessage());
             }
 
             System.out.println();
-
-            switch (opcao) {
-                case 0:
-                    System.out.println("Saindo do sonora... ");
-                    break;
-                case 1:
-                    cadastrarMusicaManualmente(scan, plataforma);
-                    break;
-                case 2:
-                    cadastrarUsuarioManualmente(scan, plataforma);
-                    break;
-                case 3:
-                    criarPlaylistEAdicionarMusicas(scan, plataforma);
-                    break;
-                case 4:
-                    buscarMusicaPorId(scan, plataforma);
-                    break;
-                case 5:
-                    buscarMusicaPorTitulo(scan, plataforma);
-                    break;
-                case 6:
-                    reproduzirUmaMusica(scan, plataforma);
-                    break;
-                case 7:
-                    listarAcervo(plataforma);
-                    break;
-                case 8:
-                    seguirUsuario(scan, plataforma);
-                    break;
-
-                case 9:
-                    deixarDeSeguirUsuario(scan, plataforma);
-                    break;
-
-                case 10:
-                    consultarQuantidadeSeguindo(scan, plataforma);
-                    break;
-                default:
-                    System.out.println("Dígito inválido, tente novamente!");
-
-            }
-
         } while (opcao != 0);
 
         scan.close();
-
     }
 
-    // -------------- Métodos (Main):
+    private static void exibirMenu() {
+        System.out.println("=== SONORA ===");
+        System.out.println("1  - Cadastrar música");
+        System.out.println("2  - Cadastrar podcast");
+        System.out.println("3  - Cadastrar usuário");
+        System.out.println("4  - Criar playlist");
+        System.out.println("5  - Adicionar música ou podcast a uma playlist");
+        System.out.println("6  - Listar playlists de um usuário");
+        System.out.println("7  - Reproduzir playlist");
+        System.out.println("8  - Remover conteúdo de uma playlist");
+        System.out.println("9  - Buscar conteúdo por ID");
+        System.out.println("10 - Buscar conteúdo por título");
+        System.out.println("11 - Reproduzir música ou podcast");
+        System.out.println("12 - Listar acervo");
+        System.out.println("13 - Seguir usuário");
+        System.out.println("14 - Deixar de seguir usuário");
+        System.out.println("15 - Consultar quantos usuários alguém segue");
+        System.out.println("16 - Cadastrar anúncio");
+        System.out.println("17 - Listar ou reproduzir anúncio");
+        System.out.println("18 - Alterar plano de usuário");
+        System.out.println("19 - Consultar plano de usuário");
+        System.out.println("20 - Consultar receita mensal estimada");
+        System.out.println("21 - Listar podcasts por apresentador");
+        System.out.println("0  - Sair");
+    }
 
-    public static void cadastrarMusicaManualmente(Scanner scan, Plataforma plataforma) {
-        Musica musica;
-        String titulo;
-        String artista;
-        String album;
-        int duracaoSegundos;
+    // -------------------- Cadastros --------------------
 
-        scan.nextLine(); // Limpando buffer
-
-        System.out.print("Digite o titulo da música: ");
-        titulo = scan.nextLine();
-        System.out.print("Digite o artista da música: ");
-        artista = scan.nextLine();
-        System.out.print("Digite o album da música: ");
-        album = scan.nextLine();
-
-        while (true) {
-            try {
-                System.out.print("Digite a duração total em segundos da música: ");
-                duracaoSegundos = Integer.parseInt(scan.nextLine());
-                break;
-            } catch (NumberFormatException exception) {
-                System.out.print("Valor invalido. Digite um número válido.");
-            }
-        }
+    public static void cadastrarMusica(Scanner scan, Plataforma plataforma) {
+        System.out.println("--- Cadastro de música ---");
+        String titulo = lerTexto(scan, "Título: ");
+        String artista = lerTexto(scan, "Artista: ");
+        String album = lerTexto(scan, "Álbum: ");
+        int duracao = lerInteiroPositivo(scan, "Duração em segundos: ");
 
         try {
-            musica = new Musica(titulo, artista, album, duracaoSegundos);
-            plataforma.cadastrarMusica(musica);
+            Musica musica = new Musica(titulo, artista, album, duracao);
             if (plataforma.cadastrarMusica(musica)) {
-                System.out.println("Música cadastrada com sucesso!");
+                System.out.println("Música cadastrada com sucesso. ID: " + musica.getId());
             } else {
-                System.out.println("Não foi possível cadastrar a música.");
+                System.out.println("A música não foi cadastrada. O título pode já estar no acervo ou o limite foi atingido.");
             }
         } catch (IllegalArgumentException exception) {
-            System.out.println("Houve um erro: " + exception.getMessage());
+            System.out.println("Dados da música inválidos: " + exception.getMessage());
         }
     }
 
-    public static void cadastrarUsuarioManualmente(Scanner scan, Plataforma plataforma) {
-        Usuario usuario;
-        String nome;
-        String email;
-
-        scan.nextLine(); // Limpando buffer
-
-        System.out.print("Digite o nome do ususário: ");
-        nome = scan.nextLine();
-        System.out.print("Digite o email do usuario: ");
-        email = scan.nextLine();
+    public static void cadastrarPodcast(Scanner scan, Plataforma plataforma) {
+        System.out.println("--- Cadastro de podcast ---");
+        String titulo = lerTexto(scan, "Título do episódio: ");
+        int duracao = lerInteiroPositivo(scan, "Duração em segundos: ");
+        String apresentador = lerTexto(scan, "Apresentador: ");
+        int numeroEpisodio = lerInteiroPositivo(scan, "Número do episódio: ");
 
         try {
+            Podcast podcast = new Podcast(titulo, duracao, apresentador, numeroEpisodio);
+            if (plataforma.cadastrarPodcast(podcast)) {
+                System.out.println("Podcast cadastrado com sucesso. ID: " + podcast.getId());
+            } else {
+                System.out.println("O podcast não foi cadastrado. O título pode já estar no acervo ou o limite foi atingido.");
+            }
+        } catch (IllegalArgumentException exception) {
+            System.out.println("Dados do podcast inválidos: " + exception.getMessage());
+        }
+    }
 
-            usuario = new Usuario(nome, email);
-            plataforma.cadastrarUsuario(usuario);
+    public static void cadastrarUsuario(Scanner scan, Plataforma plataforma) {
+        System.out.println("--- Cadastro de usuário ---");
+        String nome = lerTexto(scan, "Nome: ");
+        String email = lerTexto(scan, "E-mail: ");
+
+        try {
+            Usuario usuario = new Usuario(nome, email);
             if (plataforma.cadastrarUsuario(usuario)) {
-                System.out.println("Usuário cadastrado com sucesso!");
+                System.out.println("Usuário cadastrado com sucesso. ID: " + usuario.getId());
             } else {
-                System.out.println("Não foi possível cadastrar o usuário.");
+                System.out.println("Não foi possível cadastrar. Verifique se nome/e-mail já foram utilizados ou se o limite foi atingido.");
             }
         } catch (IllegalArgumentException exception) {
-            System.out.println("Houve um erro ao cadastrar o usuário: " + exception.getMessage());
+            System.out.println("Dados do usuário inválidos: " + exception.getMessage());
         }
-
     }
 
-    public static int criarPlaylistEAdicionarMusicas(Scanner scan, Plataforma plataforma) {
-        Playlist playlist;
-        String nome;
-        Usuario dono;
-        char continuar;
-
-        scan.nextLine(); // Limpando buffer
-
-        System.out.print("Digite o nome da playlist: ");
-        nome = scan.nextLine();
-
-        System.out.print("Digite o nome do usuário: ");
-        dono = plataforma.buscarUsuario(scan.nextLine());
-
+    public static void criarPlaylist(Scanner scan, Plataforma plataforma) {
+        System.out.println("--- Criar playlist ---");
+        String nomeUsuario = lerTexto(scan, "Nome do usuário dono da playlist: ");
+        Usuario dono = plataforma.buscarUsuario(nomeUsuario);
         if (dono == null) {
-            return 1;
+            return;
         }
 
+        String nomePlaylist = lerTexto(scan, "Nome da playlist: ");
         try {
-            playlist = new Playlist(nome, dono);
-
-            if (!plataforma.cadastrarPlaylist(playlist)) {
-                System.out.println("Não foi possível cadastrar a playlist.");
-                return 1;
+            Playlist playlist = new Playlist(nomePlaylist, dono);
+            if (dono.adicionarPlaylist(playlist)) {
+                System.out.println("Playlist '" + playlist.getNome() + "' criada para " + dono.getNome() + ".");
+                System.out.println("Use a opção 5 para adicionar músicas ou podcasts depois.");
+            } else {
+                System.out.println("Não foi possível adicionar a playlist ao usuário.");
             }
-
-            System.out.println("");
-            System.out
-                    .println(
-                            "Playlist criada com sucesso, vocẽ deseja adicionar uma música existente à playlist? (s/n) ");
-            System.out.print(">> ");
-            continuar = scan.next().toUpperCase().charAt(0);
-
-            while (continuar == 'S') {
-                Musica musica;
-
-                System.out.println("Digite o título da música: ");
-                musica = plataforma.buscarMusica(scan.nextLine());
-
-                if (musica != null) {
-                    playlist.adicionar(musica);
-                }
-
-                System.out.println();
-                System.out.println("Deseja adicionar outra música? (s/n) ");
-                System.out.print(">> ");
-                continuar = scan.next().toUpperCase().charAt(0);
-                scan.nextLine(); // limpando buffer
-
-            }
-
-            System.out.println("Saindo da playlist!! ");
-            System.out.println();
-
-            return 0;
         } catch (IllegalArgumentException exception) {
-            System.out.println("Não foi possível criar a Playlist: " + exception.getMessage());
-            return 1;
+            System.out.println("Não foi possível criar a playlist: " + exception.getMessage());
         }
-
     }
 
-    public static void buscarMusicaPorId(Scanner scan, Plataforma plataforma) {
-        int indice;
-        Musica musicaTemp;
-        scan.nextLine(); // Limpando buffer
-        System.out.println("Digite o id da música: ");
+    public static void cadastrarAnuncio(Scanner scan, Plataforma plataforma) {
+        System.out.println("--- Cadastro de anúncio ---");
+        String anunciante = lerTexto(scan, "Nome do anunciante: ");
+        String titulo = lerTexto(scan, "Título do anúncio: ");
+        int duracao = lerInteiroPositivo(scan, "Duração em segundos: ");
+        double valorPorMil = lerDoublePositivo(scan, "Valor por mil impressões (R$): ");
 
         try {
-            System.out.print(">> ");
-            indice = Integer.parseInt(scan.nextLine());
+            Anuncio anuncio = new Anuncio(anunciante, titulo, duracao, valorPorMil);
+            if (plataforma.cadastrarAnuncio(anuncio)) {
+                System.out.println("Anúncio cadastrado com sucesso.");
+            } else {
+                System.out.println("Não foi possível cadastrar. O título pode já estar em uso ou o limite foi atingido.");
+            }
+        } catch (IllegalArgumentException exception) {
+            System.out.println("Dados do anúncio inválidos: " + exception.getMessage());
+        }
+    }
 
-            musicaTemp = plataforma.buscarMusicaPorId(indice);
+    // -------------------- Playlists --------------------
 
-            if (musicaTemp != null) {
-                System.out.println("Titulo da Música: " + musicaTemp.getTitulo());
-                System.out.println("Artista da Música: " + musicaTemp.getArtista());
-                System.out.println("Duração: " + musicaTemp.getDuracaoFormatada());
-                System.out.println("Reproduções: " + musicaTemp.getReproducoes());
+    public static void adicionarConteudoNaPlaylist(Scanner scan, Plataforma plataforma) {
+        System.out.println("--- Adicionar conteúdo à playlist ---");
+        Playlist playlist = selecionarPlaylist(scan, plataforma);
+        if (playlist == null) {
+            return;
+        }
+
+        System.out.println("Qual tipo de conteúdo deseja adicionar?");
+        System.out.println("1 - Música");
+        System.out.println("2 - Podcast");
+        System.out.println("3 - Qualquer conteúdo");
+        int tipo = lerInteiro(scan, "Opção: ");
+        if (tipo < 1 || tipo > 3) {
+            System.out.println("Tipo inválido.");
+            return;
+        }
+
+        String titulo = lerTexto(scan, "Título do conteúdo: ");
+        Conteudo conteudo = buscarConteudoPorTipo(plataforma, titulo, tipo);
+        if (conteudo == null) {
+            System.out.println("Não foi encontrado conteúdo desse tipo com esse título.");
+            return;
+        }
+
+        if (playlist.adicionar(conteudo)) {
+            System.out.println("'" + conteudo.getTitulo() + "' adicionado à playlist '" + playlist.getNome() + "'.");
+        } else {
+            System.out.println("Não foi possível adicionar o conteúdo à playlist.");
+        }
+    }
+
+    public static void listarPlaylistsDeUsuario(Scanner scan, Plataforma plataforma) {
+        Usuario usuario = selecionarUsuario(scan, plataforma, "Nome do usuário: ");
+        if (usuario == null) {
+            return;
+        }
+
+        ArrayList<Playlist> playlists = usuario.getPlaylists();
+        if (playlists.isEmpty()) {
+            System.out.println(usuario.getNome() + " ainda não possui playlists.");
+            return;
+        }
+
+        System.out.println("--- Playlists de " + usuario.getNome() + " ---");
+        for (int i = 0; i < playlists.size(); i++) {
+            Playlist playlist = playlists.get(i);
+            System.out.printf("%d - %s | %d conteúdo(s) | duração total: %s%n",
+                    i + 1, playlist.getNome(), playlist.getQuantidade(),
+                    formatarDuracao(playlist.getDuracaoTotalSegundos()));
+        }
+    }
+
+    public static void reproduzirPlaylist(Scanner scan, Plataforma plataforma) {
+        Playlist playlist = selecionarPlaylist(scan, plataforma);
+        if (playlist == null) {
+            return;
+        }
+        if (playlist.getQuantidade() == 0) {
+            System.out.println("Esta playlist está vazia.");
+            return;
+        }
+
+        System.out.println("Reproduzindo playlist: " + playlist.getNome());
+        playlist.reproduzirTudo();
+    }
+
+    public static void removerConteudoDaPlaylist(Scanner scan, Plataforma plataforma) {
+        Playlist playlist = selecionarPlaylist(scan, plataforma);
+        if (playlist == null) {
+            return;
+        }
+        if (playlist.getQuantidade() == 0) {
+            System.out.println("Esta playlist está vazia.");
+            return;
+        }
+
+        listarConteudosDaPlaylist(playlist);
+        int posicao = lerInteiro(scan, "Número do conteúdo a remover (0 para cancelar): ");
+        if (posicao == 0) {
+            System.out.println("Operação cancelada.");
+            return;
+        }
+
+        try {
+            if (playlist.removerNaPosicao(posicao)) {
+                System.out.println("Conteúdo removido da playlist.");
             }
         } catch (IndexOutOfBoundsException exception) {
-            System.out.println("A posição precisa ser um número.");
-        } catch (NumberFormatException exception) {
-            System.out.println("Esta posição não existe na Plataforma");
-        } finally {
-            System.out.println("--- Fim da busca ---");
+            System.out.println("Posição inválida. Escolha um número entre 1 e " + playlist.getQuantidade() + ".");
         }
     }
 
-    public static void buscarMusicaPorTitulo(Scanner scan, Plataforma plataforma) {
-        String titulo;
-        Musica musicaTemp;
-        scan.nextLine(); // Limpando buffer
-        System.out.println("Digite o titulo da música: ");
-        System.out.print(">> ");
+    private static Playlist selecionarPlaylist(Scanner scan, Plataforma plataforma) {
+        Usuario usuario = selecionarUsuario(scan, plataforma, "Nome do usuário dono da playlist: ");
+        if (usuario == null) {
+            return null;
+        }
 
-        titulo = scan.nextLine();
-        musicaTemp = plataforma.buscarMusica(titulo);
+        ArrayList<Playlist> playlists = usuario.getPlaylists();
+        if (playlists.isEmpty()) {
+            System.out.println("Esse usuário ainda não possui playlists. Use a opção 4 para criar uma.");
+            return null;
+        }
 
-        if (musicaTemp != null) {
-            System.out.println("Titulo da Música: " + musicaTemp.getTitulo());
-            System.out.println("Artista da Música: " + musicaTemp.getArtista());
-            System.out.println("Duração: " + musicaTemp.getDuracaoFormatada());
-            System.out.println("Reproduções: " + musicaTemp.getReproducoes());
+        System.out.println("Playlists de " + usuario.getNome() + ":");
+        for (int i = 0; i < playlists.size(); i++) {
+            Playlist playlist = playlists.get(i);
+            System.out.printf("%d - %s (%d conteúdo(s))%n", i + 1, playlist.getNome(), playlist.getQuantidade());
+        }
+
+        int escolha = lerInteiro(scan, "Escolha a playlist (0 para cancelar): ");
+        if (escolha == 0) {
+            return null;
+        }
+        if (escolha < 1 || escolha > playlists.size()) {
+            System.out.println("Número de playlist inválido.");
+            return null;
+        }
+        return playlists.get(escolha - 1);
+    }
+
+    private static void listarConteudosDaPlaylist(Playlist playlist) {
+        System.out.println("--- Conteúdos da playlist: " + playlist.getNome() + " ---");
+        for (int i = 1; i <= playlist.getQuantidade(); i++) {
+            System.out.println(i + " - " + playlist.getNaPosicao(i));
         }
     }
 
-    public static void reproduzirUmaMusica(Scanner scan, Plataforma plataforma) {
-        scan.nextLine(); // Limpando buffer
+    // -------------------- Busca e reprodução --------------------
 
-        String titulo;
-        Musica musicaTemp;
-        System.out.println("Digite o título da música que você deseja reproduzir: ");
-        System.out.print(">> ");
-
-        titulo = scan.nextLine();
-
-        musicaTemp = plataforma.buscarMusica(titulo);
-        if (musicaTemp != null) {
-            musicaTemp.reproduzir();
-        }
+    public static void buscarConteudoPorId(Scanner scan, Plataforma plataforma) {
+        int id = lerInteiroPositivo(scan, "ID do conteúdo: ");
+        Conteudo conteudo = plataforma.buscarConteudoPorId(id);
+        exibirDetalhesConteudo(conteudo);
     }
 
-    // Precisa acabar esse método
-    public static void removerMusica(Scanner scan, Plataforma plataforma) {
-        System.out.println();
+    public static void buscarConteudoPorTitulo(Scanner scan, Plataforma plataforma) {
+        String titulo = lerTexto(scan, "Título do conteúdo: ");
+        exibirDetalhesConteudo(plataforma.buscarConteudo(titulo));
+    }
+
+    public static void reproduzirConteudo(Scanner scan, Plataforma plataforma) {
+        String titulo = lerTexto(scan, "Título da música ou do episódio de podcast: ");
+        Conteudo conteudo = plataforma.buscarConteudo(titulo);
+        if (conteudo != null) {
+            conteudo.reproduzir();
+        }
     }
 
     public static void listarAcervo(Plataforma plataforma) {
-        System.out.println("\n--- Acervo Sonora ---");
-
-        ArrayList<Musica> acervo = plataforma.getMusicas();
-        for (Musica musica : acervo) {
-            System.out.printf(musica.toString() + "\n");
+        ArrayList<Conteudo> acervo = plataforma.getConteudos();
+        System.out.println("--- Acervo Sonora ---");
+        if (acervo.isEmpty()) {
+            System.out.println("O acervo está vazio.");
+            return;
+        }
+        for (Conteudo conteudo : acervo) {
+            System.out.println(conteudo);
         }
     }
 
+    private static Conteudo buscarConteudoPorTipo(Plataforma plataforma, String titulo, int tipo) {
+        for (Conteudo conteudo : plataforma.getConteudos()) {
+            boolean tipoCorreto = tipo == 3
+                    || (tipo == 1 && conteudo instanceof Musica)
+                    || (tipo == 2 && conteudo instanceof Podcast);
+            if (tipoCorreto && conteudo.getTitulo().equalsIgnoreCase(titulo)) {
+                return conteudo;
+            }
+        }
+        return null;
+    }
+
+    private static void exibirDetalhesConteudo(Conteudo conteudo) {
+        if (conteudo == null) {
+            System.out.println("Conteúdo não encontrado.");
+            return;
+        }
+        System.out.println(conteudo);
+        System.out.println(conteudo.getCreditos());
+    }
+
+    // -------------------- Usuários e seguidores --------------------
+
     public static void seguirUsuario(Scanner scan, Plataforma plataforma) {
-
-        scan.nextLine();
-
-        System.out.print("Digite o nome do usuário que irá seguir: ");
-        String nomeSeguidor = scan.nextLine();
-
-        System.out.print("Digite o nome do usuário que deseja seguir: ");
-        String nomeSeguido = scan.nextLine();
-
+        String nomeSeguidor = lerTexto(scan, "Nome do usuário que irá seguir: ");
+        String nomeSeguido = lerTexto(scan, "Nome do usuário que deseja seguir: ");
         try {
             if (plataforma.seguir(nomeSeguidor, nomeSeguido)) {
-                System.out.println(
-                        nomeSeguidor + " agora está seguindo " + nomeSeguido + "!");
+                System.out.println(nomeSeguidor + " agora está seguindo " + nomeSeguido + ".");
+            } else {
+                System.out.println("Não foi possível seguir. Confira se os dois usuários estão cadastrados.");
             }
         } catch (IllegalArgumentException exception) {
-            System.out.println("Não foi possível seguir o usuário: "
-                    + exception.getMessage());
+            System.out.println("Não foi possível seguir o usuário: " + exception.getMessage());
         }
     }
 
     public static void deixarDeSeguirUsuario(Scanner scan, Plataforma plataforma) {
-
-        scan.nextLine();
-
-        System.out.print("Digite o nome do usuário: ");
-        String nomeSeguidor = scan.nextLine();
-
-        System.out.print("Digite o nome do usuário que deseja deixar de seguir: ");
-        String nomeSeguido = scan.nextLine();
-
+        String nomeSeguidor = lerTexto(scan, "Nome do usuário: ");
+        String nomeSeguido = lerTexto(scan, "Nome do usuário que deseja deixar de seguir: ");
         try {
             if (plataforma.deixarDeSeguir(nomeSeguidor, nomeSeguido)) {
-                System.out.println(
-                        nomeSeguidor + " deixou de seguir " + nomeSeguido + "!");
+                System.out.println(nomeSeguidor + " deixou de seguir " + nomeSeguido + ".");
+            } else {
+                System.out.println("Não foi possível concluir. Confira se os usuários estão cadastrados.");
             }
         } catch (IllegalArgumentException exception) {
-            System.out.println("Não foi possível deixar de seguir: "
-                    + exception.getMessage());
+            System.out.println("Não foi possível deixar de seguir: " + exception.getMessage());
         }
     }
 
-    public static void consultarQuantidadeSeguindo(
-            Scanner scan, Plataforma plataforma) {
-
-        scan.nextLine();
-
-        System.out.print("Digite o nome do usuário: ");
-        String nome = scan.nextLine();
-
-        Usuario usuario = plataforma.buscarUsuario(nome);
-
+    public static void consultarQuantidadeSeguindo(Scanner scan, Plataforma plataforma) {
+        Usuario usuario = selecionarUsuario(scan, plataforma, "Nome do usuário: ");
         if (usuario != null) {
-            System.out.println(
-                    usuario.getNome()
-                            + " está seguindo "
-                            + usuario.getQuantidadeSeguindo()
-                            + " usuário(s).");
+            System.out.println(usuario.getNome() + " segue " + usuario.getQuantidadeSeguindo() + " usuário(s).");
         }
     }
 
+    // -------------------- Anúncios --------------------
+
+    public static void listarOuReproduzirAnuncio(Scanner scan, Plataforma plataforma) {
+        ArrayList<Anuncio> anuncios = plataforma.getAnuncios();
+        if (anuncios.isEmpty()) {
+            System.out.println("Não há anúncios cadastrados.");
+            return;
+        }
+
+        System.out.println("--- Anúncios cadastrados ---");
+        for (int i = 0; i < anuncios.size(); i++) {
+            Anuncio anuncio = anuncios.get(i);
+            System.out.printf("%d - %s | Anunciante: %s | Duração: %ds | Impressões: %d%n",
+                    i + 1, anuncio.getTitulo(), anuncio.getAnunciante(),
+                    anuncio.getDuracaoSegundos(), anuncio.getImpressoes());
+        }
+
+        int escolha = lerInteiro(scan, "Digite o número do anúncio para reproduzir (0 para voltar): ");
+        if (escolha == 0) {
+            return;
+        }
+        if (escolha < 1 || escolha > anuncios.size()) {
+            System.out.println("Número de anúncio inválido.");
+            return;
+        }
+
+        Anuncio anuncio = anuncios.get(escolha - 1);
+        anuncio.reproduzir();
+        System.out.printf("Valor estimado de veiculação até agora: R$ %.2f%n", anuncio.calcularMensalidade());
+    }
+
+    // -------------------- Planos --------------------
+
+    public static void alterarPlanoUsuario(Scanner scan, Plataforma plataforma) {
+        Usuario usuario = selecionarUsuario(scan, plataforma, "Nome do usuário: ");
+        if (usuario == null) {
+            return;
+        }
+
+        System.out.println("Escolha o plano:");
+        System.out.println("1 - Gratuito");
+        System.out.println("2 - Individual");
+        System.out.println("3 - Família");
+        int opcaoPlano = lerInteiro(scan, "Opção: ");
+        Plano novoPlano;
+
+        try {
+            switch (opcaoPlano) {
+                case 1:
+                    novoPlano = new PlanoGratuito();
+                    break;
+                case 2:
+                    double precoIndividual = lerDoublePositivo(scan, "Preço mensal do plano individual (R$): ");
+                    novoPlano = new PlanoIndividual(precoIndividual);
+                    break;
+                case 3:
+                    double precoFamilia = lerDoublePositivo(scan, "Preço mensal base do plano família (R$): ");
+                    int membros = lerInteiroPositivo(scan, "Quantidade de membros (1 a 6): ");
+                    novoPlano = new PlanoFamilia(precoFamilia, membros);
+                    break;
+                default:
+                    System.out.println("Plano inválido.");
+                    return;
+            }
+            usuario.assinar(novoPlano);
+            System.out.println("Plano de " + usuario.getNome() + " alterado para " + novoPlano.getNome() + ".");
+            System.out.println(novoPlano.resumo());
+        } catch (IllegalArgumentException exception) {
+            System.out.println("Não foi possível alterar o plano: " + exception.getMessage());
+        }
+    }
+
+    public static void consultarPlanoUsuario(Scanner scan, Plataforma plataforma) {
+        Usuario usuario = selecionarUsuario(scan, plataforma, "Nome do usuário: ");
+        if (usuario == null) {
+            return;
+        }
+        System.out.println("--- Plano atual ---");
+        System.out.println("Usuário: " + usuario.getNome());
+        System.out.println(usuario.getPlanoUsuario().resumo());
+        System.out.println("Possui anúncios: " + (usuario.getPlanoUsuario().temAnuncios() ? "Sim" : "Não"));
+    }
+
+    public static void listarPodcastsPorApresentador(Scanner scan, Plataforma plataforma) {
+        String apresentador = lerTexto(scan, "Nome do apresentador: ");
+        System.out.println("--- Podcasts de " + apresentador + " ---");
+        plataforma.listarEpisodiosDe(apresentador);
+    }
+
+    // -------------------- Entrada e auxiliares --------------------
+
+    private static Usuario selecionarUsuario(Scanner scan, Plataforma plataforma, String mensagem) {
+        String nome = lerTexto(scan, mensagem);
+        return plataforma.buscarUsuario(nome);
+    }
+
+    private static String lerTexto(Scanner scan, String mensagem) {
+        System.out.print(mensagem);
+        return scan.nextLine().trim();
+    }
+
+    private static int lerInteiro(Scanner scan, String mensagem) {
+        while (true) {
+            System.out.print(mensagem);
+            String entrada = scan.nextLine().trim();
+            try {
+                return Integer.parseInt(entrada);
+            } catch (NumberFormatException exception) {
+                System.out.println("Entrada inválida. Digite um número inteiro.");
+            }
+        }
+    }
+
+    private static int lerInteiroPositivo(Scanner scan, String mensagem) {
+        while (true) {
+            int valor = lerInteiro(scan, mensagem);
+            if (valor > 0) {
+                return valor;
+            }
+            System.out.println("O valor deve ser maior que zero.");
+        }
+    }
+
+    private static double lerDoublePositivo(Scanner scan, String mensagem) {
+        while (true) {
+            System.out.print(mensagem);
+            String entrada = scan.nextLine().trim().replace(',', '.');
+            try {
+                double valor = Double.parseDouble(entrada);
+                if (Double.isFinite(valor) && valor > 0) {
+                    return valor;
+                }
+                System.out.println("Digite um valor positivo válido.");
+            } catch (NumberFormatException exception) {
+                System.out.println("Entrada inválida. Exemplo de valor válido: 19,90.");
+            }
+        }
+    }
+
+    private static String formatarDuracao(int totalSegundos) {
+        int horas = totalSegundos / 3600;
+        int minutos = (totalSegundos % 3600) / 60;
+        int segundos = totalSegundos % 60;
+        if (horas > 0) {
+            return String.format("%02d:%02d:%02d", horas, minutos, segundos);
+        }
+        return String.format("%02d:%02d", minutos, segundos);
+    }
 }

@@ -1,4 +1,6 @@
-public abstract class Conteudo {
+import Interfaces.Reproduzivel;
+
+public abstract class Conteudo implements Reproduzivel {
     private static int contadorId = 0;
     private final int id;
     private String titulo;
@@ -30,6 +32,7 @@ public abstract class Conteudo {
         this.titulo = titulo;
     }
 
+    @Override
     public int getDuracaoSegundos() {
         return duracaoSegundos;
     }
@@ -46,6 +49,7 @@ public abstract class Conteudo {
         return reproducoes;
     }
 
+    @Override
     public final void reproduzir() {
         reproducoes++;
         System.out.println("Reproduzindo -- " + getCreditos());

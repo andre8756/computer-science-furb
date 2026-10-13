@@ -1,5 +1,8 @@
 package Planos;
-public abstract class Plano {
+
+import Interfaces.Faturavel;
+
+public abstract class Plano implements Faturavel {
     private String nome;
     private int maxDispositivos;
 
@@ -17,8 +20,6 @@ public abstract class Plano {
     }
 
     public abstract boolean temAnuncios();
-
-    public abstract double calcularMensalidade();
 
     public final String resumo() {
         return nome + ": R$ " + calcularMensalidade()

@@ -1,3 +1,6 @@
+import Planos.Plano;
+import Planos.PlanoGratuito;
+
 public class App3 {
     public static void main(String[] args) {
 
@@ -9,6 +12,8 @@ public class App3 {
         // a classe Conteudo possui o método getApresentador(),
         // pois Conteudo é o tipo estático da nossa variável c.
         // Porém, o método getApresentador() pertence à classe Podcast.
- 
+        
+        Plano p = new PlanoGratuito();
+        System.out.println(p.resumo());
     }
 }
