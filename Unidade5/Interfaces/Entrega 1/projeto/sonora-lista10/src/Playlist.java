@@ -91,6 +91,10 @@ public class Playlist {
         return duracaoTotalSeg;
     }
 
+    public ArrayList<Conteudo> getConteudos(){
+        return conteudos;
+    }
+
     public void reproduzirTudo() {
         for (Conteudo conteudo : conteudos) {
             if (conteudo != null) {

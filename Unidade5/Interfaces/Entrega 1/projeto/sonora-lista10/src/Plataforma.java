@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import Interfaces.Faturavel;
+import Interfaces.Reproduzivel;
+import Planos.PlanoGratuito;
 
 public class Plataforma {
     private final int MAX = 500;
@@ -131,13 +134,22 @@ public class Plataforma {
     }
 
     public double calcularReceitaMensal() {
-        double soma = 0;
+        ArrayList<Faturavel> faturaveis = new ArrayList<>();
 
-        for (Usuario usuario : usuarios) {
-            soma += usuario.getPlanoUsuario().calcularMensalidade();
+        faturaveis.addAll(
+                usuarios.stream()
+                        .map(Usuario::getPlanoUsuario)
+                        .toList());
+
+        faturaveis.addAll(anuncios);
+
+        double total = 0;
+
+        for (Faturavel faturavel : faturaveis) {
+            total += faturavel.calcularMensalidade();
         }
 
-        return soma;
+        return total;
     }
 
     public void listarEpisodiosDe(String apresentador) {
@@ -147,6 +159,33 @@ public class Plataforma {
             }
         }
     }
+
+    public void tocarPlaylist(Usuario ouvinte, Playlist playlist) {
+    ArrayList<Reproduzivel> reproduziveis = new ArrayList<>();
+
+    boolean inserirAnuncios =
+            ouvinte.getPlanoUsuario().temAnuncios()
+            && !anuncios.isEmpty();
+
+    int indiceAnuncio = 0;
+
+    for (int i = 0; i < playlist.getConteudos().size(); i++) {
+        Conteudo conteudo = playlist.getConteudos().get(i);
+
+        reproduziveis.add(conteudo);
+
+        if (inserirAnuncios && (i + 1) % 2 == 0) {
+            reproduziveis.add(anuncios.get(indiceAnuncio));
+
+            indiceAnuncio = (indiceAnuncio + 1) % anuncios.size();
+        }
+    }
+
+    for (Reproduzivel reproduzivel : reproduziveis) {
+        System.out.println(reproduzivel.getDuracaoFormatada());
+        reproduzivel.reproduzir();
+    }
+}
 
     // -------- Métodos de seguir
 
@@ -217,6 +256,12 @@ public class Plataforma {
         return true;
     }
 
+    private boolean temAnuncio(Usuario usuario){
+        if(usuario.getPlanoUsuario() instanceof PlanoGratuito) return true;
+
+        return false;
+    }
+
     public ArrayList<Conteudo> getMusicas() {
         return conteudos;
     }
@@ -225,11 +270,11 @@ public class Plataforma {
         return usuarios;
     }
 
-    public ArrayList<Conteudo> getConteudos(){
+    public ArrayList<Conteudo> getConteudos() {
         return conteudos;
     }
 
-    public ArrayList<Anuncio> getAnuncios(){
+    public ArrayList<Anuncio> getAnuncios() {
         return anuncios;
     }
 
