@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import Planos.Plano;
@@ -14,7 +15,12 @@ public class App {
 
         do {
             exibirMenu();
-            opcao = lerInteiro(scan, ">> ");
+            try {
+                opcao = lerInteiro(scan, ">> ");
+            } catch (NoSuchElementException exception) {
+                System.out.println("\nEntrada encerrada. Encerrando o Sonora...");
+                break;
+            }
             System.out.println();
 
             try {
@@ -86,9 +92,16 @@ public class App {
                     case 21:
                         listarPodcastsPorApresentador(scan, plataforma);
                         break;
+                    case 22:
+                        tocarPlaylistParaUsuario(scan, plataforma);
+                        break;
                     default:
-                        System.out.println("Opção inválida. Escolha uma opção exibida no menu.");
+                        throw new IllegalArgumentException(
+                                "Opção inválida. Escolha uma opção exibida no menu.");
                 }
+            } catch (NoSuchElementException exception) {
+                System.out.println("\nEntrada encerrada. Encerrando o Sonora...");
+                break;
             } catch (IllegalArgumentException exception) {
                 System.out.println("Não foi possível concluir a operação: " + exception.getMessage());
             }
@@ -122,6 +135,7 @@ public class App {
         System.out.println("19 - Consultar plano de usuário");
         System.out.println("20 - Consultar receita mensal estimada");
         System.out.println("21 - Listar podcasts por apresentador");
+        System.out.println("22 - Tocar playlist para um usuário e comparar receita");
         System.out.println("0  - Sair");
     }
 
@@ -238,8 +252,7 @@ public class App {
         System.out.println("3 - Qualquer conteúdo");
         int tipo = lerInteiro(scan, "Opção: ");
         if (tipo < 1 || tipo > 3) {
-            System.out.println("Tipo inválido.");
-            return;
+            throw new IllegalArgumentException("Tipo inválido. Escolha 1, 2 ou 3.");
         }
 
         String titulo = lerTexto(scan, "Título do conteúdo: ");
@@ -291,6 +304,40 @@ public class App {
         playlist.reproduzirTudo();
     }
 
+    public static void tocarPlaylistParaUsuario(Scanner scan, Plataforma plataforma) {
+        System.out.println("--- Tocar playlist para um usuário ---");
+
+        Usuario ouvinte = selecionarUsuario(
+                scan, plataforma, "Nome do usuário que vai ouvir: ");
+        if (ouvinte == null) {
+            return;
+        }
+
+        Playlist playlist = selecionarPlaylist(scan, plataforma);
+        if (playlist == null) {
+            return;
+        }
+        if (playlist.getQuantidade() == 0) {
+            throw new IllegalArgumentException(
+                    "A playlist selecionada está vazia. Adicione músicas ou podcasts antes de tocar.");
+        }
+
+        double receitaAntes = plataforma.calcularReceitaMensal();
+        System.out.printf("Receita mensal antes da reprodução: R$ %.4f%n", receitaAntes);
+
+        plataforma.tocarPlaylist(ouvinte, playlist);
+
+        double receitaDepois = plataforma.calcularReceitaMensal();
+        System.out.printf("Receita mensal depois da reprodução: R$ %.4f%n", receitaDepois);
+        System.out.printf("Variação da receita mensal: R$ %.4f%n", receitaDepois - receitaAntes);
+
+        if (receitaDepois <= receitaAntes) {
+            System.out.println(
+                    "A receita não aumentou. Para observar o efeito, use um usuário com plano que tenha anúncios, "
+                    + "cadastre ao menos um anúncio e escolha uma playlist com pelo menos dois conteúdos.");
+        }
+    }
+
     public static void removerConteudoDaPlaylist(Scanner scan, Plataforma plataforma) {
         Playlist playlist = selecionarPlaylist(scan, plataforma);
         if (playlist == null) {
@@ -340,8 +387,8 @@ public class App {
             return null;
         }
         if (escolha < 1 || escolha > playlists.size()) {
-            System.out.println("Número de playlist inválido.");
-            return null;
+            throw new IllegalArgumentException(
+                    "Número de playlist inválido. Escolha uma das opções exibidas.");
         }
         return playlists.get(escolha - 1);
     }
@@ -466,8 +513,8 @@ public class App {
             return;
         }
         if (escolha < 1 || escolha > anuncios.size()) {
-            System.out.println("Número de anúncio inválido.");
-            return;
+            throw new IllegalArgumentException(
+                    "Número de anúncio inválido. Escolha uma das opções exibidas.");
         }
 
         Anuncio anuncio = anuncios.get(escolha - 1);
@@ -505,8 +552,8 @@ public class App {
                     novoPlano = new PlanoFamilia(precoFamilia, membros);
                     break;
                 default:
-                    System.out.println("Plano inválido.");
-                    return;
+                    throw new IllegalArgumentException(
+                            "Plano inválido. Escolha 1, 2 ou 3.");
             }
             usuario.assinar(novoPlano);
             System.out.println("Plano de " + usuario.getNome() + " alterado para " + novoPlano.getNome() + ".");
@@ -542,7 +589,11 @@ public class App {
 
     private static String lerTexto(Scanner scan, String mensagem) {
         System.out.print(mensagem);
-        return scan.nextLine().trim();
+        String valor = scan.nextLine().trim();
+        if (valor.isBlank()) {
+            throw new IllegalArgumentException("O texto não pode ficar vazio.");
+        }
+        return valor;
     }
 
     private static int lerInteiro(Scanner scan, String mensagem) {
@@ -559,11 +610,15 @@ public class App {
 
     private static int lerInteiroPositivo(Scanner scan, String mensagem) {
         while (true) {
-            int valor = lerInteiro(scan, mensagem);
-            if (valor > 0) {
+            try {
+                int valor = lerInteiro(scan, mensagem);
+                if (valor <= 0) {
+                    throw new IllegalArgumentException("O valor deve ser maior que zero.");
+                }
                 return valor;
+            } catch (IllegalArgumentException exception) {
+                System.out.println(exception.getMessage());
             }
-            System.out.println("O valor deve ser maior que zero.");
         }
     }
 
@@ -573,12 +628,14 @@ public class App {
             String entrada = scan.nextLine().trim().replace(',', '.');
             try {
                 double valor = Double.parseDouble(entrada);
-                if (Double.isFinite(valor) && valor > 0) {
-                    return valor;
+                if (!Double.isFinite(valor) || valor <= 0) {
+                    throw new IllegalArgumentException("Digite um valor positivo válido.");
                 }
-                System.out.println("Digite um valor positivo válido.");
+                return valor;
             } catch (NumberFormatException exception) {
                 System.out.println("Entrada inválida. Exemplo de valor válido: 19,90.");
+            } catch (IllegalArgumentException exception) {
+                System.out.println(exception.getMessage());
             }
         }
     }
