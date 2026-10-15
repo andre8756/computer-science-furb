@@ -1,7 +1,4 @@
 
-
-import java.util.Locale;
-
 public abstract class ItemCardapio {
     private String nome;
     private double precoBase;
