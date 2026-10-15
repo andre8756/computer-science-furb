@@ -1,34 +1,37 @@
 
-
 public class AssinaturaClube implements Cobravel {
     private double valorMensal;
     private int meses;
-
-    // Relacionamento: cada assinatura pertence a um Cliente.
     private Cliente cliente;
 
     public AssinaturaClube(Cliente cliente, double valorMensal, int meses) {
-        // TODO: inicializar os atributos.
+        if (cliente == null) {
+            throw new IllegalArgumentException("A assinatura precisa ter um cliente.");
+        }
+        ItemCardapio.validarPositivo(valorMensal);
+        if (meses < 1) {
+            throw new IllegalArgumentException("A assinatura precisa ter pelo menos 1 mês.");
+        }
+        this.cliente = cliente;
+        this.valorMensal = valorMensal;
+        this.meses = meses;
     }
 
     public Cliente getCliente() {
-        // TODO
-        return null;
+        return cliente;
     }
 
     public double getValorMensal() {
-        // TODO
-        return 0.0;
+        return valorMensal;
     }
 
     public int getMeses() {
-        // TODO
-        return 0;
+        return meses;
     }
 
     @Override
     public double calcularValorCobrar() {
-        // TODO
-        return 0.0;
+        double total = valorMensal * meses;
+        return meses >= 12 ? total * 0.85 : total;
     }
 }

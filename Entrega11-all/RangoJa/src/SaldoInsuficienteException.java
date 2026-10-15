@@ -1,9 +1,11 @@
 
 
-public class SaldoInsuficienteException extends Exception {
+import java.util.Locale;
 
+public class SaldoInsuficienteException extends Exception {
     public SaldoInsuficienteException(double saldo, double valorSolicitado) {
-        // TODO: definir a mensagem da exceção, se necessário.
-        super();
+        super(String.format(Locale.forLanguageTag("pt-BR"),
+                "Saldo insuficiente: disponível R$ %.2f, solicitado R$ %.2f",
+                saldo, valorSolicitado));
     }
 }

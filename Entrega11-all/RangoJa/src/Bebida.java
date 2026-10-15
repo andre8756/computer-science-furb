@@ -6,28 +6,36 @@ public class Bebida extends ItemCardapio {
 
     public Bebida(String nome, double precoBase, int volumeMl, boolean alcoolica) {
         super(nome, precoBase);
-        // TODO: inicializar os atributos específicos de Bebida.
+        if (volumeMl <= 0) {
+            throw new IllegalArgumentException("O volume da bebida deve ser maior que zero.");
+        }
+        this.volumeMl = volumeMl;
+        this.alcoolica = alcoolica;
     }
 
     public int getVolumeMl() {
-        // TODO
-        return 0;
+        return volumeMl;
     }
 
     public boolean isAlcoolica() {
-        // TODO
-        return false;
+        return alcoolica;
     }
 
     @Override
     public double calcularPreco() {
-        // TODO
-        return 0.0;
+        double preco;
+        
+        if(isAlcoolica()) {
+            preco = getPrecoBase()+3.0;
+        } else{
+            preco = getPrecoBase();
+        }
+
+        return preco;
     }
 
     @Override
     public String toString() {
-        // TODO
-        return null;
+        return super.toString() + " (" + volumeMl + " ml)" + (alcoolica ? " [alcoólica]" : "");
     }
 }

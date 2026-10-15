@@ -5,23 +5,23 @@ public class Sobremesa extends ItemCardapio {
 
     public Sobremesa(String nome, double precoPor100g, int pesoGramas) {
         super(nome, precoPor100g);
-        // TODO: inicializar os atributos específicos de Sobremesa.
+        if (pesoGramas <= 0) {
+            throw new IllegalArgumentException("O peso da sobremesa deve ser maior que zero.");
+        }
+        this.pesoGramas = pesoGramas;
     }
 
     public int getPesoGramas() {
-        // TODO
-        return 0;
+        return pesoGramas;
     }
 
     @Override
     public double calcularPreco() {
-        // TODO
-        return 0.0;
+        return getPrecoBase() * pesoGramas / 100.0;
     }
 
     @Override
     public String toString() {
-        // TODO
-        return null;
+        return super.toString() + " (" + pesoGramas + " g)";
     }
 }

@@ -1,27 +1,31 @@
 
-
 public class Prato extends ItemCardapio {
     private char tamanho;
 
     public Prato(String nome, double precoBase, char tamanho) {
         super(nome, precoBase);
-        // TODO: inicializar os atributos específicos de Prato.
+        if (tamanho != 'P' && tamanho != 'M' && tamanho != 'G') {
+            throw new IllegalArgumentException("O tamanho deve ser P, M ou G.");
+        }
+        this.tamanho = tamanho;
     }
 
     public char getTamanho() {
-        // TODO
-        return '\0';
+        return tamanho;
     }
 
     @Override
     public double calcularPreco() {
-        // TODO
-        return 0.0;
+        switch (tamanho) {
+            case 'P': return getPrecoBase();
+            case 'M': return getPrecoBase() * 1.30;
+            case 'G': return getPrecoBase() * 1.60;
+            default: throw new IllegalStateException("Tamanho de prato inválido.");
+        }
     }
 
     @Override
     public String toString() {
-        // TODO
-        return null;
+        return super.toString() + " (tamanho " + tamanho + ")";
     }
 }
