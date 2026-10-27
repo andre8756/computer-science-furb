@@ -9,7 +9,6 @@ public class Senha {
         if(setor == null || setor.isBlank()){throw new IllegalArgumentException("Setor obrigatório");}
         this.setor = setor;
 
-        totalEmitidas++;
         numero = ++totalEmitidas;
     }
 
@@ -21,7 +20,7 @@ public class Senha {
         return setor;
     }
 
-    public int getTotalEmitidas(){
+    public static int getTotalEmitidas(){
         return totalEmitidas;
     }
 
