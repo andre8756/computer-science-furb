@@ -1,0 +1,20 @@
+// B2. Tipo de exceção
+
+if (itens.contains(item)) {
+    throw new IllegalArgumentException("Item já incluído no orçamento");
+}
+
+// a) O erro neste código é que deveria ser lançada uma exeção 
+// do tipo IllegalStateException, pois o item é valido, porém 
+// não pode ser adicionado na lista por ser repetido.
+
+// b) Se eu for colocar um item que já existe, ele vai retornar 
+// que o argumento é inválido. O correto é apenas retornar que o estado
+// do objeto impede a operação
+
+// c)
+
+if (itens.contains(item)) {
+    throw new IllegalStateException("Item já incluído no orçamento");
+}
+

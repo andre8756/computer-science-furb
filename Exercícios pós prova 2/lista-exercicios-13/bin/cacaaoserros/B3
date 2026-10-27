@@ -1,0 +1,18 @@
+// B3. Ordem das validações
+
+if (item == null) throw new IllegalArgumentException("Item inválido");
+if (itens.size() == 5) throw new IllegalStateException("Orçamento lotado");
+if (itens.contains(item)) throw new IllegalStateException("Item já incluído no orçamento");
+
+// a) O erro está na ordem das validações, o correto é ir do mais específico
+// para o mais abrangente.
+
+// b) Um exemplo é quando um item é repetido, e a lista já está cheia
+// assim, o código irá retornar com "Orçamento lotado", antes mesmo
+// de validar se ele poderia ser inserido na lista.
+
+// c) 
+
+if (item == null) throw new IllegalArgumentException("Item inválido");
+if (itens.contains(item)) throw new IllegalStateException("Item já incluído no orçamento");
+if (itens.size() == 5) throw new IllegalStateException("Orçamento lotado");

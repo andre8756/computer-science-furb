@@ -1,0 +1,22 @@
+// B1. Limite
+
+if (itens.size() > 5) {
+    throw new IllegalStateException("Orçamento lotado");
+}
+itens.add(item);
+
+// a) O erro é que a condicional só é verdadeira quando a lista 
+// já estiver com 6 ou mais itens. Sendo o limite 5, a condicional
+// valida esse limite apenas após a lista o ultrapassá-lo.
+
+// b) Por exemplo, se eu for adicionar um novo item, e a lista
+// estiver com 5 itens, o fluxo não entrará na condiiconal, adicionando
+// um sexto elemento. Nesse cenário, o código atual permite adicionar até
+// 6 itens, e o ideal seria adicionar no máximo 5 itens.
+
+// c) 
+
+if (itens.size() >= 5) {
+    throw new IllegalStateException("Orçamento lotado");
+}
+itens.add(item);
