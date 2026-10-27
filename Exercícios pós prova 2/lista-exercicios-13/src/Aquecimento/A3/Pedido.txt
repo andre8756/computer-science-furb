@@ -1,0 +1,57 @@
+// Professor, deixei este arquivo como .txt para não ficar 
+// apresentando erros e precisar importar Endereco e Cliente.
+
+
+// Versão 1
+public class Pedido extends Endereco {
+    public Pedido(Cliente comprador, String rua, int numero) {
+        super(rua, numero); 
+    }   
+}
+
+// Está totalmente errado, pois o Pedido não pode extender endereco,
+// o Endereco deveria ser um atributo do Pedido. Também não está 
+// atribuindo nenhum valor para comprador.
+
+
+// Versão 2
+public class Pedido {
+    private String rua;
+    private int numero;
+    public Pedido(Cliente comprador, String rua, int numero) {
+        Endereco entrega = new Endereco(rua, numero);
+        this.rua = rua;
+        this.numero = numero;
+    }
+}
+
+
+// Correção:
+
+public class Pedido{
+    private Cliente comprador;
+    private Endereco entrega;
+
+    public Pedido(Cliente comprador, String rua, int numero){
+        setComprador(comprador);
+        entrega = new Endereco(rua, numero);
+    }
+
+    public Cliente getComprador(){
+        return comprador;
+    }
+
+    public void setComprador(Cliente comprador){
+        if(comprador == null){
+            throw new IllegalArgumentException("Comprador obrigatório!");
+        }
+    }
+
+    public String getRuaEntrega(){
+        return entrega.getRua();
+    }
+
+    public int getNumeroEntrega(){
+        return entrega.getNumero();
+    }
+}   
