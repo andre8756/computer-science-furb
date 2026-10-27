@@ -1,4 +1,4 @@
-package Aquecimento;
+package Aquecimento.A1;
 
 public class Senha {
     private static int totalEmitidas = 0;

@@ -1,4 +1,4 @@
-package Aquecimento;
+package Aquecimento.A1;
 
 public class App {
 
@@ -21,7 +21,7 @@ public class App {
         }
         
         Senha caixa3 = new Senha("Caixa");
-        System.out.println("4 - "+caixa2.getSetor());
+        System.out.println("4 - "+caixa3.getSetor());
 
         System.out.println("Emitidas: "+Senha.getTotalEmitidas());
 
