@@ -1,0 +1,22 @@
+// B6. Base do cálculo
+
+@Override
+public double calcularGarantiaEstendida() {
+    return getPrecoBase() * quantidade * 0.15;
+}
+
+// a) O método calcularGarantiaEstendida() deveria utilizar o 
+// método calcularPreco() no seu cálculo, ao invés de realizar o
+// cálculo manualmente.
+
+// b) Um exemplo seria se na função de calcularPreco(), outros
+// fatores influenciassem o cálculo, assim, o método calcularGarantiaEstendida()
+// retornaria um valor incorreto. O certo seria utilizar o calcularPreco()
+// para a operação
+
+// c) 
+
+@Override
+public double calcularGarantiaEstendida() {
+    return calcularPreco() * 0.15;
+}

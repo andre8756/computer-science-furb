@@ -1,0 +1,32 @@
+// B5. Contador
+
+public ItemSetup(String descricao, double precoBase) {
+    totalItens++;
+    codigo = totalItens;
+    if (precoBase <= 0) {
+        throw new IllegalArgumentException("Preço base inválido");
+    }
+    this.descricao = descricao;
+    this.precoBase = precoBase;
+}
+
+// a) O único erro está na parte de gerar o código, onde ele
+// gera um código mesmo para itens que não foram criados.
+
+// b) Se for criado um item com precoBase = -1, o código será gerado
+// , porém o item não será gerado, por ter um preco negativo. O correto
+// seria gerar um código apenas se o item for válido.
+
+// Exemplo: item1, item2, item3  --- onde o item 2 é inválido
+
+// c)
+
+public ItemSetup(String descricao, double precoBase) {
+    if (precoBase <= 0) {
+        throw new IllegalArgumentException("Preço base inválido");
+    }
+    this.descricao = descricao;
+    this.precoBase = precoBase;
+    totalItens++;
+    codigo = totalItens;
+}

@@ -1,0 +1,20 @@
+// B7. toString sem @Override
+
+public String tostring() {
+    return getCodigo() + " - " + getDescricao() + " - R$ " + calcularPreco();
+}
+
+// a) @Override identifica erros ao sobrescrever métodos herdados, 
+// inclusive de Object. O problema também envolve o nome do método,
+// que está com o s minúsculo
+
+// b) Sem toString() corretamente escrito, System.out.println(item)
+// exibe a representação padrão do objeto, 
+// como Produto@5acf9800.
+
+// c) 
+
+@Override
+public String toString() {
+    return getCodigo() + " - " + getDescricao() + " - R$ " + calcularPreco();
+}

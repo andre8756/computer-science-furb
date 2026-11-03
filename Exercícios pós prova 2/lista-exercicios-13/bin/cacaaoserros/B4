@@ -1,0 +1,39 @@
+// B4. Remoção
+
+public void removerItem(ItemSetup item) {
+    for (ItemSetup i : itens) {
+        if (i != item) {
+            throw new IllegalStateException("Item não encontrado no orçamento");
+        }
+    }
+    itens.remove(item);
+}
+
+// a) O erro está em no for desnecessário, e na condicional que 
+// faz com que se o primeiro i da lista não for igual ao item, será
+// lançada a exeção
+
+// b) Um exemplo prático é se for passado no parâmetro um item que não
+// está na lista. Isso irá retornar um erro logo na primeira validação.
+// O correto seria fazer a condição onde se o i == item, então removesse 
+// o item, e caso não caísse na condição, lançaria a exeção.
+
+// c) 
+
+public void removerItem(ItemSetup item) {
+    if (!itens.contains(item)) {
+        throw new IllegalStateException("Item não encontrado no orçamento");
+    }
+    itens.remove(item);
+}
+
+// ou 
+
+public void removerItem(ItemSetup item) {
+    for (ItemSetup i : itens) {
+        if (i == item) {
+            itens.remove(item);
+        }
+    }
+    throw new IllegalStateException("Item não encontrado no orçamento");
+}

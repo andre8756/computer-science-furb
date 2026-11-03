@@ -1,0 +1,9 @@
+// B8. main
+
+Peca placa = new Peca("Placa de vídeo", 2500.0, 1);
+orcamento.adicionarItem(placa);
+System.out.println("Solicitante: " + orcamento.getSolicitante());
+System.out.println(orcamento.getItens());
+orcamento.adicionarItem(placa);
+
+// a)  
